@@ -1,1 +1,10 @@
-// Design tokens will be added here when the approved design is implemented.
+:root {
+  --font-family-primary: 'Inter', sans-serif;
+  --font-family-display: 'Inter Display', var(--font-family-primary);
+  --color-text-primary: #072615;
+  --color-surface-primary: #fff;
+  --color-border-subtle: #eef0ed;
+  --color-border-control: #eaeaea;
+  --color-action-primary: #0b2e30;
+  --color-action-primary-text: #d1ffc9;
+}

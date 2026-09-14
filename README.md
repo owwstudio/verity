@@ -52,3 +52,7 @@ src/
 `src/scripts/core/motion.js` is the only GSAP plugin-registration point. `src/scripts/core/lenis.js` creates and exports the only Lenis instance. Future JavaScript and GSAP modules must select DOM elements through `data-*` attributes rather than BEM classes.
 
 The current page is intentionally minimal. No Figma design, project-specific design tokens, or advanced animation has been implemented.
+
+## Typography
+
+Inter is loaded from Google Fonts in weights 400, 500, 600, and 700 and is the primary font family. Inter Display Regular and Medium are self-hosted from `src/assets/fonts` and are available through `var(--font-family-display)` for display typography.

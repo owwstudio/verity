@@ -1,0 +1,53 @@
+mixin navbar
+  nav.navbar(
+    aria-label='Primary navigation',
+    data-navbar,
+    data-node-id='278:35'
+  )
+    a.navbar__brand(href='/', aria-label='Verity home', data-navbar-logo)
+      img.navbar__logo(
+        src='/src/assets/icons/verity-logo.svg',
+        alt='',
+        width='99',
+        height='15'
+      )
+
+    ul.navbar__menu(data-navbar-primary)
+      li.navbar__item
+        a.navbar__link(href='/assessment/') Assessment
+      li.navbar__item
+        a.navbar__link(href='/product/') Product
+      li.navbar__item
+        a.navbar__link(href='/solutions/') Solutions
+      li.navbar__item
+        a.navbar__link(href='/assurance/') Assurance
+
+    .navbar__actions
+      ul.navbar__menu.navbar__menu--secondary
+        li.navbar__item
+          a.navbar__link(href='/company/') Company
+        li.navbar__item
+          a.navbar__link(href='/how-it-works/') How it works
+
+      .navbar__controls
+        button.navbar__language(
+          type='button',
+          aria-label='Change language. Current language: German',
+          data-language-toggle
+        )
+          span.navbar__language-icon(aria-hidden='true')
+            img(
+              src='/src/assets/icons/germany.svg',
+              alt='',
+              width='28',
+              height='28'
+            )
+          span.navbar__language-caret(aria-hidden='true')
+            img(
+              src='/src/assets/icons/caret-down.svg',
+              alt='',
+              width='16',
+              height='16'
+            )
+
+        a.navbar__cta(href='/book-a-demo/', data-navbar-cta) Book a demo
