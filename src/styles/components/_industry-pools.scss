@@ -46,7 +46,7 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.04em;
-    opacity: 0.35;
+    opacity: 0.1;
     text-align: start;
     white-space: nowrap;
     transition:
@@ -54,24 +54,12 @@
       opacity 420ms ease;
   }
 
-  &__option--faint {
-    opacity: 0.1;
-  }
-
-  &__option--soft {
-    opacity: 0.2;
-  }
-
-  &__option--muted {
-    opacity: 0.3;
-  }
-
-  &__option--strong {
-    opacity: 0.6;
+  &__option[data-proximity='adjacent'] {
+    opacity: 0.35;
   }
 
   &__option[data-state='active'] {
-    opacity: 0.8;
+    opacity: 1;
   }
 
   &__option:focus-visible {

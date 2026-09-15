@@ -19,7 +19,7 @@
   border-block-end: 0.0625rem solid var(--color-border-subtle);
   box-shadow: none;
   backdrop-filter: blur(0) saturate(100%);
-  overflow: clip;
+  overflow: visible;
   transition:
     color 240ms ease,
     background-color 240ms ease,
@@ -118,6 +118,148 @@
     white-space: nowrap;
   }
 
+  &__item--dropdown,
+  &__language-wrap {
+    position: relative;
+  }
+
+  &__dropdown-toggle {
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    transition: color 200ms ease;
+  }
+
+  &__item--dropdown[data-state='open'] &__dropdown-toggle {
+    color: #097b5f;
+  }
+
+  &__dropdown {
+    position: absolute;
+    inline-size: 15rem;
+    padding: 1.5rem;
+    color: var(--color-surface-primary);
+    background: rgb(0 0 0 / 30%);
+    border: 0.0625rem solid rgb(255 255 255 / 10%);
+    border-radius: 1rem;
+    box-shadow: 0 1rem 2.5rem rgb(0 24 12 / 16%);
+    backdrop-filter: blur(1rem) saturate(140%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-0.5rem) scale(0.98);
+    transform-origin: 50% 0;
+    transition:
+      opacity 220ms ease,
+      visibility 220ms ease,
+      transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &__dropdown--product,
+  &__dropdown--solutions,
+  &__dropdown--company,
+  &__dropdown--how-it-works {
+    inset-block-start: calc(100% + 0.9375rem);
+  }
+
+  &__dropdown--product {
+    inset-inline-start: -0.75rem;
+  }
+
+  &__dropdown--solutions {
+    display: grid;
+    inline-size: 27.875rem;
+    inset-inline-start: -1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  &__dropdown--company {
+    inline-size: 15.625rem;
+    inset-inline-start: -1.5rem;
+  }
+
+  &__dropdown--how-it-works {
+    inline-size: 15.625rem;
+    inset-inline-end: -1.5rem;
+  }
+
+  &__dropdown--language {
+    inset-block-start: calc(100% + 0.25rem);
+    inset-inline-end: 0;
+  }
+
+  &__item--dropdown[data-state='open'] &__dropdown,
+  &__language-wrap[data-state='open'] &__dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  &__dropdown-list {
+    display: grid;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__dropdown-group {
+    display: grid;
+    min-inline-size: 0;
+    gap: 1.25rem;
+  }
+
+  &__dropdown-heading {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    opacity: 0.6;
+  }
+
+  &__dropdown-link {
+    display: flex;
+    inline-size: 100%;
+    align-items: center;
+    color: inherit;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    transition: opacity 200ms ease;
+  }
+
+  &__dropdown-link--language {
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  &__dropdown-link:hover {
+    opacity: 0.5;
+  }
+
+  &__dropdown-link:focus-visible {
+    outline: 0.125rem solid currentcolor;
+    outline-offset: 0.25rem;
+  }
+
+  &__dropdown-icon {
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    flex: 0 0 auto;
+  }
+
+  &__dropdown-icon img {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
   &__actions {
     display: flex;
     grid-row: 1;
@@ -147,6 +289,14 @@
     background: transparent;
     border: 0.0625rem solid var(--color-border-control);
     border-radius: 6.1875rem;
+    cursor: pointer;
+    transition:
+      background-color 200ms ease,
+      border-color 200ms ease;
+  }
+
+  &__language-wrap[data-state='open'] &__language {
+    background: rgb(0 0 0 / 30%);
   }
 
   &__language-icon {
@@ -157,6 +307,11 @@
   &__language-caret {
     inline-size: 1rem;
     block-size: 1rem;
+    transition: transform 240ms ease;
+  }
+
+  &__language-wrap[data-state='open'] &__language-caret {
+    transform: rotate(180deg);
   }
 
   &__brand:focus-visible,
@@ -164,5 +319,17 @@
   &__language:focus-visible {
     outline: 0.125rem solid currentcolor;
     outline-offset: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar {
+    &__dropdown,
+    &__dropdown-toggle,
+    &__dropdown-link,
+    &__language,
+    &__language-caret {
+      transition-duration: 0.01ms;
+    }
   }
 }

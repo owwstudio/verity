@@ -3,6 +3,151 @@
     "name": "Verity",
     "description": "Verity"
   },
+  "navbar": {
+    "product": {
+      "nodeId": "315:75",
+      "items": [
+        {
+          "label": "Verity Decisioning",
+          "href": "/product/verity-decisioning/"
+        },
+        {
+          "label": "Verity Value Engine",
+          "href": "/product/verity-value-engine/"
+        },
+        {
+          "label": "SAP Add-in",
+          "href": "/product/sap-add-in/"
+        }
+      ]
+    },
+    "solutions": {
+      "nodeId": "315:106",
+      "groups": [
+        {
+          "label": "by platform:",
+          "items": [
+            {
+              "label": "M&A",
+              "href": "/solutions/ma/"
+            },
+            {
+              "label": "Litigation",
+              "href": "/solutions/litigation/"
+            },
+            {
+              "label": "Banking",
+              "href": "/solutions/banking/"
+            },
+            {
+              "label": "Tax",
+              "href": "/solutions/tax/"
+            },
+            {
+              "label": "Insurance",
+              "href": "/solutions/insurance/"
+            }
+          ]
+        },
+        {
+          "label": "by value pool:",
+          "items": [
+            {
+              "label": "AI investment yield",
+              "href": "/value-pools/ai-investment-yield/"
+            },
+            {
+              "label": "Assurance economics",
+              "href": "/value-pools/assurance-economics/"
+            },
+            {
+              "label": "Capital and platform productivity",
+              "href": "/value-pools/capital-platform-productivity/"
+            },
+            {
+              "label": "Decision capital",
+              "href": "/value-pools/decision-capital/"
+            },
+            {
+              "label": "Operational capacity",
+              "href": "/value-pools/operational-capacity/"
+            },
+            {
+              "label": "Prevented loss and leackage",
+              "href": "/value-pools/prevented-loss-leackage/"
+            }
+          ]
+        }
+      ]
+    },
+    "company": {
+      "nodeId": "315:132",
+      "items": [
+        {
+          "label": "Careers",
+          "href": "/company/careers/"
+        },
+        {
+          "label": "Blog",
+          "href": "/blog/"
+        },
+        {
+          "label": "Press",
+          "href": "/press/"
+        },
+        {
+          "label": "About",
+          "href": "/company/about/"
+        },
+        {
+          "label": "Contact",
+          "href": "/contact/"
+        }
+      ]
+    },
+    "howItWorks": {
+      "nodeId": "315:124",
+      "items": [
+        {
+          "label": "Evidence",
+          "href": "/how-it-works/evidence/"
+        },
+        {
+          "label": "Security",
+          "href": "/how-it-works/security/"
+        },
+        {
+          "label": "Trust",
+          "href": "/how-it-works/trust/"
+        },
+        {
+          "label": "Patents pending",
+          "href": "/how-it-works/patents/"
+        }
+      ]
+    },
+    "language": {
+      "nodeId": "315:85",
+      "current": {
+        "label": "German",
+        "icon": "/src/assets/icons/germany.svg"
+      },
+      "items": [
+        {
+          "label": "England",
+          "href": "/en/",
+          "lang": "en",
+          "icon": "/src/assets/icons/england.svg"
+        },
+        {
+          "label": "Deutschland",
+          "href": "/de/",
+          "lang": "de",
+          "icon": "/src/assets/icons/germany.svg"
+        }
+      ]
+    }
+  },
   "hero": {
     "eyebrow": "Enterprise Decision Infrastructure",
     "title": ["Tokenize every asset.", "Optimize the entire enterprise."],
@@ -147,15 +292,15 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Dummy value-captured content."
+            "text": "Decision capital and decision productivity"
           },
           {
             "label": "What Verity Unlocks",
-            "text": "Dummy Verity-unlocks content."
+            "text": "Authority reusable and machine-executable"
           },
           {
             "label": "How you measure it",
-            "text": "Dummy measurement content."
+            "text": "Decision time, rework, escalations, key-person dependency"
           }
         ]
       },
@@ -165,15 +310,15 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Dummy value-captured content."
+            "text": "Increase operational capacity and productivity."
           },
           {
             "label": "What Verity Unlocks",
-            "text": "Dummy Verity-unlocks content."
+            "text": "Automates permitted decisions while people retain intent, exceptions and judgement."
           },
           {
             "label": "How you measure it",
-            "text": "Dummy measurement content."
+            "text": "Backlog, cycle time, cost per decision, capacity released."
           }
         ]
       },
@@ -183,15 +328,15 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Dummy value-captured content."
+            "text": "Reduce financial, operational and reputational losses."
           },
           {
             "label": "What Verity Unlocks",
-            "text": "Dummy Verity-unlocks content."
+            "text": "Stop Errors, Blocks unauthorised actions"
           },
           {
             "label": "How you measure it",
-            "text": "Dummy measurement content."
+            "text": "Loss ratio, Fraud loss, Incident cost"
           }
         ]
       },
@@ -201,15 +346,15 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Dummy value-captured content."
+            "text": "Asset productivity and service value"
           },
           {
             "label": "What Verity Unlocks",
-            "text": "Dummy Verity-unlocks content."
+            "text": "Converts connected-asset signals into authorised maintenance, software, and service actions"
           },
           {
             "label": "How you measure it",
-            "text": "Dummy measurement content."
+            "text": "Uptime, downtime, service revenue, retention"
           }
         ]
       },
@@ -219,15 +364,15 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Dummy value-captured content."
+            "text": "Assurance economics and efficiency"
           },
           {
             "label": "What Verity Unlocks",
-            "text": "Dummy Verity-unlocks content."
+            "text": "Replaces retrospective evidence collection with continuous, independently verifiable evidence"
           },
           {
             "label": "How you measure it",
-            "text": "Dummy measurement content."
+            "text": "Audit effort, control coverage, remediation time, assurance margin"
           }
         ]
       },
@@ -237,15 +382,15 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Dummy value-captured content."
+            "text": "Capital and platform productivity"
           },
           {
             "label": "What Verity Unlocks",
-            "text": "Dummy Verity-unlocks content."
+            "text": "Accelerates claims, collections, and approvals while reusing existing cloud, data, and control investments"
           },
           {
             "label": "How you measure it",
-            "text": "Dummy measurement content."
+            "text": "Audit effort, control coverage, remediation time, assurance margin"
           }
         ]
       }
@@ -293,35 +438,65 @@
     "eyebrow": "One decision, end-to-end",
     "title": "From fourteen-thousand line-items to a decision you can still prove in 2031.",
     "description": "Illustrative. A €40m annual supplier re-award across 14,000 line items, with contract, quality, tooling and logistics data held in five systems.",
-    "image": {
-      "src": "/src/assets/images/decision-flow-object.png",
-      "alt": ""
+    "evidence": {
+      "nodeId": "313:2",
+      "text": "Each step is an event. The decision is the event that binds them.",
+      "action": {
+        "label": "View full cross-system evidence chain",
+        "href": "/how-it-works/",
+        "icon": "/src/assets/icons/arrow-circle-dark.svg"
+      }
     },
     "steps": [
       {
         "id": "decision-flow-identify",
         "label": "Identify",
-        "description": "Every authorised record gets an enduring cryptographic identity tied to its exact content, version, origin, time and accountable owner. If something is changed or substituted later, you will know."
+        "description": "Every authorised record gets an enduring cryptographic identity tied to its exact content, version, origin, time and accountable owner. If something is changed or substituted later, you will know.",
+        "image": {
+          "nodeId": "317:179",
+          "src": "/src/assets/images/identify.png",
+          "alt": "Policy, value case, and decision owner connected to an authorised Verity action."
+        }
       },
       {
         "id": "decision-flow-understand",
         "label": "Understand",
-        "description": "Dummy content for the Understand step."
+        "description": "It connects those records to the relevant contract, supplier, asset, forecast, policy, risk, and operational state. Conflicts, assumptions, and unknowns remain visible rather than being silently averaged away.",
+        "image": {
+          "nodeId": "317:248",
+          "src": "/src/assets/images/understand.png",
+          "alt": "Contract, asset, supplier, and forecast records connected through Verity."
+        }
       },
       {
         "id": "decision-flow-decide",
         "label": "Decide",
-        "description": "Dummy content for the Decide step."
+        "description": "You see which information drives the value case, which policy applies, and who holds the decision right. The accountable person authorizes a bounded action - not an open mandate.",
+        "image": {
+          "nodeId": "317:325",
+          "src": "/src/assets/images/decide.png",
+          "alt": "Decision identity record connected to problem and value outputs."
+        }
       },
       {
         "id": "decision-flow-act",
         "label": "Act",
-        "description": "Dummy content for the Act step."
+        "description": "Authorization becomes coordinated execution. Each system receives only the information and the authority its role requires.",
+        "image": {
+          "nodeId": "317:417",
+          "src": "/src/assets/images/act.png",
+          "alt": "Approved action executed across API, server, database, and inventory systems."
+        }
       },
       {
         "id": "decision-flow-prove",
         "label": "Prove",
-        "description": "Dummy content for the Prove step."
+        "description": "One portable evidence package binds what was known, what was decided, who authorized it, what every system did, and how the outcome compares with the value case.",
+        "image": {
+          "nodeId": "317:496",
+          "src": "/src/assets/images/prove.png",
+          "alt": "Evidence package showing a backtest, value comparison, and reviewed decision trail."
+        }
       }
     ]
   }

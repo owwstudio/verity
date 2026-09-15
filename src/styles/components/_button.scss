@@ -23,6 +23,11 @@
     border-color: var(--color-border-action);
   }
 
+  &--inverse {
+    color: var(--color-action-primary);
+    background: var(--color-surface-primary);
+  }
+
   &--compact {
     padding: 0.875rem 1rem;
   }
@@ -31,6 +36,10 @@
     gap: 0.5rem;
     padding: 0.25rem 0.25rem 0.25rem 1rem;
     font-weight: 400;
+  }
+
+  &--inverse#{&}--with-icon {
+    font-weight: 500;
   }
 
   &__icon {

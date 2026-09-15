@@ -8,11 +8,17 @@ const SELECTORS = {
 }
 
 const setActiveOption = (options, activeOption) => {
-  options.forEach((option) => {
+  const activeIndex = options.indexOf(activeOption)
+
+  options.forEach((option, index) => {
     const isActive = option === activeOption
+    const isAdjacent = activeIndex >= 0 && Math.abs(index - activeIndex) === 1
 
     option.dataset.state = isActive ? 'active' : 'inactive'
     option.setAttribute('aria-pressed', String(isActive))
+
+    if (isAdjacent) option.dataset.proximity = 'adjacent'
+    else delete option.dataset.proximity
   })
 }
 
@@ -81,7 +87,7 @@ const initIndustryPools = () => {
   const media = gsap.matchMedia()
 
   media.add('(prefers-reduced-motion: no-preference)', () => {
-    gsap.set(action, { y: 24, autoAlpha: 0 })
+    gsap.set(action, { y: 32, scale: 0.96, autoAlpha: 0 })
     gsap.set(items, { y: 32, autoAlpha: 0 })
 
     const reveal = gsap.timeline({
@@ -93,17 +99,23 @@ const initIndustryPools = () => {
     })
 
     reveal
-      .to(action, { y: 0, autoAlpha: 1, duration: 0.45, ease: 'power2.out' })
+      .to(items, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power3.out',
+      })
       .to(
-        items,
+        action,
         {
           y: 0,
+          scale: 1,
           autoAlpha: 1,
-          duration: 0.6,
-          stagger: 0.12,
+          duration: 0.55,
           ease: 'power3.out',
         },
-        '-=0.08',
+        '-=0.16',
       )
 
     return () => {

@@ -5,7 +5,9 @@ section.decision-flow(
 )
   .decision-flow__sticky(data-decision-flow-sticky)
     .decision-flow__panel
-      .decision-flow__header
+      .decision-flow__backdrop(aria-hidden='true', data-decision-flow-backdrop)
+
+      .decision-flow__header(data-decision-flow-header)
         .decision-flow__heading
           p.decision-flow__eyebrow(data-decision-flow-reveal)= decisionFlow.eyebrow
           h2#decision-flow-title.decision-flow__title(
@@ -16,43 +18,56 @@ section.decision-flow(
 
       .decision-flow__divider(data-decision-flow-divider)
 
-      .decision-flow__content
-        ol.decision-flow__steps
-          each step, index in decisionFlow.steps
-            li.decision-flow__step(
-              data-state=index === 0 ? 'active' : 'inactive',
-              data-decision-flow-step,
+      .decision-flow__content(data-decision-flow-content)
+        .decision-flow__rail
+          ol.decision-flow__steps
+            each step, index in decisionFlow.steps
+              li.decision-flow__step(
+                data-state=index === 0 ? 'active' : 'inactive',
+                data-decision-flow-step,
+                data-decision-flow-reveal
+              )
+                button.decision-flow__trigger(
+                  type='button',
+                  aria-expanded=index === 0 ? 'true' : 'false',
+                  aria-controls=step.id,
+                  data-decision-flow-trigger
+                )
+                  span.decision-flow__summary
+                    strong.decision-flow__step-label= step.label
+                    span.decision-flow__icon(aria-hidden='true')
+                      img(
+                        src='/src/assets/icons/plus-circle.svg',
+                        alt='',
+                        width='24',
+                        height='24'
+                      )
+
+                .decision-flow__step-details(
+                  id=step.id,
+                  aria-hidden=index === 0 ? 'false' : 'true',
+                  data-decision-flow-details
+                )
+                  .decision-flow__step-details-inner
+                    p= step.description
+
+          .decision-flow__evidence(data-node-id=decisionFlow.evidence.nodeId)
+            p.decision-flow__evidence-copy(data-decision-flow-reveal)= decisionFlow.evidence.text
+            +button(decisionFlow.evidence.action.label, decisionFlow.evidence.action.href, 'inverse', decisionFlow.evidence.action.icon).button--with-icon(
               data-decision-flow-reveal
             )
-              button.decision-flow__trigger(
-                type='button',
-                aria-expanded=index === 0 ? 'true' : 'false',
-                aria-controls=step.id,
-                data-decision-flow-trigger
-              )
-                span.decision-flow__summary
-                  strong.decision-flow__step-label= step.label
-                  span.decision-flow__icon(aria-hidden='true')
-                    img(
-                      src='/src/assets/icons/plus-circle.svg',
-                      alt='',
-                      width='24',
-                      height='24'
-                    )
-
-              .decision-flow__step-details(
-                id=step.id,
-                aria-hidden=index === 0 ? 'false' : 'true',
-                data-decision-flow-details
-              )
-                .decision-flow__step-details-inner
-                  p= step.description
 
         figure.decision-flow__media(data-decision-flow-media)
-          img.decision-flow__image(
-            src=decisionFlow.image.src,
-            alt=decisionFlow.image.alt,
-            width='736',
-            height='736',
-            data-decision-flow-image
-          )
+          each step, index in decisionFlow.steps
+            img.decision-flow__image(
+              src=step.image.src,
+              alt=step.image.alt,
+              width='844',
+              height='681',
+              loading='eager',
+              decoding='async',
+              data-state=index === 0 ? 'active' : 'inactive',
+              aria-hidden=index === 0 ? null : 'true',
+              data-node-id=step.image.nodeId,
+              data-decision-flow-image
+            )
