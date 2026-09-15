@@ -1,4 +1,6 @@
 .industry-pools {
+  position: relative;
+  z-index: 3;
   min-block-size: 100svh;
   color: #000;
   background: var(--color-surface-page);

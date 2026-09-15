@@ -13,6 +13,7 @@ The design-neutral front-end foundation for Verity. It uses Vite, Vituum, Pug, S
 npm install       # Install dependencies
 npm run dev       # Start the development server
 npm run build     # Create the production build in dist/
+npm run build:handoff # Create readable section bundles in dist/handoff/
 npm run preview   # Preview the production build
 npm run format    # Format supported project files
 npm run lint      # Check JavaScript, SCSS, and formatting
@@ -56,3 +57,10 @@ The current page is intentionally minimal. No Figma design, project-specific des
 ## Typography
 
 Inter is loaded from Google Fonts in weights 400, 500, 600, and 700 and is the primary font family. Inter Display Regular and Medium are self-hosted from `src/assets/fonts` and are available through `var(--font-family-display)` for display typography.
+
+## React handoff
+
+Run `npm run build:handoff` to create non-minified HTML, CSS, and ES module
+files grouped by section. This output is separate from the optimized production
+build. See [HANDOFF.md](./HANDOFF.md) for the output contract and React
+integration guidance.

@@ -7,73 +7,83 @@ section.value-pools(
     .container.value-pools__intro-inner
       h2#value-pools-title.value-pools__title(data-value-pools-title)= valuePools.title
 
-  .value-pools__table-screen(
-    data-node-id=valuePools.tableNodeId,
-    data-value-pools-table-screen
-  )
-    .container.value-pools__content
-      .value-pools__table-scroll(
-        role='region',
-        aria-label='Verity value pools',
-        tabindex='0'
-      )
-        .value-pools__table(data-value-pools-table)
-          .value-pools__table-head(
-            aria-hidden='true',
-            data-value-pools-table-head
-          )
-            span.value-pools__category-heading
-            each column in valuePools.columns
-              span.value-pools__column-heading
-                strong.value-pools__column-title= column.title
-                span.value-pools__column-description= column.description
+  .value-pools__overlap-stage
+    .value-pools__table-screen(
+      data-node-id=valuePools.tableNodeId,
+      data-value-pools-table-screen
+    )
+      .container.value-pools__content(data-value-pools-content)
+        .value-pools__table-scroll(
+          role='region',
+          aria-label='Verity value pools',
+          tabindex='0',
+          data-value-pools-table-scroll
+        )
+          .value-pools__table(data-value-pools-table)
+            .value-pools__table-head(
+              aria-hidden='true',
+              data-value-pools-table-head
+            )
+              span.value-pools__category-heading
+              each column in valuePools.columns
+                span.value-pools__column-heading
+                  strong.value-pools__column-title= column.title
+                  span.value-pools__column-description= column.description
 
-          .value-pools__table-body
-            each row in valuePools.rows
-              article.value-pools__row(
-                data-state=row.expanded ? 'expanded' : 'collapsed',
-                data-value-pools-row
-              )
-                button.value-pools__row-trigger(
-                  type='button',
-                  aria-expanded=row.expanded ? 'true' : 'false',
-                  aria-controls=row.id,
-                  data-value-pools-row-trigger
+            .value-pools__table-body
+              each row in valuePools.rows
+                article.value-pools__row(
+                  data-state=row.expanded ? 'expanded' : 'collapsed',
+                  data-value-pools-row
                 )
-                  span.value-pools__row-heading= row.label
-                  each column in valuePools.columns
-                    span.value-pools__value
-                      img.value-pools__dot(
-                        src='/src/assets/icons/value-pool-dot.svg',
-                        alt='',
-                        width='10',
-                        height='10',
-                        aria-hidden='true'
-                      )
+                  button.value-pools__row-trigger(
+                    type='button',
+                    aria-expanded=row.expanded ? 'true' : 'false',
+                    aria-controls=row.id,
+                    data-value-pools-row-trigger
+                  )
+                    span.value-pools__row-heading= row.label
+                    each column in valuePools.columns
+                      span.value-pools__value
+                        img.value-pools__dot(
+                          src='/src/assets/icons/value-pool-dot.svg',
+                          alt='',
+                          width='10',
+                          height='10',
+                          aria-hidden='true'
+                        )
 
-                .value-pools__row-details(
-                  id=row.id,
-                  aria-hidden=row.expanded ? 'false' : 'true',
-                  data-value-pools-row-details
-                )
-                  .value-pools__row-details-inner
-                    each detail in row.details
-                      .value-pools__detail
-                        .value-pools__detail-heading
-                          img.value-pools__detail-icon(
-                            src='/src/assets/icons/cube.svg',
-                            alt='',
-                            width='20',
-                            height='20',
-                            aria-hidden='true'
-                          )
-                          strong= detail.label
-                        p.value-pools__detail-text= detail.text
+                  .value-pools__row-details(
+                    id=row.id,
+                    aria-hidden=row.expanded ? 'false' : 'true',
+                    data-value-pools-row-details
+                  )
+                    .value-pools__row-details-inner
+                      each detail in row.details
+                        .value-pools__detail
+                          .value-pools__detail-heading
+                            img.value-pools__detail-icon(
+                              src='/src/assets/icons/cube.svg',
+                              alt='',
+                              width='20',
+                              height='20',
+                              aria-hidden='true'
+                            )
+                            strong= detail.label
+                          p.value-pools__detail-text= detail.text
 
-                    span.value-pools__caret-control(aria-hidden='true')
-                      img.value-pools__caret(
-                        src='/src/assets/icons/caret-down.svg',
-                        alt='',
-                        width='16',
-                        height='16'
-                      )
+                      span.value-pools__caret-control(aria-hidden='true')
+                        img.value-pools__caret(
+                          src='/src/assets/icons/caret-down.svg',
+                          alt='',
+                          width='16',
+                          height='16'
+                        )
+
+    .value-pools__table-runway(
+      aria-hidden='true',
+      data-value-pools-table-runway
+    )
+
+    unless typeof handoffStandalone !== 'undefined' && handoffStandalone
+      include industry-pools.pug

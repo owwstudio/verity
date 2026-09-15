@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:handoff": "vite build --config vite.handoff.config.js && node scripts/render-handoff.js",
     "preview": "vite preview",
     "format": "prettier --write . --ignore-unknown",
     "lint": "eslint . && stylelint \"src/styles/**/*.scss\" && prettier --check . --ignore-unknown"
@@ -30,6 +31,7 @@
     "@prettier/plugin-pug": "^3.4.2",
     "@vituum/vite-plugin-pug": "^2.0.1",
     "eslint": "^10.10.0",
+    "pug": "^3.0.4",
     "prettier": "^3.9.6",
     "sass": "^1.104.1",
     "stylelint": "^17.15.0",
