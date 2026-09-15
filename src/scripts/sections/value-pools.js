@@ -93,7 +93,7 @@ const initValuePools = () => {
     const tableReveal = gsap.timeline({
       scrollTrigger: {
         trigger: tableScreen,
-        start: 'top top',
+        start: 'top 82%',
         toggleActions: 'play none none reverse',
       },
     })

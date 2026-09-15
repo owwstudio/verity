@@ -44,15 +44,17 @@ section#the-problem.the-problem(
             data-problem-timeline-index=index
           )
             if item.type === 'statement'
-              p.the-problem__text= item.text
+              p.the-problem__text(data-problem-text)= item.text
 
             if item.type === 'costs'
               .the-problem__costs
-                p.the-problem__text= item.intro
+                p.the-problem__text(data-problem-text)= item.intro
                 ul.the-problem__cost-list
                   each cost in item.items
-                    li.the-problem__cost-item
-                      span.the-problem__cost-highlight= cost.highlight
+                    li.the-problem__cost-item(data-problem-text)
+                      span.the-problem__cost-highlight(
+                        data-problem-accent-text
+                      )= cost.highlight
                       | #{ cost.text }
 
       ul.the-problem__principles(
