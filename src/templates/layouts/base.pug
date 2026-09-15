@@ -1,3 +1,5 @@
+include ../components/button.pug
+include ../components/tag.pug
 include ../components/navbar.pug
 
 doctype html
@@ -22,7 +24,8 @@ html(lang='en')
 
   body
     a.skip-link(href='#main-content') Skip to content
-    +navbar
+    .navbar-shell
+      +navbar
 
     main#main-content
       block content

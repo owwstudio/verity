@@ -2,5 +2,327 @@
   "site": {
     "name": "Verity",
     "description": "Verity"
+  },
+  "hero": {
+    "eyebrow": "Enterprise Decision Infrastructure",
+    "title": ["Tokenize every asset.", "Optimize the entire enterprise."],
+    "description": "Verity gives every asset — line item, contract, machine, and model — a governed identity and a value specific to the decision at hand. So you reallocate capital continuously instead of annually, and every reallocation can be verified independently.",
+    "platforms": [
+      "Azure",
+      "AWS",
+      "Google Cloud",
+      "Open Telekom Cloud",
+      "IONOS Cloud",
+      "STACKIT"
+    ],
+    "primaryAction": {
+      "label": "Discuss one key decision",
+      "href": "/book-a-demo/"
+    },
+    "secondaryAction": {
+      "label": "See the 10:1 rule",
+      "href": "/how-it-works/"
+    }
+  },
+  "problem": {
+    "label": "The Problem",
+    "title": ["Every system in your company is right", "That is the problem"],
+    "image": {
+      "src": "/src/assets/images/veryti-main-img.webp",
+      "alt": ""
+    },
+    "timeline": [
+      {
+        "type": "statement",
+        "nodeId": "285:451",
+        "text": "Ask what a customer is worth, what a supplier truly costs, or whether a production line should continue—and you’ll get multiple answers. Each is valid within its own system. None is authoritative across the enterprise."
+      },
+      {
+        "type": "statement",
+        "nodeId": "285:580",
+        "text": "So the decision takes time — for reconciliation, for alignment, for a version of the truth everyone will sign. When it is finally taken, it is defended in a hard to reconstruct spreadsheet, and reopened the moment someone asks who approved it."
+      },
+      {
+        "type": "costs",
+        "nodeId": "285:667",
+        "intro": "That is the cost you are already paying:",
+        "items": [
+          {
+            "highlight": "Capital allocated once a year",
+            "text": ", because continuous reallocation cannot be defended."
+          },
+          {
+            "highlight": "Decisions taken at the speed of reconciliation",
+            "text": ", not at the speed of the market."
+          },
+          {
+            "highlight": "Evidence assembled after the fact",
+            "text": ", at audit cost, from systems that were never asked to remember."
+          }
+        ]
+      },
+      {
+        "type": "statement",
+        "nodeId": "285:712",
+        "text": "The interfaces are connected. What is missing sits beneath them: what each record means, which version applied at the moment it mattered, who owns it, what it is worth for this decision, who may decide, and what may then happen."
+      }
+    ],
+    "principles": {
+      "nodeId": "285:795",
+      "items": [
+        "Entities change.",
+        "Schemas change.",
+        "What happened does not."
+      ]
+    },
+    "assurance": {
+      "nodeId": "285:870",
+      "primary": [
+        {
+          "name": "TISAX"
+        },
+        {
+          "name": "ISO 27001 : 2022",
+          "detail": "Stage 1"
+        }
+      ],
+      "secondary": [
+        "ISAE 3000",
+        "NIS 2",
+        "ISO 14001",
+        "NIST",
+        "ISO 50001",
+        "SOC 2"
+      ]
+    },
+    "interlude": {
+      "nodeId": "285:1012"
+    },
+    "closing": {
+      "nodeId": "285:1103",
+      "glow": "/src/assets/images/problem-closing-glow.svg"
+    }
+  },
+  "valuePools": {
+    "introNodeId": "285:1253",
+    "tableNodeId": "306:2",
+    "title": "Seven places where the value is ready to be unlocked.",
+    "columns": [
+      {
+        "title": "Value pool",
+        "description": "What value you capture"
+      },
+      {
+        "title": "What Verity unlocks",
+        "description": "How it helps"
+      },
+      {
+        "title": "What Verity unlocks",
+        "description": "How it helps"
+      }
+    ],
+    "rows": [
+      {
+        "id": "value-pool-ai-investment",
+        "label": "AI investment yield",
+        "expanded": true,
+        "details": [
+          {
+            "label": "Value Captured",
+            "text": "AI investment yield and value realisation"
+          },
+          {
+            "label": "What Verity Unlock",
+            "text": "Proven models, agents and automation move from pilot into governed production"
+          },
+          {
+            "label": "How you measure it",
+            "text": "Production conversion, realised ROI, time to value"
+          }
+        ]
+      },
+      {
+        "id": "value-pool-decision-capital",
+        "label": "Decision capital",
+        "details": [
+          {
+            "label": "Value Captured",
+            "text": "Dummy value-captured content."
+          },
+          {
+            "label": "What Verity Unlocks",
+            "text": "Dummy Verity-unlocks content."
+          },
+          {
+            "label": "How you measure it",
+            "text": "Dummy measurement content."
+          }
+        ]
+      },
+      {
+        "id": "value-pool-operational-capacity",
+        "label": "Operational capacity",
+        "details": [
+          {
+            "label": "Value Captured",
+            "text": "Dummy value-captured content."
+          },
+          {
+            "label": "What Verity Unlocks",
+            "text": "Dummy Verity-unlocks content."
+          },
+          {
+            "label": "How you measure it",
+            "text": "Dummy measurement content."
+          }
+        ]
+      },
+      {
+        "id": "value-pool-prevented-loss",
+        "label": "Prevented loss and leakage",
+        "details": [
+          {
+            "label": "Value Captured",
+            "text": "Dummy value-captured content."
+          },
+          {
+            "label": "What Verity Unlocks",
+            "text": "Dummy Verity-unlocks content."
+          },
+          {
+            "label": "How you measure it",
+            "text": "Dummy measurement content."
+          }
+        ]
+      },
+      {
+        "id": "value-pool-asset-service",
+        "label": "Asset and service value",
+        "details": [
+          {
+            "label": "Value Captured",
+            "text": "Dummy value-captured content."
+          },
+          {
+            "label": "What Verity Unlocks",
+            "text": "Dummy Verity-unlocks content."
+          },
+          {
+            "label": "How you measure it",
+            "text": "Dummy measurement content."
+          }
+        ]
+      },
+      {
+        "id": "value-pool-assurance",
+        "label": "Assurance economics",
+        "details": [
+          {
+            "label": "Value Captured",
+            "text": "Dummy value-captured content."
+          },
+          {
+            "label": "What Verity Unlocks",
+            "text": "Dummy Verity-unlocks content."
+          },
+          {
+            "label": "How you measure it",
+            "text": "Dummy measurement content."
+          }
+        ]
+      },
+      {
+        "id": "value-pool-capital-platform",
+        "label": "Capital and platform productivity",
+        "details": [
+          {
+            "label": "Value Captured",
+            "text": "Dummy value-captured content."
+          },
+          {
+            "label": "What Verity Unlocks",
+            "text": "Dummy Verity-unlocks content."
+          },
+          {
+            "label": "How you measure it",
+            "text": "Dummy measurement content."
+          }
+        ]
+      }
+    ]
+  },
+  "industryPools": {
+    "nodeId": "307:108",
+    "cta": {
+      "label": "See the value pool for your industry",
+      "href": "/solutions/"
+    },
+    "items": [
+      {
+        "label": "Connected products",
+        "tone": "faint"
+      },
+      {
+        "label": "Insurance",
+        "tone": "soft"
+      },
+      {
+        "label": "Banking and payments",
+        "tone": "muted"
+      },
+      {
+        "label": "Critical Infrastructure",
+        "tone": "strong"
+      },
+      {
+        "label": "Assurance And Professional Services",
+        "tone": "default"
+      },
+      {
+        "label": "Cross-functional enterprise operations",
+        "tone": "soft"
+      },
+      {
+        "label": "Cloud and technology platforms",
+        "tone": "soft"
+      }
+    ]
+  },
+  "decisionFlow": {
+    "nodeId": "285:269",
+    "eyebrow": "One decision, end-to-end",
+    "title": "From fourteen-thousand line-items to a decision you can still prove in 2031.",
+    "description": "Illustrative. A €40m annual supplier re-award across 14,000 line items, with contract, quality, tooling and logistics data held in five systems.",
+    "image": {
+      "src": "/src/assets/images/decision-flow-object.png",
+      "alt": ""
+    },
+    "steps": [
+      {
+        "id": "decision-flow-identify",
+        "label": "Identify",
+        "description": "Every authorised record gets an enduring cryptographic identity tied to its exact content, version, origin, time and accountable owner. If something is changed or substituted later, you will know."
+      },
+      {
+        "id": "decision-flow-understand",
+        "label": "Understand",
+        "description": "Dummy content for the Understand step."
+      },
+      {
+        "id": "decision-flow-decide",
+        "label": "Decide",
+        "description": "Dummy content for the Decide step."
+      },
+      {
+        "id": "decision-flow-act",
+        "label": "Act",
+        "description": "Dummy content for the Act step."
+      },
+      {
+        "id": "decision-flow-prove",
+        "label": "Prove",
+        "description": "Dummy content for the Prove step."
+      }
+    ]
   }
 }

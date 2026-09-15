@@ -1,0 +1,383 @@
+.value-pools {
+  position: relative;
+  z-index: 2;
+  margin-block-start: -0.0625rem;
+  color: var(--color-text-body);
+  background: var(--color-surface-page);
+
+  &__intro {
+    display: grid;
+    min-block-size: 100svh;
+    place-items: center;
+  }
+
+  &__intro-inner {
+    inline-size: 100%;
+    padding-block: 5rem;
+  }
+
+  &__title {
+    max-inline-size: 39.6875rem;
+    margin-inline: auto;
+    color: #000;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.04em;
+    text-align: center;
+  }
+
+  &__table-screen {
+    min-block-size: 100svh;
+  }
+
+  &__content {
+    display: flex;
+    min-block-size: 100svh;
+    padding-block: clamp(4rem, 10svh, 5.625rem);
+    align-items: flex-start;
+  }
+
+  &__table-scroll {
+    inline-size: 100%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+
+  &__table-scroll:focus-visible {
+    outline: 0.125rem solid var(--color-action-primary);
+    outline-offset: 0.25rem;
+  }
+
+  &__table {
+    inline-size: 100%;
+    min-inline-size: 60rem;
+  }
+
+  &__table-head,
+  &__row-trigger {
+    display: grid;
+    grid-template-columns: 21.0565% repeat(3, 26.3145%);
+  }
+
+  &__table-head {
+    min-block-size: 5rem;
+    margin-inline-start: 21.0565%;
+    grid-template-columns: repeat(3, 33.3333%);
+  }
+
+  &__category-heading {
+    display: none;
+  }
+
+  &__column-heading {
+    display: grid;
+    padding: 1.1875rem 1.5rem;
+    align-content: center;
+    justify-items: center;
+    color: var(--color-action-primary);
+    border-block-start: 0.0625rem solid #e2e2e2;
+    border-inline-start: 0.0625rem solid #e2e2e2;
+    font-family: var(--font-family-display);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  &__column-title,
+  &__column-description {
+    display: block;
+  }
+
+  &__column-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  &__column-description {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  &__table-body {
+    display: grid;
+    gap: 0.75rem;
+    margin-block-start: 0.9375rem;
+  }
+
+  &__row {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 0;
+    border: 0.0625rem solid transparent;
+    border-radius: 1rem;
+    box-shadow: 0 0 0 rgb(0 30 25 / 0%);
+    transition:
+      padding 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 360ms ease,
+      border-color 360ms ease,
+      color 360ms ease,
+      box-shadow 480ms ease;
+  }
+
+  &__row::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: url('/src/assets/images/value-pools-hover.jpg') center 43% /
+      cover;
+    content: '';
+    opacity: 0;
+    transform: scale(1.025);
+    transition:
+      opacity 420ms ease,
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &__row[data-state='expanded'] {
+    padding: 1rem 1rem 0.5rem;
+    color: #fff;
+    background-color: #132d15;
+    border-color: rgb(255 255 255 / 35%);
+    box-shadow: 0 1.5rem 3.5rem rgb(0 30 25 / 16%);
+  }
+
+  &__row[data-state='expanded']::before {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  &__row-trigger {
+    inline-size: 100%;
+    min-block-size: 3.125rem;
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    border-radius: 1rem;
+    cursor: pointer;
+    text-align: start;
+    transition:
+      min-block-size 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 360ms ease;
+  }
+
+  &__row[data-state='expanded'] &__row-trigger {
+    min-block-size: 3.5625rem;
+    background: rgb(181 181 181 / 20%);
+  }
+
+  &__row-trigger:focus-visible {
+    outline: 0.125rem solid var(--color-action-primary);
+    outline-offset: -0.25rem;
+  }
+
+  &__row[data-state='expanded'] &__row-trigger:focus-visible {
+    outline-color: #fff;
+  }
+
+  &__row-heading,
+  &__value {
+    display: flex;
+    min-inline-size: 0;
+    min-block-size: 3.125rem;
+    padding: 0.875rem 1.5rem;
+    align-items: center;
+    border-block-start: 0.0625rem solid #e2e2e2;
+    transition:
+      min-block-size 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 360ms ease,
+      color 360ms ease;
+  }
+
+  &__row-heading {
+    color: #484848;
+    font-family: var(--font-family-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__value {
+    justify-content: center;
+    border-inline-start: 0.0625rem solid #e2e2e2;
+  }
+
+  &__row[data-state='expanded'] &__row-heading,
+  &__row[data-state='expanded'] &__value {
+    min-block-size: 3.5625rem;
+    color: #fff;
+    border-color: transparent;
+  }
+
+  &__dot {
+    inline-size: 0.625rem;
+    block-size: 0.625rem;
+    transition: filter 360ms ease;
+  }
+
+  &__row[data-state='expanded'] &__dot {
+    filter: brightness(0) invert(1);
+  }
+
+  &__row-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 280ms ease;
+  }
+
+  &__row[data-state='expanded'] &__row-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  &__row-details-inner {
+    position: relative;
+    display: grid;
+    min-block-size: 0;
+    overflow: hidden;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  &__detail {
+    display: grid;
+    min-block-size: 10.6875rem;
+    padding: 2rem 3rem;
+    align-content: start;
+    justify-items: center;
+    text-align: center;
+  }
+
+  &__detail + &__detail {
+    border-inline-start: 0.0625rem solid rgb(255 255 255 / 12%);
+  }
+
+  &__detail-heading {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: center;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__detail-heading strong {
+    font-weight: 600;
+  }
+
+  &__detail-icon {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    filter: brightness(0) invert(1);
+  }
+
+  &__detail-text {
+    max-inline-size: 19.125rem;
+    margin: 0.75rem 0 0;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+  }
+
+  &__caret-control {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    display: grid;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    background: var(--color-surface-page);
+    border-radius: 50%;
+    place-items: center;
+    transform: rotate(180deg);
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &__caret {
+    inline-size: 1rem;
+    block-size: 1rem;
+  }
+}
+
+@media (width >= 56rem) and (height >= 48rem) {
+  .value-pools {
+    &__table-screen,
+    &__content {
+      block-size: 100svh;
+      min-block-size: 0;
+    }
+
+    &__table-screen {
+      overflow: clip;
+    }
+  }
+}
+
+@media (width >= 56rem) and (48rem <= height < 56.25rem) {
+  .value-pools {
+    &__content {
+      padding-block: 3rem;
+    }
+
+    &__table-head {
+      min-block-size: 4.5rem;
+    }
+
+    &__detail {
+      min-block-size: 7.5rem;
+      padding: 1.25rem 2rem;
+    }
+
+    &__detail-text {
+      margin-block-start: 0.5rem;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media (width < 56rem) {
+  .value-pools {
+    &__content {
+      padding-block: 4rem;
+    }
+
+    &__detail {
+      padding: 1.5rem;
+    }
+  }
+}
+
+@media (width < 48rem) {
+  .value-pools {
+    &__intro-inner {
+      padding-block: 4rem;
+    }
+
+    &__title {
+      max-inline-size: 32rem;
+      font-size: clamp(2rem, 8vw, 2.5rem);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .value-pools {
+    &__row,
+    &__row::before,
+    &__row-trigger,
+    &__row-heading,
+    &__value,
+    &__dot,
+    &__row-details,
+    &__caret-control {
+      transition-duration: 0.01ms;
+    }
+  }
+}

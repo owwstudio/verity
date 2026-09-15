@@ -1,1 +1,7 @@
-// Layout objects belong here when the approved design establishes them.
+.container {
+  inline-size: min(
+    calc(100% - (2 * var(--layout-page-gutter))),
+    var(--layout-container-max)
+  );
+  margin-inline: auto;
+}

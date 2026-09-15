@@ -1,0 +1,91 @@
+section#the-problem.the-problem(
+  aria-labelledby='the-problem-title',
+  data-problem,
+  data-node-id='285:417'
+)
+  .the-problem__sticky(data-problem-sticky)
+    .the-problem__background(aria-hidden='true')
+      img.the-problem__background-image(
+        src=problem.image.src,
+        alt=problem.image.alt,
+        width='2880',
+        height='1600',
+        data-problem-background
+      )
+      .the-problem__overlay(data-problem-overlay)
+      .the-problem__depth(data-problem-depth)
+      .the-problem__interlude(
+        data-node-id=problem.interlude.nodeId,
+        data-problem-interlude
+      )
+      .the-problem__closing(
+        data-node-id=problem.closing.nodeId,
+        data-problem-closing
+      )
+        img.the-problem__closing-glow(
+          src=problem.closing.glow,
+          alt='',
+          width='3609',
+          height='1194'
+        )
+
+    .container.the-problem__layout(data-problem-layout)
+      header.the-problem__heading(data-problem-heading)
+        span.the-problem__label= problem.label
+        h2#the-problem-title.the-problem__title
+          each line in problem.title
+            span.the-problem__title-line= line
+
+      ol.the-problem__timeline(data-problem-timeline)
+        each item, index in problem.timeline
+          li.the-problem__timeline-item(
+            data-node-id=item.nodeId,
+            data-problem-timeline-item,
+            data-problem-timeline-index=index
+          )
+            if item.type === 'statement'
+              p.the-problem__text= item.text
+
+            if item.type === 'costs'
+              .the-problem__costs
+                p.the-problem__text= item.intro
+                ul.the-problem__cost-list
+                  each cost in item.items
+                    li.the-problem__cost-item
+                      span.the-problem__cost-highlight= cost.highlight
+                      | #{ cost.text }
+
+      ul.the-problem__principles(
+        data-node-id=problem.principles.nodeId,
+        data-problem-principles
+      )
+        each principle in problem.principles.items
+          li.the-problem__principle= principle
+
+      .the-problem__assurance(
+        aria-label='Assurance standards',
+        data-node-id=problem.assurance.nodeId,
+        data-problem-assurance
+      )
+        ul.the-problem__assurance-primary
+          each standard in problem.assurance.primary
+            li.the-problem__assurance-primary-item
+              span.the-problem__assurance-badge(aria-hidden='true') ◇
+              span.the-problem__assurance-name
+                strong= standard.name
+                if standard.detail
+                  small= standard.detail
+
+        img.the-problem__assurance-divider(
+          src='/src/assets/icons/assurance-divider.svg',
+          alt='',
+          width='1',
+          height='288',
+          aria-hidden='true'
+        )
+
+        ul.the-problem__assurance-secondary
+          each standard in problem.assurance.secondary
+            li.the-problem__assurance-secondary-item
+              span.the-problem__assurance-diamond(aria-hidden='true') ◇
+              span= standard

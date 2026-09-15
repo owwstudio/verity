@@ -1,0 +1,58 @@
+section.decision-flow(
+  aria-labelledby='decision-flow-title',
+  data-decision-flow,
+  data-node-id=decisionFlow.nodeId
+)
+  .decision-flow__sticky(data-decision-flow-sticky)
+    .decision-flow__panel
+      .decision-flow__header
+        .decision-flow__heading
+          p.decision-flow__eyebrow(data-decision-flow-reveal)= decisionFlow.eyebrow
+          h2#decision-flow-title.decision-flow__title(
+            data-decision-flow-reveal
+          )= decisionFlow.title
+
+        p.decision-flow__description(data-decision-flow-reveal)= decisionFlow.description
+
+      .decision-flow__divider(data-decision-flow-divider)
+
+      .decision-flow__content
+        ol.decision-flow__steps
+          each step, index in decisionFlow.steps
+            li.decision-flow__step(
+              data-state=index === 0 ? 'active' : 'inactive',
+              data-decision-flow-step,
+              data-decision-flow-reveal
+            )
+              button.decision-flow__trigger(
+                type='button',
+                aria-expanded=index === 0 ? 'true' : 'false',
+                aria-controls=step.id,
+                data-decision-flow-trigger
+              )
+                span.decision-flow__summary
+                  strong.decision-flow__step-label= step.label
+                  span.decision-flow__icon(aria-hidden='true')
+                    img(
+                      src='/src/assets/icons/plus-circle.svg',
+                      alt='',
+                      width='24',
+                      height='24'
+                    )
+
+              .decision-flow__step-details(
+                id=step.id,
+                aria-hidden=index === 0 ? 'false' : 'true',
+                data-decision-flow-details
+              )
+                .decision-flow__step-details-inner
+                  p= step.description
+
+        figure.decision-flow__media(data-decision-flow-media)
+          img.decision-flow__image(
+            src=decisionFlow.image.src,
+            alt=decisionFlow.image.alt,
+            width='736',
+            height='736',
+            data-decision-flow-image
+          )

@@ -1,0 +1,306 @@
+.decision-flow {
+  position: relative;
+  background: var(--color-surface-primary);
+
+  &__sticky {
+    min-block-size: 100svh;
+    padding: 1rem;
+  }
+
+  &__panel {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-block-size: calc(100svh - 2rem);
+    overflow: hidden;
+    flex-direction: column;
+    color: var(--color-surface-primary);
+    background: #0b2e30;
+    border-radius: 2rem;
+  }
+
+  &__panel::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: url('/src/assets/images/value-pools-hover.jpg') center / cover;
+    content: '';
+    opacity: 0.7;
+    transform: scale(1.08);
+  }
+
+  &__header {
+    display: grid;
+    min-block-size: 17.0625rem;
+    padding: 4.5rem 4.5rem 3rem;
+    grid-template-columns: minmax(0, 42rem) minmax(18rem, 32rem);
+    gap: 5rem;
+    align-items: end;
+    justify-content: space-between;
+  }
+
+  &__heading {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  &__eyebrow {
+    color: var(--color-action-primary-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.04em;
+  }
+
+  &__description {
+    max-inline-size: 32rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__divider {
+    block-size: 0.0625rem;
+    margin-inline: 4.5rem;
+    background: rgb(255 255 255 / 20%);
+  }
+
+  &__content {
+    display: grid;
+    min-block-size: 0;
+    padding: clamp(2rem, 7.4svh, 5rem) 4.5rem 4rem;
+    flex: 1;
+    grid-template-columns: minmax(24rem, 34.1875rem) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  &__steps {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    align-self: start;
+    list-style: none;
+  }
+
+  &__step {
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    border: 0.0625rem solid transparent;
+    border-radius: 2rem;
+    transition:
+      background-color 480ms ease,
+      border-color 480ms ease,
+      box-shadow 480ms ease;
+  }
+
+  &__step[data-state='active'] {
+    background: rgb(255 255 255 / 4%);
+    border-color: rgb(255 255 255 / 12%);
+    box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 12%);
+  }
+
+  &__trigger {
+    display: flex;
+    inline-size: 100%;
+    min-block-size: 3.5rem;
+    padding: 0;
+    align-items: center;
+    color: inherit;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: start;
+  }
+
+  &__trigger:focus-visible {
+    outline: 0.125rem solid var(--color-action-primary-text);
+    outline-offset: -0.25rem;
+  }
+
+  &__summary {
+    display: inline-flex;
+    min-block-size: 3.5rem;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgb(255 255 255 / 4%);
+    border: 0.0625rem solid rgb(255 255 255 / 10%);
+    border-radius: 2rem;
+    transition:
+      background-color 420ms ease,
+      border-color 420ms ease;
+  }
+
+  &__step[data-state='active'] &__summary {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  &__step-label {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+
+  &__icon {
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    transition:
+      opacity 360ms ease,
+      transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &__icon img {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  &__step[data-state='active'] &__icon {
+    opacity: 0;
+    transform: rotate(45deg) scale(0.75);
+  }
+
+  &__step-details {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 560ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 360ms ease;
+  }
+
+  &__step[data-state='active'] &__step-details {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  &__step-details-inner {
+    min-block-size: 0;
+    overflow: hidden;
+  }
+
+  &__step-details-inner p {
+    min-block-size: 7.5rem;
+    margin: 0;
+    padding: 0 1.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__media {
+    display: grid;
+    min-inline-size: 0;
+    margin: 0;
+    place-items: center;
+  }
+
+  &__image {
+    inline-size: min(43.333vw, 39rem, calc(100svh - 22rem));
+    block-size: auto;
+    transform-origin: center;
+  }
+}
+
+@media (width >= 56rem) and (prefers-reduced-motion: no-preference) {
+  .decision-flow {
+    block-size: var(--decision-flow-length, 600svh);
+
+    &__sticky {
+      position: sticky;
+      inset-block-start: 0;
+      block-size: 100svh;
+    }
+
+    &__panel {
+      block-size: calc(100svh - 2rem);
+      min-block-size: 0;
+    }
+  }
+}
+
+@media (width < 70rem) {
+  .decision-flow {
+    &__header {
+      gap: 3rem;
+      grid-template-columns: minmax(0, 1.2fr) minmax(16rem, 0.8fr);
+    }
+
+    &__title {
+      font-size: clamp(2rem, 3.6vw, 2.5rem);
+    }
+
+    &__content {
+      grid-template-columns: minmax(22rem, 1fr) minmax(0, 1fr);
+    }
+  }
+}
+
+@media (width < 56rem) {
+  .decision-flow {
+    &__sticky {
+      padding: 0.75rem;
+    }
+
+    &__panel {
+      min-block-size: calc(100svh - 1.5rem);
+      border-radius: 1.5rem;
+    }
+
+    &__header {
+      min-block-size: 0;
+      padding: 4rem var(--layout-page-gutter) 2.5rem;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    &__divider {
+      margin-inline: var(--layout-page-gutter);
+    }
+
+    &__content {
+      padding: 2.5rem var(--layout-page-gutter) 4rem;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    &__steps {
+      inline-size: 100%;
+    }
+
+    &__media {
+      grid-row: 1;
+    }
+
+    &__image {
+      inline-size: min(75vw, 28rem);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .decision-flow {
+    &__step,
+    &__summary,
+    &__icon,
+    &__step-details {
+      transition-duration: 0.01ms;
+    }
+  }
+}

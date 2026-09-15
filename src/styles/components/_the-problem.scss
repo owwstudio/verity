@@ -1,0 +1,438 @@
+.the-problem {
+  position: relative;
+  color: #fff;
+  background: var(--color-action-primary);
+
+  &::after {
+    position: absolute;
+    z-index: 3;
+    inset-inline: 0;
+    inset-block-end: -0.0625rem;
+    block-size: clamp(10rem, 28svh, 22rem);
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgb(253 255 252 / 0%) 0%,
+      rgb(253 255 252 / 32%) 42%,
+      var(--color-surface-page) 100%
+    );
+    content: '';
+  }
+
+  &__sticky {
+    position: relative;
+    min-block-size: 100svh;
+    overflow: hidden;
+  }
+
+  &__background,
+  &__overlay,
+  &__depth,
+  &__interlude,
+  &__closing {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__background-image {
+    inline-size: 100%;
+    block-size: 100%;
+    max-inline-size: none;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    background: rgb(0 0 0 / 60%);
+  }
+
+  &__depth {
+    background: linear-gradient(
+      180deg,
+      rgb(0 30 25 / 0%) 0%,
+      rgb(0 30 25 / 90%) 79%
+    );
+    opacity: 0;
+  }
+
+  &__closing {
+    overflow: hidden;
+    background: linear-gradient(
+      180deg,
+      rgb(0 30 25 / 45%) 0%,
+      #001e19 58%,
+      #001e19 100%
+    );
+    opacity: 0;
+  }
+
+  &__interlude {
+    background: #001e19;
+    opacity: 0;
+  }
+
+  &__closing-glow {
+    position: absolute;
+    inset-block-start: 45%;
+    inset-inline-start: 50%;
+    inline-size: 250%;
+    max-inline-size: none;
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      #000 12%,
+      #000 88%,
+      transparent 100%
+    );
+    transform: translateX(-50%);
+  }
+
+  &__layout {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 4rem;
+    padding-block: 8rem;
+  }
+
+  &__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  &__label {
+    padding: 0.5rem 0.75rem;
+    border: 0.0625rem solid rgb(255 255 255 / 20%);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    color: var(--color-action-primary-text);
+    font-size: clamp(1.25rem, 1.667vw, 1.5rem);
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.04em;
+  }
+
+  &__title-line {
+    display: block;
+  }
+
+  &__timeline,
+  &__principles,
+  &__cost-list,
+  &__assurance-primary,
+  &__assurance-secondary {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__timeline {
+    display: grid;
+    gap: 4rem;
+  }
+
+  &__text,
+  &__cost-item {
+    font-family: var(--font-family-display);
+    font-size: clamp(1.5rem, 2.222vw, 2rem);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__costs {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  &__cost-list {
+    display: grid;
+    gap: 0.25rem;
+    padding-inline-start: 2.125rem;
+    list-style: disc;
+  }
+
+  &__cost-highlight {
+    color: var(--color-action-primary-text);
+  }
+
+  &__cost-item::marker {
+    color: var(--color-action-primary-text);
+  }
+
+  &__principles {
+    display: grid;
+    gap: 2rem;
+    color: var(--color-action-primary-text);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+
+  &__assurance {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    gap: 3rem;
+    padding: 3rem;
+    overflow: hidden;
+    background: rgb(150 255 154 / 8%);
+    border: 0.0625rem solid rgb(255 255 255 / 18%);
+    border-radius: 1.5rem;
+    box-shadow:
+      inset 0 0.0625rem 0 rgb(255 255 255 / 26%),
+      inset 0 -0.0625rem 0 rgb(255 255 255 / 10%),
+      0 2rem 5rem rgb(0 20 15 / 28%);
+    backdrop-filter: blur(1.25rem) saturate(140%) contrast(96%);
+  }
+
+  &__assurance::before,
+  &__assurance::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    pointer-events: none;
+    content: '';
+  }
+
+  &__assurance::before {
+    background: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 10%),
+      transparent 42%,
+      rgb(209 255 201 / 6%)
+    );
+  }
+
+  &__assurance::after {
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 12%), transparent 28%),
+      linear-gradient(315deg, rgb(209 255 201 / 6%), transparent 24%);
+    box-shadow:
+      inset 0 0 2rem rgb(255 255 255 / 3%),
+      inset 0 0.0625rem 0 rgb(255 255 255 / 32%);
+  }
+
+  &__assurance > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__assurance-primary,
+  &__assurance-secondary {
+    display: grid;
+    gap: 2rem;
+  }
+
+  &__assurance-primary-item,
+  &__assurance-secondary-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  &__assurance-badge {
+    display: grid;
+    flex: 0 0 3.25rem;
+    inline-size: 3.25rem;
+    block-size: 3.25rem;
+    place-items: center;
+    color: var(--color-action-primary);
+    background: #fff;
+    border-radius: 0.75rem;
+    font-family: Arial, sans-serif;
+    font-size: 1.5rem;
+  }
+
+  &__assurance-name {
+    display: grid;
+    gap: 0.25rem;
+    font-size: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  &__assurance-name strong {
+    font-weight: 600;
+  }
+
+  &__assurance-name small {
+    font-size: inherit;
+    line-height: 1.6;
+  }
+
+  &__assurance-divider {
+    display: none;
+  }
+
+  &__assurance-secondary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    color: rgb(255 255 255 / 50%);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  &__assurance-diamond {
+    color: #dce3ea;
+    font-family: Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+}
+
+@media (width >= 56rem) and (prefers-reduced-motion: no-preference) {
+  .the-problem {
+    min-block-size: 1050svh;
+
+    &__sticky {
+      position: sticky;
+      inset-block-start: 0;
+      block-size: 100svh;
+    }
+
+    &__background-image {
+      position: absolute;
+      inset-block-start: -5vw;
+      inset-inline-start: -47.431vw;
+      inline-size: 155.694vw;
+      block-size: 86.528vw;
+      transform-origin: left top;
+      will-change: transform;
+    }
+
+    &__overlay,
+    &__depth,
+    &__interlude,
+    &__closing {
+      will-change: opacity;
+    }
+
+    &__overlay {
+      opacity: 0;
+    }
+
+    &__layout {
+      display: block;
+      block-size: 100%;
+      padding-block: 0;
+      opacity: 0;
+      transform: translateY(2rem);
+      will-change: transform, opacity;
+    }
+
+    &__heading {
+      position: absolute;
+      inset-block-start: clamp(7.5rem, 11.944vw, 10.75rem);
+      inset-inline-start: 0;
+      inline-size: 45.833%;
+      will-change: transform, opacity;
+    }
+
+    &__timeline {
+      position: absolute;
+      inset: 0;
+      display: block;
+    }
+
+    &__timeline-item {
+      position: absolute;
+      inset-block-start: min(14.583vw, 13.125rem);
+      inset-inline-start: 49.628%;
+      inline-size: 50.372%;
+      visibility: hidden;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    &__principles {
+      position: absolute;
+      inset-block-start: calc(50% - 0.875rem);
+      inset-inline: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: center;
+      visibility: hidden;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    &__principle:nth-child(2) {
+      text-align: center;
+    }
+
+    &__principle:nth-child(3) {
+      text-align: end;
+    }
+
+    &__assurance {
+      position: absolute;
+      inset-block-start: 33.25%;
+      inset-inline: 5.208%;
+      display: grid;
+      grid-template-columns: minmax(14rem, 1fr) 0.0625rem minmax(0, 2fr);
+      gap: clamp(2rem, 5.556vw, 5rem);
+      align-items: center;
+      min-block-size: 46%;
+      padding: 3rem clamp(2.5rem, 4.722vw, 4.25rem);
+      visibility: hidden;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    &__assurance-primary {
+      gap: 3rem;
+    }
+
+    &__assurance-divider {
+      display: block;
+      inline-size: 0.0625rem;
+      block-size: 18rem;
+    }
+
+    &__assurance-secondary {
+      gap: 2.5rem 4rem;
+    }
+
+    &__closing-glow {
+      inset-block-start: 19.167vw;
+      inline-size: 250.625vw;
+      block-size: 82.917vw;
+    }
+  }
+}
+
+@media (width < 56rem) {
+  .the-problem {
+    &__layout {
+      min-block-size: 100svh;
+    }
+
+    &__timeline,
+    &__principles,
+    &__assurance {
+      max-inline-size: 42rem;
+    }
+
+    &__closing,
+    &__depth,
+    &__interlude {
+      display: none;
+    }
+  }
+}
+
+@media (width < 40rem) {
+  .the-problem {
+    &__assurance-secondary {
+      grid-template-columns: 1fr;
+    }
+  }
+}

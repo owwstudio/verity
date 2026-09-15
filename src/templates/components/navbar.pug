@@ -2,6 +2,7 @@ mixin navbar
   nav.navbar(
     aria-label='Primary navigation',
     data-navbar,
+    data-navbar-position='fixed',
     data-node-id='278:35'
   )
     a.navbar__brand(href='/', aria-label='Verity home', data-navbar-logo)
@@ -50,4 +51,6 @@ mixin navbar
               height='16'
             )
 
-        a.navbar__cta(href='/book-a-demo/', data-navbar-cta) Book a demo
+        +button('Book a demo', '/book-a-demo/', 'primary').navbar__cta.button--compact(
+          data-navbar-cta
+        )

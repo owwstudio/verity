@@ -1,0 +1,29 @@
+section.industry-pools(
+  aria-label='Industry value pools',
+  data-industry-pools,
+  data-node-id=industryPools.nodeId
+)
+  .container.industry-pools__inner
+    .industry-pools__action(data-industry-pools-action)
+      +button(industryPools.cta.label, industryPools.cta.href, 'primary', '/src/assets/icons/arrow-circle-right.svg').button--with-icon(
+        data-industry-pools-cta
+      )
+
+    ul#industry-pools-list.industry-pools__list
+      each item in industryPools.items
+        li.industry-pools__item(data-industry-pools-item)
+          button.industry-pools__option(
+            class=`industry-pools__option--${item.tone}`,
+            type='button',
+            aria-pressed=item.active ? 'true' : 'false',
+            data-state=item.active ? 'active' : 'inactive',
+            data-industry-pools-option
+          )
+            span.industry-pools__indicator(aria-hidden='true')
+              img(
+                src='/src/assets/icons/arrow-up-right.svg',
+                alt='',
+                width='64',
+                height='64'
+              )
+            span.industry-pools__label= item.label
