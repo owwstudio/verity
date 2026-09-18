@@ -28,6 +28,10 @@
     letter-spacing: -0.04em;
   }
 
+  &__title--intro {
+    display: none;
+  }
+
   &__description {
     position: absolute;
     z-index: 2;
@@ -134,6 +138,11 @@
     &__stage {
       block-size: 100svh;
       min-block-size: 0;
+    }
+
+    &__title--intro {
+      display: block;
+      white-space: nowrap;
     }
   }
 }

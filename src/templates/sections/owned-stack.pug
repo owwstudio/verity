@@ -5,7 +5,13 @@ section.owned-stack(
 )
   .owned-stack__sticky
     .owned-stack__stage(data-owned-stack-stage)
-      h2#owned-stack-title.owned-stack__title(data-owned-stack-title)= ownedStack.title
+      p.owned-stack__title.owned-stack__title--intro(
+        aria-hidden='true',
+        data-owned-stack-title-intro
+      )= ownedStack.title
+      h2#owned-stack-title.owned-stack__title.owned-stack__title--final(
+        data-owned-stack-title-final
+      )= ownedStack.title
       p.owned-stack__description(data-owned-stack-description)= ownedStack.description
 
       .owned-stack__track(data-owned-stack-track)
