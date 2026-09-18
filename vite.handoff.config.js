@@ -3,11 +3,17 @@ import { defineConfig } from 'vite'
 
 const sectionNames = [
   'navbar',
+  'authority-evidence',
   'hero',
   'the-problem',
   'value-pools',
   'industry-pools',
   'decision-flow',
+  'owned-stack',
+  'ten-to-one',
+  'verity-story',
+  'status-stack',
+  'site-footer',
 ]
 const sectionNameSet = new Set(sectionNames)
 

@@ -1,0 +1,64 @@
+section.ten-to-one(
+  aria-labelledby='ten-to-one-title',
+  data-ten-to-one,
+  data-node-id=tenToOne.nodeId
+)
+  .ten-to-one__sticky(data-ten-to-one-sticky)
+    .ten-to-one__panel(data-ten-to-one-panel)
+      img.ten-to-one__background(
+        src='/src/assets/images/ten-to-one-background.jpg',
+        alt='',
+        width='1768',
+        height='3834',
+        loading='eager',
+        decoding='async',
+        data-ten-to-one-background
+      )
+
+      .ten-to-one__proof(data-ten-to-one-proof)
+        .ten-to-one__intro(data-ten-to-one-intro)
+          p.ten-to-one__eyebrow= tenToOne.eyebrow
+          h2#ten-to-one-title.ten-to-one__title= tenToOne.title
+
+        p.ten-to-one__threshold(data-ten-to-one-threshold)
+          strong.ten-to-one__threshold-lead= tenToOne.threshold.lead
+          span.ten-to-one__threshold-text= tenToOne.threshold.text
+
+        ol.ten-to-one__principles
+          each principle, index in tenToOne.principles
+            li.ten-to-one__principle(
+              data-ten-to-one-principle,
+              data-principle-index=index,
+              tabindex='0'
+            )
+              .ten-to-one__principle-default(aria-hidden='true')
+                span.ten-to-one__number= principle.number
+                span.ten-to-one__label= principle.label
+              .ten-to-one__principle-hover
+                img.ten-to-one__principle-image(
+                  src=principle.image,
+                  alt='',
+                  width='904',
+                  height='1200',
+                  loading='lazy',
+                  decoding='async'
+                )
+                .ten-to-one__principle-shade
+                .ten-to-one__principle-content
+                  .ten-to-one__principle-heading
+                    span.ten-to-one__hover-number= principle.number
+                    span.ten-to-one__hover-label= principle.label
+                  p.ten-to-one__principle-description= principle.description
+
+      .ten-to-one__today(
+        data-ten-to-one-today,
+        data-node-id=tenToOne.today.nodeId
+      )
+        .ten-to-one__today-heading
+          p.ten-to-one__eyebrow= tenToOne.eyebrow
+          h2.ten-to-one__today-title= tenToOne.today.title
+
+        .ten-to-one__today-copy
+          p.ten-to-one__statement= tenToOne.today.statement
+          p.ten-to-one__detail= tenToOne.today.detail
+          +button(tenToOne.today.action.label, tenToOne.today.action.href, 'inverse', tenToOne.today.action.icon).ten-to-one__action.button--with-icon

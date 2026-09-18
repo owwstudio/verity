@@ -1,0 +1,84 @@
+section.authority-evidence(
+  aria-labelledby='authority-evidence-title',
+  data-authority-evidence,
+  data-node-id=authorityEvidence.nodeId
+)
+  .authority-evidence__sticky
+    .authority-evidence__stage(data-authority-evidence-stage)
+      .authority-evidence__background-frame(data-authority-evidence-background)
+        .authority-evidence__background-rotation
+          img.authority-evidence__background(
+            src=authorityEvidence.background.src,
+            alt=authorityEvidence.background.alt,
+            width='1672',
+            height='940',
+            loading='eager',
+            decoding='async'
+          )
+
+      article.authority-evidence__scene.authority-evidence__scene--intro(
+        data-authority-evidence-scene='intro'
+      )
+        .authority-evidence__intro-panel.authority-evidence__glass(
+          data-authority-intro-panel
+        )
+          .authority-evidence__intro-heading(data-authority-intro-heading)
+            p.authority-evidence__eyebrow= authorityEvidence.eyebrow
+            h2#authority-evidence-title.authority-evidence__intro-title= authorityEvidence.introduction.title
+          img.authority-evidence__intro-icon(
+            src=authorityEvidence.icon,
+            alt='',
+            width='48',
+            height='48',
+            data-authority-intro-icon
+          )
+          .authority-evidence__intro-copy(data-authority-intro-copy)
+            each paragraph in authorityEvidence.introduction.paragraphs
+              p(data-authority-copy-paragraph)= paragraph
+
+      article.authority-evidence__scene.authority-evidence__scene--criteria(
+        data-authority-evidence-scene='criteria',
+        data-node-id=authorityEvidence.criteria.nodeId
+      )
+        .authority-evidence__criteria-heading
+          p.authority-evidence__eyebrow= authorityEvidence.eyebrow
+          h2.authority-evidence__criteria-title= authorityEvidence.criteria.title
+        .authority-evidence__criteria-grid
+          each item in authorityEvidence.criteria.items
+            .authority-evidence__criterion.authority-evidence__glass(
+              data-authority-evidence-card
+            )
+              .authority-evidence__card-icon.authority-evidence__card-icon--light
+                img(
+                  src=authorityEvidence.cardIcon,
+                  alt='',
+                  width='23',
+                  height='25'
+                )
+              .authority-evidence__item-copy
+                h3.authority-evidence__item-title= item.title
+                p.authority-evidence__item-text= item.text
+
+      article.authority-evidence__scene.authority-evidence__scene--proof(
+        data-authority-evidence-scene='proof',
+        data-node-id=authorityEvidence.proof.nodeId
+      )
+        .authority-evidence__proof-heading
+          p.authority-evidence__eyebrow= authorityEvidence.proof.eyebrow
+          h2.authority-evidence__proof-title= authorityEvidence.proof.title
+          p.authority-evidence__proof-description= authorityEvidence.proof.description
+        +button(authorityEvidence.proof.action.label, authorityEvidence.proof.action.href, 'inverse').authority-evidence__action
+        .authority-evidence__proof-panel.authority-evidence__glass
+          .authority-evidence__steps
+            each step in authorityEvidence.proof.steps
+              .authority-evidence__step(data-authority-evidence-step)
+                .authority-evidence__card-icon.authority-evidence__card-icon--green
+                  img(
+                    src=authorityEvidence.stepIcon,
+                    alt='',
+                    width='23',
+                    height='25'
+                  )
+                .authority-evidence__item-copy
+                  h3.authority-evidence__item-title= step.title
+                  p.authority-evidence__item-text= step.text

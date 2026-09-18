@@ -1,0 +1,452 @@
+.authority-evidence {
+  position: relative;
+  color: #fdfffc;
+  background: #00130e;
+
+  &__sticky,
+  &__stage {
+    min-block-size: 100svh;
+  }
+
+  &__stage {
+    position: relative;
+    inline-size: min(100%, 90rem);
+    margin-inline: auto;
+    overflow: hidden;
+    background: #00130e;
+    isolation: isolate;
+  }
+
+  &__background-frame {
+    position: absolute;
+    z-index: 0;
+    inset-block-start: -78.56%;
+    inset-inline-start: -14.79%;
+    display: flex;
+    inline-size: 176.91%;
+    block-size: 231.47%;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  &__background-rotation {
+    inline-size: 87.38%;
+    block-size: 60.08%;
+    transform: rotate(25.31deg);
+  }
+
+  &__background {
+    inline-size: 100%;
+    block-size: 100%;
+    max-inline-size: none;
+    object-fit: cover;
+  }
+
+  &__scene {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+  }
+
+  &__glass {
+    position: relative;
+    overflow: hidden;
+    background: rgb(255 255 255 / 12%);
+    border: 0.0625rem solid rgb(255 255 255 / 14%);
+    box-shadow:
+      inset 0 0.0625rem 0 rgb(255 255 255 / 28%),
+      inset 0 -0.0625rem 0 rgb(255 255 255 / 10%),
+      0 1rem 3rem rgb(0 24 12 / 20%);
+    backdrop-filter: blur(8px) saturate(145%) contrast(102%);
+
+    &::before,
+    &::after {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      pointer-events: none;
+      content: '';
+    }
+
+    &::before {
+      background: linear-gradient(
+        135deg,
+        rgb(255 255 255 / 8%),
+        transparent 48%,
+        rgb(209 255 201 / 4%)
+      );
+    }
+
+    &::after {
+      box-shadow:
+        inset 0 0.0625rem 0 rgb(255 255 255 / 32%),
+        inset 0 -0.0625rem 0 rgb(255 255 255 / 12%);
+    }
+
+    > * {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  &__eyebrow,
+  &__intro-title,
+  &__criteria-title,
+  &__proof-title,
+  &__proof-description,
+  &__item-title,
+  &__item-text,
+  &__intro-copy p {
+    margin: 0;
+  }
+
+  &__eyebrow {
+    color: #d1ffc9;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  &__intro-panel {
+    position: absolute;
+    inset-block-start: 3rem;
+    inset-inline-start: 3rem;
+    inline-size: 42rem;
+    block-size: calc(100% - 6rem);
+    max-block-size: 50.25rem;
+    padding: 2.5rem;
+    border-radius: 1.5rem;
+  }
+
+  &__intro-heading {
+    display: grid;
+    gap: 1rem;
+  }
+
+  &__intro-title,
+  &__criteria-title,
+  &__proof-title {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.04em;
+  }
+
+  &__intro-title {
+    inline-size: 25.9375rem;
+  }
+
+  &__intro-icon {
+    position: absolute;
+    inset-block-start: 3.25rem;
+    inset-inline-start: 2.75rem;
+    inline-size: 3rem;
+    block-size: 3rem;
+  }
+
+  &__intro-copy {
+    position: absolute;
+    inset-block-start: 15.875rem;
+    inset-inline-start: 2.5rem;
+    inline-size: 35.75rem;
+    color: #334d42;
+    font-size: 1.625rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__copy-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  &__copy-character {
+    color: #334d42;
+  }
+
+  &__intro-copy p + p {
+    margin-block-start: 1.625rem;
+  }
+
+  &__criteria-heading {
+    position: absolute;
+    inset-block-start: 5.5rem;
+    inset-inline-start: 5.5rem;
+    display: flex;
+    block-size: clamp(15rem, 39svh, 21.9375rem);
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__criteria-grid {
+    position: absolute;
+    inset-block: auto clamp(2.5rem, 9svh, 5.0625rem);
+    inset-inline: 5.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    block-size: clamp(15rem, 36.78svh, 20.6875rem);
+  }
+
+  &__criterion {
+    display: flex;
+    min-inline-size: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  &__card-icon {
+    display: grid;
+    place-items: center;
+    inline-size: clamp(3rem, 7.12svh, 4rem);
+    block-size: clamp(3rem, 7.12svh, 4rem);
+    overflow: hidden;
+    border-radius: 50%;
+    backdrop-filter: blur(23.863px);
+
+    img {
+      inline-size: 1.4257rem;
+      block-size: 1.5349rem;
+    }
+
+    &--light {
+      background: #fff;
+    }
+
+    &--green {
+      background: rgb(36 107 62 / 50%);
+    }
+  }
+
+  &__item-copy {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  &__item-title,
+  &__item-text {
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__item-title {
+    font-weight: 600;
+  }
+
+  &__item-text {
+    font-weight: 400;
+  }
+
+  &__proof-heading {
+    position: absolute;
+    inset-block-start: 5.5rem;
+    inset-inline-start: 5.5rem;
+    display: grid;
+    inline-size: 20.4375rem;
+    gap: 1.5rem;
+  }
+
+  &__proof-description {
+    margin-block-start: 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__action {
+    position: absolute;
+    inset-block: auto clamp(3rem, 21.67svh, 12.1875rem);
+    inset-inline-start: 5.5rem;
+    padding: 1rem 1.25rem;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  &__proof-panel {
+    position: absolute;
+    inset-block: clamp(2rem, 7.23svh, 4.0625rem);
+    inset-inline-end: 4rem;
+    inline-size: 39.25rem;
+    block-size: auto;
+    padding: clamp(2rem, 6.23svh, 3.5rem) 3rem;
+    border-radius: 1.5rem;
+  }
+
+  &__steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.5rem, 5.34svh, 3rem) 2rem;
+  }
+
+  &__step {
+    display: grid;
+    min-inline-size: 0;
+    gap: clamp(1rem, 2.67svh, 1.5rem);
+  }
+}
+
+@media (width >= 70rem) and (prefers-reduced-motion: no-preference) {
+  .authority-evidence {
+    block-size: var(--authority-evidence-length, 600svh);
+
+    &__sticky {
+      position: sticky;
+      inset-block-start: 0;
+      block-size: 100svh;
+      min-block-size: 0;
+      overflow: hidden;
+    }
+
+    &__stage {
+      block-size: 100svh;
+      min-block-size: 0;
+    }
+
+    &__background-frame,
+    &__scene,
+    &__criterion,
+    &__step {
+      will-change: transform, opacity;
+    }
+  }
+}
+
+@media (width < 70rem), (prefers-reduced-motion: reduce) {
+  .authority-evidence {
+    padding: 1rem;
+
+    &__sticky,
+    &__stage {
+      min-block-size: 0;
+    }
+
+    &__stage {
+      display: grid;
+      gap: 1rem;
+      padding: clamp(3rem, 8vw, 5rem) var(--layout-page-gutter);
+      border-radius: 1.5rem;
+    }
+
+    &__background-frame {
+      position: absolute;
+      inset: 0;
+      inline-size: 100%;
+      block-size: 100%;
+    }
+
+    &__background-rotation {
+      inline-size: 100%;
+      block-size: 100%;
+      transform: none;
+    }
+
+    &__scene,
+    &__intro-panel,
+    &__criteria-heading,
+    &__criteria-grid,
+    &__proof-heading,
+    &__action,
+    &__proof-panel {
+      position: relative;
+      inset: auto;
+      inline-size: auto;
+      block-size: auto;
+      max-block-size: none;
+    }
+
+    &__scene {
+      display: grid;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    &__intro-panel,
+    &__proof-panel {
+      padding: 2rem;
+    }
+
+    &__intro-icon,
+    &__intro-copy {
+      position: relative;
+      inset: auto;
+      inline-size: auto;
+      max-block-size: none;
+      margin-block-start: 4rem;
+      mask-image: none;
+    }
+
+    &__intro-copy {
+      color: #fff;
+      font-size: 1.25rem;
+    }
+
+    &__criteria-heading {
+      block-size: auto;
+      gap: 4rem;
+    }
+
+    &__criteria-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      block-size: auto;
+    }
+
+    &__criterion {
+      min-block-size: 18rem;
+    }
+
+    &__action {
+      justify-self: start;
+    }
+  }
+}
+
+@media (width < 48rem) {
+  .authority-evidence {
+    &__stage {
+      padding-inline: 0.5rem;
+    }
+
+    &__scene {
+      padding-inline: 1rem;
+    }
+
+    &__intro-panel,
+    &__proof-panel {
+      padding: 1.5rem;
+    }
+
+    &__intro-title {
+      inline-size: auto;
+    }
+
+    &__criteria-grid,
+    &__steps {
+      grid-template-columns: 1fr;
+    }
+
+    &__criterion {
+      min-block-size: 15rem;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .authority-evidence {
+    &__background-frame,
+    &__scene,
+    &__criterion,
+    &__step {
+      transform: none;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

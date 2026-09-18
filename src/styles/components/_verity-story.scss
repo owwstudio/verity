@@ -1,0 +1,352 @@
+.verity-story {
+  position: relative;
+  color: #000;
+  background: #fff;
+
+  &__sticky,
+  &__stage {
+    min-block-size: 100svh;
+  }
+
+  &__stage {
+    position: relative;
+    inline-size: min(100%, 90rem);
+    margin-inline: auto;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  &__overview,
+  &__lesson {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__overview {
+    z-index: 1;
+  }
+
+  &__lesson {
+    z-index: 0;
+  }
+
+  &__introduction {
+    position: absolute;
+    inset-block-start: 7.5rem;
+    inset-inline-start: 3rem;
+    display: grid;
+    inline-size: 28.375rem;
+    gap: 2rem;
+  }
+
+  &__title,
+  &__description,
+  &__lesson-title,
+  &__lesson-description,
+  &__quote,
+  &__quote p {
+    margin: 0;
+  }
+
+  &__title {
+    inline-size: 24.875rem;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.04em;
+  }
+
+  &__description {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  &__metrics-window {
+    position: absolute;
+    inset: 0 3rem 0 calc(50% + 0.5rem);
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  &__metrics {
+    position: absolute;
+    inset-block-start: 7.5rem;
+    inset-inline: 0;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__metric {
+    display: flex;
+    min-block-size: 8.875rem;
+    padding-block: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    border-block-start: 0.0625rem solid rgb(0 0 0 / 10%);
+  }
+
+  &__metric-value {
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+  }
+
+  &__metric-label {
+    inline-size: 11.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+    text-align: end;
+  }
+
+  &__metrics-fade {
+    position: absolute;
+    z-index: 1;
+    inset-inline: 0;
+    pointer-events: none;
+
+    &--top {
+      inset-block-start: 0;
+      block-size: 13.5625rem;
+      background: linear-gradient(
+        0deg,
+        rgb(255 255 255 / 0%) 0%,
+        rgb(255 255 255 / 34%) 69%,
+        #fff 100%
+      );
+    }
+
+    &--bottom {
+      inset-block-end: 0;
+      block-size: min(45.5625rem, 48svh);
+      background: linear-gradient(
+        180deg,
+        rgb(255 255 255 / 0%) 0%,
+        rgb(255 255 255 / 34%) 15%,
+        #fff 46%
+      );
+    }
+  }
+
+  &__lesson-title {
+    position: absolute;
+    inset-block-start: min(5.5rem, 10svh);
+    inset-inline-start: 3rem;
+    inline-size: 16.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    white-space: pre-line;
+  }
+
+  &__lesson-content {
+    position: absolute;
+    inset-block-start: min(5.5rem, 10svh);
+    inset-inline-start: calc(50% + 0.5rem);
+    display: grid;
+    inline-size: calc(50% - 3.5rem);
+    gap: 1.5rem;
+  }
+
+  &__lesson-description {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+  }
+
+  &__quote {
+    display: grid;
+    gap: 1rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+
+    cite {
+      color: #005325;
+      font-size: 1rem;
+      font-style: normal;
+    }
+  }
+
+  &__portrait,
+  &__lesson-image {
+    position: absolute;
+    display: block;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    filter: none;
+    mask-image: none;
+  }
+
+  &__portrait {
+    inset-block: auto min(7.25rem, 13svh);
+    inset-inline-start: 3rem;
+    inline-size: min(16.5rem, 30svh);
+    block-size: min(15.1875rem, 27.6svh);
+  }
+
+  &__lesson-image {
+    inset-block: auto min(7.25rem, 13svh);
+    inset-inline-start: calc(50% + 0.5rem);
+    inline-size: calc(50% - 3.5rem);
+    block-size: min(22rem, 36svh);
+  }
+}
+
+@media (width >= 70rem) and (prefers-reduced-motion: no-preference) {
+  .verity-story {
+    block-size: var(--verity-story-length, 400svh);
+
+    &__sticky {
+      position: sticky;
+      inset-block-start: 0;
+      block-size: 100svh;
+      min-block-size: 0;
+      overflow: hidden;
+    }
+
+    &__stage {
+      block-size: 100svh;
+      min-block-size: 0;
+    }
+
+    &__introduction,
+    &__metrics,
+    &__lesson-title,
+    &__lesson-content,
+    &__portrait,
+    &__lesson-image {
+      will-change: transform, opacity;
+    }
+  }
+}
+
+@media (width < 70rem), (prefers-reduced-motion: reduce) {
+  .verity-story {
+    padding: clamp(4rem, 8vw, 7rem) var(--layout-page-gutter);
+
+    &__sticky,
+    &__stage {
+      min-block-size: 0;
+    }
+
+    &__stage {
+      display: grid;
+      gap: clamp(5rem, 10vw, 8rem);
+      overflow: visible;
+    }
+
+    &__overview,
+    &__lesson {
+      position: relative;
+      inset: auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 3rem;
+    }
+
+    &__introduction,
+    &__metrics-window,
+    &__metrics,
+    &__lesson-title,
+    &__lesson-content,
+    &__portrait,
+    &__lesson-image {
+      position: static;
+      inline-size: auto;
+    }
+
+    &__metrics-window {
+      overflow: visible;
+    }
+
+    &__metrics-fade {
+      display: none;
+    }
+
+    &__metric-value {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    &__lesson-title {
+      grid-column: 1;
+      white-space: normal;
+    }
+
+    &__lesson-content {
+      grid-column: 2;
+    }
+
+    &__portrait {
+      align-self: end;
+      inline-size: min(100%, 16.5rem);
+      block-size: auto;
+      aspect-ratio: 264 / 243;
+    }
+
+    &__lesson-image {
+      inline-size: 100%;
+      block-size: auto;
+      aspect-ratio: 664 / 396;
+    }
+  }
+}
+
+@media (width < 48rem) {
+  .verity-story {
+    &__overview,
+    &__lesson {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    &__title {
+      inline-size: auto;
+      font-size: clamp(2rem, 9vw, 2.5rem);
+    }
+
+    &__lesson-title,
+    &__lesson-content {
+      grid-column: auto;
+    }
+
+    &__metric {
+      gap: 1.5rem;
+    }
+
+    &__metric-label {
+      inline-size: min(42%, 11.5rem);
+    }
+
+    &__portrait {
+      inline-size: 55%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verity-story {
+    &__overview,
+    &__introduction,
+    &__metrics,
+    &__lesson,
+    &__lesson-title,
+    &__lesson-content,
+    &__portrait,
+    &__lesson-image {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+  }
+}

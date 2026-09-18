@@ -1,0 +1,37 @@
+section.owned-stack(
+  aria-labelledby='owned-stack-title',
+  data-owned-stack,
+  data-node-id=ownedStack.nodeId
+)
+  .owned-stack__sticky
+    .owned-stack__stage(data-owned-stack-stage)
+      h2#owned-stack-title.owned-stack__title(data-owned-stack-title)= ownedStack.title
+      p.owned-stack__description(data-owned-stack-description)= ownedStack.description
+
+      .owned-stack__track(data-owned-stack-track)
+        .owned-stack__introduction
+          h3.owned-stack__copy-title= ownedStack.introduction.title
+          p.owned-stack__copy= ownedStack.introduction.text
+
+        p.owned-stack__consequences-label= ownedStack.consequencesLabel
+
+        .owned-stack__consequences
+          each consequence in ownedStack.consequences
+            article.owned-stack__consequence(data-node-id=consequence.nodeId)
+              img.owned-stack__image(
+                src=consequence.image.src,
+                alt=consequence.image.alt,
+                width='664',
+                height='351',
+                loading='eager',
+                decoding='async'
+              )
+              .owned-stack__consequence-copy
+                h3.owned-stack__copy-title= consequence.title
+                p.owned-stack__copy= consequence.text
+
+      .owned-stack__followup(data-owned-stack-followup)
+        .owned-stack__followup-copy
+          h3.owned-stack__copy-title= ownedStack.followup.title
+          p.owned-stack__copy= ownedStack.followup.text
+        +button(ownedStack.followup.action.label, ownedStack.followup.action.href, 'primary', ownedStack.followup.action.icon).owned-stack__action.button--with-icon

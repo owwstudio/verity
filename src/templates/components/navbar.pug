@@ -10,7 +10,15 @@ mixin navbarSimpleDropdown(name, label, config)
       aria-controls=menuId,
       aria-haspopup='true',
       data-navbar-dropdown-toggle
-    )= label
+    )
+      span= label
+      span.navbar__dropdown-caret(aria-hidden='true')
+        img(
+          src='/src/assets/icons/caret-down.svg',
+          alt='',
+          width='16',
+          height='16'
+        )
     .navbar__dropdown(
       id=menuId,
       class=`navbar__dropdown--${name}`,
@@ -28,6 +36,7 @@ mixin navbar
   nav.navbar(
     aria-label='Primary navigation',
     data-navbar,
+    data-state='closed',
     data-navbar-position='fixed',
     data-node-id='278:35'
   )
@@ -39,87 +48,118 @@ mixin navbar
         height='15'
       )
 
-    ul.navbar__menu(data-navbar-primary)
-      li.navbar__item
-        a.navbar__link(href='/assessment/') Assessment
-      +navbarSimpleDropdown('product', 'Product', navbar.product)
-      li.navbar__item.navbar__item--dropdown(
-        data-navbar-dropdown='solutions',
-        data-state='closed'
+    button.navbar__mobile-toggle(
+      type='button',
+      aria-label='Open navigation menu',
+      aria-expanded='false',
+      aria-controls='navbar-menu',
+      data-navbar-mobile-toggle
+    )
+      img.navbar__mobile-toggle-icon.navbar__mobile-toggle-icon--open(
+        src='/src/assets/icons/list.svg',
+        alt='',
+        width='24',
+        height='24'
       )
-        button.navbar__link.navbar__dropdown-toggle(
-          type='button',
-          aria-expanded='false',
-          aria-controls='navbar-solutions-menu',
-          aria-haspopup='true',
-          data-navbar-dropdown-toggle
-        ) Solutions
-        #navbar-solutions-menu.navbar__dropdown.navbar__dropdown--solutions(
-          aria-hidden='true',
-          inert,
-          data-navbar-dropdown-menu,
-          data-node-id=navbar.solutions.nodeId
-        )
-          each group in navbar.solutions.groups
-            .navbar__dropdown-group
-              p.navbar__dropdown-heading= group.label
-              ul.navbar__dropdown-list
-                each item in group.items
-                  li.navbar__dropdown-item
-                    a.navbar__dropdown-link(href=item.href)= item.label
-      li.navbar__item
-        a.navbar__link(href='/assurance/') Assurance
+      img.navbar__mobile-toggle-icon.navbar__mobile-toggle-icon--close(
+        src='/src/assets/icons/close.svg',
+        alt='',
+        width='24',
+        height='24'
+      )
 
-    .navbar__actions
-      ul.navbar__menu.navbar__menu--secondary
-        +navbarSimpleDropdown('company', 'Company', navbar.company)
-        +navbarSimpleDropdown('how-it-works', 'How it works', navbar.howItWorks)
-
-      .navbar__controls
-        .navbar__language-wrap(
-          data-navbar-dropdown='language',
+    #navbar-menu.navbar__panel(data-navbar-panel)
+      ul.navbar__menu(data-navbar-primary)
+        li.navbar__item.navbar__item--assessment
+          a.navbar__link(href='/assessment/') Assessment
+        +navbarSimpleDropdown('product', 'Product', navbar.product)
+        li.navbar__item.navbar__item--dropdown(
+          data-navbar-dropdown='solutions',
           data-state='closed'
         )
-          button.navbar__language(
+          button.navbar__link.navbar__dropdown-toggle(
             type='button',
-            aria-label=`Change language. Current language: ${navbar.language.current.label}`,
             aria-expanded='false',
-            aria-controls='navbar-language-menu',
+            aria-controls='navbar-solutions-menu',
             aria-haspopup='true',
             data-navbar-dropdown-toggle
           )
-            span.navbar__language-icon(aria-hidden='true')
-              img(
-                src=navbar.language.current.icon,
-                alt='',
-                width='28',
-                height='28'
-              )
-            span.navbar__language-caret(aria-hidden='true')
+            span Solutions
+            span.navbar__dropdown-caret(aria-hidden='true')
               img(
                 src='/src/assets/icons/caret-down.svg',
                 alt='',
                 width='16',
                 height='16'
               )
-
-          #navbar-language-menu.navbar__dropdown.navbar__dropdown--language(
+          #navbar-solutions-menu.navbar__dropdown.navbar__dropdown--solutions(
             aria-hidden='true',
             inert,
-            data-navbar-dropdown-menu
+            data-navbar-dropdown-menu,
+            data-node-id=navbar.solutions.nodeId
           )
-            ul.navbar__dropdown-list
-              each language in navbar.language.items
-                li.navbar__dropdown-item
-                  a.navbar__dropdown-link.navbar__dropdown-link--language(
-                    href=language.href,
-                    hreflang=language.lang,
-                    lang=language.lang
-                  )
-                    span.navbar__dropdown-icon(aria-hidden='true')
-                      img(src=language.icon, alt='', width='28', height='28')
-                    span= language.label
+            each group in navbar.solutions.groups
+              .navbar__dropdown-group
+                p.navbar__dropdown-heading= group.label
+                ul.navbar__dropdown-list
+                  each item in group.items
+                    li.navbar__dropdown-item
+                      a.navbar__dropdown-link(href=item.href)= item.label
+        li.navbar__item
+          a.navbar__link(href='/assurance/') Assurance
 
-        +button('Book a demo', '/book-a-demo/', 'primary').navbar__cta.button--compact(
-          data-navbar-cta
-        )
+      .navbar__actions
+        ul.navbar__menu.navbar__menu--secondary
+          +navbarSimpleDropdown('company', 'Company', navbar.company)
+          +navbarSimpleDropdown('how-it-works', 'How it works', navbar.howItWorks)
+
+        .navbar__controls
+          .navbar__language-wrap(
+            data-navbar-dropdown='language',
+            data-state='closed'
+          )
+            button.navbar__language(
+              type='button',
+              aria-label=`Change language. Current language: ${navbar.language.current.label}`,
+              aria-expanded='false',
+              aria-controls='navbar-language-menu',
+              aria-haspopup='true',
+              data-navbar-dropdown-toggle
+            )
+              span.navbar__language-current
+                span.navbar__language-icon(aria-hidden='true')
+                  img(
+                    src=navbar.language.current.icon,
+                    alt='',
+                    width='28',
+                    height='28'
+                  )
+                span.navbar__language-label= navbar.language.current.label
+              span.navbar__language-caret(aria-hidden='true')
+                img(
+                  src='/src/assets/icons/caret-down.svg',
+                  alt='',
+                  width='16',
+                  height='16'
+                )
+
+            #navbar-language-menu.navbar__dropdown.navbar__dropdown--language(
+              aria-hidden='true',
+              inert,
+              data-navbar-dropdown-menu
+            )
+              ul.navbar__dropdown-list
+                each language in navbar.language.items
+                  li.navbar__dropdown-item
+                    a.navbar__dropdown-link.navbar__dropdown-link--language(
+                      href=language.href,
+                      hreflang=language.lang,
+                      lang=language.lang
+                    )
+                      span.navbar__dropdown-icon(aria-hidden='true')
+                        img(src=language.icon, alt='', width='28', height='28')
+                      span= language.label
+
+          +button('Book a demo', '/book-a-demo/', 'primary').navbar__cta.button--compact(
+            data-navbar-cta
+          )

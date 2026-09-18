@@ -129,7 +129,7 @@
     "language": {
       "nodeId": "315:85",
       "current": {
-        "label": "German",
+        "label": "Deutschland",
         "icon": "/src/assets/icons/germany.svg"
       },
       "items": [
@@ -454,7 +454,7 @@
         "description": "Every authorised record gets an enduring cryptographic identity tied to its exact content, version, origin, time and accountable owner. If something is changed or substituted later, you will know.",
         "image": {
           "nodeId": "317:179",
-          "src": "/src/assets/images/identify.png",
+          "src": "/src/assets/images/identify-new.png",
           "alt": "Policy, value case, and decision owner connected to an authorised Verity action."
         }
       },
@@ -464,7 +464,7 @@
         "description": "It connects those records to the relevant contract, supplier, asset, forecast, policy, risk, and operational state. Conflicts, assumptions, and unknowns remain visible rather than being silently averaged away.",
         "image": {
           "nodeId": "317:248",
-          "src": "/src/assets/images/understand.png",
+          "src": "/src/assets/images/understand-new.png",
           "alt": "Contract, asset, supplier, and forecast records connected through Verity."
         }
       },
@@ -474,7 +474,7 @@
         "description": "You see which information drives the value case, which policy applies, and who holds the decision right. The accountable person authorizes a bounded action - not an open mandate.",
         "image": {
           "nodeId": "317:325",
-          "src": "/src/assets/images/decide.png",
+          "src": "/src/assets/images/decide-new.png",
           "alt": "Decision identity record connected to problem and value outputs."
         }
       },
@@ -484,7 +484,7 @@
         "description": "Authorization becomes coordinated execution. Each system receives only the information and the authority its role requires.",
         "image": {
           "nodeId": "317:417",
-          "src": "/src/assets/images/act.png",
+          "src": "/src/assets/images/act-new.png",
           "alt": "Approved action executed across API, server, database, and inventory systems."
         }
       },
@@ -494,9 +494,339 @@
         "description": "One portable evidence package binds what was known, what was decided, who authorized it, what every system did, and how the outcome compares with the value case.",
         "image": {
           "nodeId": "317:496",
-          "src": "/src/assets/images/prove.png",
+          "src": "/src/assets/images/prove-new.png",
           "alt": "Evidence package showing a backtest, value comparison, and reviewed decision trail."
         }
+      }
+    ]
+  },
+  "ownedStack": {
+    "nodeId": "329:659",
+    "title": "Why this is not what you already own",
+    "description": "You have bought most of the stack. None of it does this.",
+    "introduction": {
+      "title": "Catalogues describe assets",
+      "text": "Integration platforms move data. Policy engines enforce rules. Analytics platforms recommend. Workflow platforms execute. Every one of them is necessary and none of them is wrong. None of them binds economic value to human authority to executed action to portable evidence, in a single chain that can be reconstructed years later. That binding is the product."
+    },
+    "consequencesLabel": "Two consequences follow:",
+    "consequences": [
+      {
+        "nodeId": "329:666",
+        "image": {
+          "src": "/src/assets/images/owned-stack-isolated.png",
+          "alt": "Cash, capital, performance, risk, and constraints independently optimised in isolation."
+        },
+        "title": "Every asset is optimised on its own",
+        "text": "how it can generate more cash, consume less capital, perform better, or carry less risk within its constraints."
+      },
+      {
+        "nodeId": "329:789",
+        "image": {
+          "src": "/src/assets/images/owned-stack-portfolio.png",
+          "alt": "A coordinated portfolio connecting dependencies, competing priorities, scarce resources, and system-wide value."
+        },
+        "title": "The portfolio is coordinated as a whole",
+        "text": "across dependencies, competing priorities and scarce resources, so a local improvement cannot quietly destroy value elsewhere."
+      }
+    ],
+    "followup": {
+      "title": "And one thing you no longer have to do:",
+      "text": "your organisation never has to agree in advance on what e.g. a customer is. It only has to know what happened and who authorised it. Entities get redefined. Events do not.",
+      "action": {
+        "label": "Explore the seven key innovations",
+        "href": "/how-it-works/",
+        "icon": "/src/assets/icons/arrow-circle-right.svg"
+      }
+    }
+  },
+  "tenToOne": {
+    "nodeId": "329:856",
+    "eyebrow": "The 10:1 rule",
+    "title": "We will not ask you to believe a business case. Including ours.",
+    "threshold": {
+      "lead": "The threshold: 10:1 over five years.",
+      "text": "An engagement must credibly enable or protect at least ten times its cost. If the assessment does not clear that bar, you find out in week three — and put the money somewhere it works harder."
+    },
+    "principles": [
+      {
+        "number": "01",
+        "label": "You choose the measures",
+        "description": "Decision time, execution time, revenue, cost, cash conversion, capital utilisation, loss avoided, control effort, audit effort.",
+        "image": "/src/assets/images/ten-to-one-hover-01.png"
+      },
+      {
+        "number": "02",
+        "label": "We verify against your systems",
+        "description": "Your systems of record — Your ledger, your ERP, your operational systems. Not Verity telemetry.",
+        "image": "/src/assets/images/ten-to-one-hover-02.png"
+      },
+      {
+        "number": "03",
+        "label": "Finance confirms",
+        "description": "Confirmed by your Finance function or an independent reviewer before anything is published.",
+        "image": "/src/assets/images/finance confirm hover.png"
+      },
+      {
+        "number": "04",
+        "label": "Estimates stay estimates",
+        "description": "A realised value claim is published only when operational and financial evidence supports it.",
+        "image": "/src/assets/images/ten-to-one-hover-04.png"
+      },
+      {
+        "number": "05",
+        "label": "Negative results count too",
+        "description": "Results below forecast — or negative — are published by the same method.",
+        "image": "/src/assets/images/negative result count hover.png"
+      }
+    ],
+    "today": {
+      "nodeId": "329:881",
+      "title": "Where we are today",
+      "statement": "Verity is entering its first proof deployments. No Verity-attributable customer outcome has been published.",
+      "detail": "If you engage now, you are in the first cohort — which is why the measurement method above is fixed before the work starts, and why the first engagement is bounded, funded from the decision's own budget, and ends in a documented go/no-go.",
+      "action": {
+        "label": "Review the measurement method",
+        "href": "/how-it-works/",
+        "icon": "/src/assets/icons/arrow-circle-dark.svg"
+      }
+    }
+  },
+  "authorityEvidence": {
+    "nodeId": "334:1982",
+    "eyebrow": "Authority & Evidence",
+    "background": {
+      "src": "/src/assets/images/authority-evidence-background.png",
+      "alt": ""
+    },
+    "icon": "/src/assets/icons/authority-evidence-copy-cube.svg",
+    "cardIcon": "/src/assets/icons/authority-evidence-card-cube.svg",
+    "stepIcon": "/src/assets/icons/authority-evidence-step-cube.svg",
+    "introduction": {
+      "title": "Human authority in. Independent proof out.",
+      "paragraphs": [
+        "Technology brings context together, highlights uncertainty, and coordinates action. People remain accountable for every key decision.",
+        "Once approved, each decision sets enforceable limits on data, policy, system actions, and responsibility.",
+        "Verity records evidence as actions happen. Auditors can verify it offline without a Verity licence, API, infrastructure, or access to unrelated confidential data."
+      ]
+    },
+    "criteria": {
+      "nodeId": "334:1991",
+      "title": "Built for consequential decisions",
+      "items": [
+        {
+          "title": "Business-critical",
+          "text": "Decisions need to be made with confidence."
+        },
+        {
+          "title": "Risk / Legal / Audit",
+          "text": "Production is gated by Risk, Legal, Security, or Audit."
+        },
+        {
+          "title": "Existing systems",
+          "text": "Existing cloud, AI, and enterprise systems need to work together."
+        },
+        {
+          "title": "Regulatory evidence",
+          "text": "Decisions must meet regulatory and evidence requirements."
+        }
+      ]
+    },
+    "proof": {
+      "nodeId": "334:1942",
+      "eyebrow": "Prove the case before committing",
+      "title": "Prove the case before committing.",
+      "description": "One consequential decision. 3–4 weeks.",
+      "steps": [
+        {
+          "title": "Baseline",
+          "text": "Understand the current state and establish the baseline."
+        },
+        {
+          "title": "Value Hypothesis",
+          "text": "Test the value hypothesis against the 10:1 threshold."
+        },
+        {
+          "title": "Decision",
+          "text": "Map the decision and execution chain across systems."
+        },
+        {
+          "title": "Execution",
+          "text": "Identify control gaps in policy, data, process, and authority."
+        },
+        {
+          "title": "Evidence",
+          "text": "Agree measurement method and generate evidence for go / no-go."
+        }
+      ],
+      "action": {
+        "label": "Discuss one consequential decision",
+        "href": "/book-a-demo/"
+      }
+    }
+  },
+  "verityStory": {
+    "nodeId": "334:2021",
+    "title": "Who is building this, and what is true today",
+    "description": "You have bought most of the stack. Built by people who have run the infrastructure of one of Europe’s largest companies — where failure was not an option. None of it does this.",
+    "metrics": [
+      {
+        "value": "8 Yrs",
+        "label": "Delivering global automotive infrastructure"
+      },
+      {
+        "value": "10",
+        "label": "Brands"
+      },
+      {
+        "value": "150+",
+        "label": "Markets"
+      },
+      {
+        "value": "1,500+",
+        "label": "Endpoints"
+      },
+      {
+        "value": "5 Yrs",
+        "label": "In operation"
+      },
+      {
+        "value": "99,999%",
+        "label": "Availability"
+      }
+    ],
+    "lesson": {
+      "nodeId": "334:2052",
+      "title": "The lesson that became Verity",
+      "description": "Connecting systems is not enough. When identity, meaning, authority, responsibility and evidence separate as information crosses organisational and technical boundaries, decisions slow down and accountability disappears. Seven foundational innovations exist to keep that chain intact.",
+      "quote": "We are not asking you to trust a promise. The decision, the authority, the action, and the outcome can be examined independently — both in and against our favor.",
+      "attribution": "Helge Heupel, Founder & CEO",
+      "portrait": {
+        "src": "/src/assets/images/verity-founder.png",
+        "alt": "Portrait of Helge Heupel, Founder and CEO of Verity."
+      },
+      "image": {
+        "src": "/src/assets/images/verity-office.png",
+        "alt": "A bright workspace overlooking the sea."
+      }
+    }
+  },
+  "statusStack": {
+    "nodeId": "334:1230",
+    "eyebrow": "Status",
+    "title": "Status, 26 August 2026",
+    "background": {
+      "src": "/src/assets/images/status-background.jpg",
+      "accent": "/src/assets/images/status-background-accent.png"
+    },
+    "cards": [
+      {
+        "number": "01",
+        "title": "First proof deployments",
+        "icon": "/src/assets/icons/status-diamond.svg",
+        "mark": "©",
+        "text": "Early-stage product entering its first proof deployments."
+      },
+      {
+        "number": "02",
+        "title": "Patent applications",
+        "icon": "/src/assets/icons/status-square.svg",
+        "text": "Seven foundational patent applications filed with the USPTO on 30 June 2026.",
+        "note": "Filing is not evidence of grant, technical effectiveness, or customer value."
+      },
+      {
+        "number": "03",
+        "title": "Independent review",
+        "icon": "/src/assets/icons/status-triangle.svg",
+        "text": "Independent review of the complete post-quantum cryptographic implementation is scheduled for Q4 2026.",
+        "note": "The cryptographic profile is described as post-quantum-hardened, not post-quantum-secure."
+      },
+      {
+        "number": "04",
+        "title": "Assurance roadmap",
+        "icon": "/src/assets/icons/status-roadmap.svg",
+        "roadmap": [
+          {
+            "title": "TISAX 2023–2026",
+            "detail": "Next assessment 7–9 September 2026"
+          },
+          {
+            "title": "ISO 27001",
+            "detail": "November 2026"
+          },
+          {
+            "title": "ISO 14001 & ISO 50001",
+            "detail": "Q4 2026"
+          },
+          {
+            "title": "ISAE 3000",
+            "detail": "December 2026"
+          },
+          {
+            "title": "ISO 42001",
+            "detail": "Q1 2027"
+          }
+        ]
+      },
+      {
+        "number": "05",
+        "title": "Your keys, your control",
+        "icon": "/src/assets/icons/status-key.svg",
+        "mark": "©",
+        "text": "Signing and encryption keys remain in your own HSM or KMS."
+      }
+    ],
+    "action": {
+      "label": "View the current capability and assurance record",
+      "href": "/assurance/"
+    }
+  },
+  "siteFooter": {
+    "nodeId": "334:2127",
+    "title": "Tokenize every asset. Optimize the entire enterprise.",
+    "action": {
+      "label": "Lets Discuss",
+      "href": "/book-a-demo/"
+    },
+    "navigation": [
+      [
+        {
+          "label": "Assessment",
+          "href": "/assessment/"
+        },
+        {
+          "label": "Product",
+          "href": "/product/"
+        },
+        {
+          "label": "Solutions",
+          "href": "/solutions/"
+        },
+        {
+          "label": "Assurance",
+          "href": "/assurance/"
+        }
+      ],
+      [
+        {
+          "label": "Company",
+          "href": "/company/"
+        },
+        {
+          "label": "How it works",
+          "href": "/how-it-works/"
+        }
+      ]
+    ],
+    "wordmark": "/src/assets/icons/footer-wordmark.svg",
+    "copyright": "© 2026 Helge Heupel Group",
+    "policies": [
+      {
+        "label": "Policy Privacy",
+        "href": "/privacy-policy/"
+      },
+      {
+        "label": "Term and Condition",
+        "href": "/terms-and-conditions/"
       }
     ]
   }

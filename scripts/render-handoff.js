@@ -7,11 +7,17 @@ const projectRoot = cwd()
 const outputRoot = resolve(projectRoot, 'dist/handoff')
 const sectionNames = [
   'navbar',
+  'authority-evidence',
   'hero',
   'the-problem',
   'value-pools',
   'industry-pools',
   'decision-flow',
+  'owned-stack',
+  'ten-to-one',
+  'verity-story',
+  'status-stack',
+  'site-footer',
 ]
 const siteData = JSON.parse(
   await readFile(resolve(projectRoot, 'src/data/site.json'), 'utf8'),

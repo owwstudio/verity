@@ -223,7 +223,7 @@
       inset 0 0.0625rem 0 rgb(255 255 255 / 26%),
       inset 0 -0.0625rem 0 rgb(255 255 255 / 10%),
       0 2rem 5rem rgb(0 20 15 / 28%);
-    backdrop-filter: blur(1.25rem) saturate(140%) contrast(96%);
+    backdrop-filter: blur(8px) saturate(145%) contrast(102%);
   }
 
   &__assurance::before,

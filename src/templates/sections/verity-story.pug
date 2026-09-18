@@ -1,0 +1,53 @@
+section.verity-story(
+  aria-labelledby='verity-story-title',
+  data-verity-story,
+  data-node-id=verityStory.nodeId
+)
+  .verity-story__sticky
+    .verity-story__stage(data-verity-story-stage)
+      .verity-story__overview(data-verity-story-overview)
+        .verity-story__introduction(data-verity-story-introduction)
+          h2#verity-story-title.verity-story__title= verityStory.title
+          p.verity-story__description= verityStory.description
+
+        .verity-story__metrics-window
+          ul.verity-story__metrics(data-verity-story-metrics)
+            each metric in verityStory.metrics
+              li.verity-story__metric
+                strong.verity-story__metric-value= metric.value
+                span.verity-story__metric-label= metric.label
+          .verity-story__metrics-fade.verity-story__metrics-fade--top(
+            aria-hidden='true'
+          )
+          .verity-story__metrics-fade.verity-story__metrics-fade--bottom(
+            aria-hidden='true'
+          )
+
+      .verity-story__lesson(
+        data-verity-story-lesson,
+        data-node-id=verityStory.lesson.nodeId
+      )
+        h2.verity-story__lesson-title(data-verity-story-lesson-copy)= verityStory.lesson.title
+        .verity-story__lesson-content(data-verity-story-lesson-copy)
+          p.verity-story__lesson-description= verityStory.lesson.description
+          blockquote.verity-story__quote
+            p= `“${verityStory.lesson.quote}”`
+            cite= verityStory.lesson.attribution
+        img.verity-story__portrait(
+          src=verityStory.lesson.portrait.src,
+          alt=verityStory.lesson.portrait.alt,
+          width='1200',
+          height='1000',
+          loading='lazy',
+          decoding='async',
+          data-verity-story-portrait
+        )
+        img.verity-story__lesson-image(
+          src=verityStory.lesson.image.src,
+          alt=verityStory.lesson.image.alt,
+          width='1200',
+          height='680',
+          loading='lazy',
+          decoding='async',
+          data-verity-story-image
+        )

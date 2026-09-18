@@ -118,6 +118,7 @@
     background: rgb(255 255 255 / 4%);
     border-color: rgb(255 255 255 / 12%);
     box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 12%);
+    backdrop-filter: blur(8px) saturate(145%) contrast(102%);
   }
 
   &__trigger {

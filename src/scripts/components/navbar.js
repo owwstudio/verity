@@ -3,6 +3,8 @@ const SELECTORS = {
   dropdown: '[data-navbar-dropdown]',
   toggle: '[data-navbar-dropdown-toggle]',
   menu: '[data-navbar-dropdown-menu]',
+  mobileToggle: '[data-navbar-mobile-toggle]',
+  panel: '[data-navbar-panel]',
 }
 
 const getMenuLinks = (menu) => [...menu.querySelectorAll('a[href]')]
@@ -13,6 +15,30 @@ const initNavbar = () => {
   if (!navbar) return
 
   const dropdowns = [...navbar.querySelectorAll(SELECTORS.dropdown)]
+  const mobileToggle = navbar.querySelector(SELECTORS.mobileToggle)
+  const panel = navbar.querySelector(SELECTORS.panel)
+  const mobileMedia = window.matchMedia('(width < 64rem)')
+
+  const setMobileMenuState = (isOpen) => {
+    if (!mobileToggle || !panel) return
+
+    const shouldOpen = mobileMedia.matches && isOpen
+
+    navbar.dataset.state = shouldOpen ? 'open' : 'closed'
+    mobileToggle.setAttribute('aria-expanded', String(shouldOpen))
+    mobileToggle.setAttribute(
+      'aria-label',
+      shouldOpen ? 'Close navigation menu' : 'Open navigation menu',
+    )
+
+    if (mobileMedia.matches) {
+      panel.setAttribute('aria-hidden', String(!shouldOpen))
+      panel.inert = !shouldOpen
+    } else {
+      panel.removeAttribute('aria-hidden')
+      panel.inert = false
+    }
+  }
 
   const setDropdownState = (dropdown, isOpen) => {
     const toggle = dropdown.querySelector(SELECTORS.toggle)
@@ -52,11 +78,11 @@ const initNavbar = () => {
     }
 
     dropdown.addEventListener('pointerenter', (event) => {
-      if (event.pointerType === 'mouse') openDropdown()
+      if (!mobileMedia.matches && event.pointerType === 'mouse') openDropdown()
     })
 
     dropdown.addEventListener('pointerleave', (event) => {
-      if (event.pointerType !== 'mouse') return
+      if (mobileMedia.matches || event.pointerType !== 'mouse') return
 
       closeTimer = window.setTimeout(closeDropdown, 120)
     })
@@ -75,7 +101,8 @@ const initNavbar = () => {
       ).matches
       const isOpen = dropdown.dataset.state === 'open'
 
-      if (supportsHover && event.detail > 0) openDropdown()
+      if (!mobileMedia.matches && supportsHover && event.detail > 0)
+        openDropdown()
       else if (isOpen) closeDropdown()
       else openDropdown()
     })
@@ -120,8 +147,30 @@ const initNavbar = () => {
     })
   })
 
+  mobileToggle?.addEventListener('click', () => {
+    const isOpen = navbar.dataset.state === 'open'
+
+    closeDropdowns()
+    setMobileMenuState(!isOpen)
+  })
+
+  panel?.addEventListener('click', (event) => {
+    if (!mobileMedia.matches || !event.target.closest('a[href]')) return
+
+    closeDropdowns()
+    setMobileMenuState(false)
+  })
+
+  mobileMedia.addEventListener('change', () => {
+    closeDropdowns()
+    setMobileMenuState(false)
+  })
+
   window.document.addEventListener('pointerdown', (event) => {
-    if (!navbar.contains(event.target)) closeDropdowns()
+    if (navbar.contains(event.target)) return
+
+    closeDropdowns()
+    setMobileMenuState(false)
   })
 
   window.document.addEventListener('keydown', (event) => {
@@ -131,11 +180,19 @@ const initNavbar = () => {
       (dropdown) => dropdown.dataset.state === 'open',
     )
 
-    if (!openDropdown) return
+    if (openDropdown) {
+      setDropdownState(openDropdown, false)
+      openDropdown.querySelector(SELECTORS.toggle)?.focus()
+      return
+    }
 
-    setDropdownState(openDropdown, false)
-    openDropdown.querySelector(SELECTORS.toggle)?.focus()
+    if (navbar.dataset.state !== 'open') return
+
+    setMobileMenuState(false)
+    mobileToggle?.focus()
   })
+
+  setMobileMenuState(false)
 }
 
 export { initNavbar }

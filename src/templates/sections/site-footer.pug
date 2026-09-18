@@ -1,0 +1,35 @@
+footer#site-footer.site-footer(data-site-footer, data-node-id=siteFooter.nodeId)
+  .site-footer__inner
+    .site-footer__top
+      .site-footer__lead
+        h2.site-footer__title(data-footer-reveal)= siteFooter.title
+
+        +button(siteFooter.action.label, siteFooter.action.href, 'primary', '/src/assets/icons/arrow-circle-right.svg').site-footer__action.button--with-icon(
+          data-footer-reveal
+        )
+
+      nav.site-footer__navigation(aria-label='Footer navigation')
+        each group in siteFooter.navigation
+          ul.site-footer__navigation-list
+            each item in group
+              li.site-footer__navigation-item(data-footer-reveal)
+                a.site-footer__navigation-link(href=item.href)= item.label
+
+    .site-footer__wordmark(data-footer-wordmark, aria-hidden='true')
+      img(
+        src=siteFooter.wordmark,
+        alt='',
+        width='1344',
+        height='195',
+        loading='lazy',
+        decoding='async'
+      )
+
+    .site-footer__legal
+      p.site-footer__copyright(data-footer-reveal)= siteFooter.copyright
+
+      .site-footer__policies
+        each policy, index in siteFooter.policies
+          if index > 0
+            span.site-footer__policy-separator(aria-hidden='true') |
+          a.site-footer__policy(data-footer-reveal, href=policy.href)= policy.label
