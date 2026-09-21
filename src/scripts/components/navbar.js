@@ -1,3 +1,5 @@
+import { lenis } from '../core/lenis.js'
+
 const SELECTORS = {
   navbar: '[data-navbar]',
   dropdown: '[data-navbar-dropdown]',
@@ -6,6 +8,9 @@ const SELECTORS = {
   mobileToggle: '[data-navbar-mobile-toggle]',
   panel: '[data-navbar-panel]',
 }
+
+const TOP_SCROLL_THRESHOLD = 8
+const DIRECTION_SCROLL_THRESHOLD = 3
 
 const getMenuLinks = (menu) => [...menu.querySelectorAll('a[href]')]
 
@@ -18,11 +23,47 @@ const initNavbar = () => {
   const mobileToggle = navbar.querySelector(SELECTORS.mobileToggle)
   const panel = navbar.querySelector(SELECTORS.panel)
   const mobileMedia = window.matchMedia('(width < 64rem)')
+  let lastScroll = window.scrollY
+  let isNavbarVisible = true
+
+  const isNavbarEngaged = () =>
+    navbar.dataset.state === 'open' ||
+    dropdowns.some((dropdown) => dropdown.dataset.state === 'open') ||
+    navbar.contains(window.document.activeElement)
+
+  const setNavbarVisibility = (isVisible) => {
+    if (!isVisible && isNavbarEngaged()) return
+    if (isVisible === isNavbarVisible) return
+
+    isNavbarVisible = isVisible
+    navbar.dataset.scrollState = isVisible ? 'visible' : 'hidden'
+    navbar.inert = !isVisible
+
+    if (isVisible) navbar.dataset.navbarPosition = 'fixed'
+  }
+
+  const handleNavbarScroll = ({ scroll = window.scrollY } = {}) => {
+    const currentScroll = Math.max(0, scroll)
+    const scrollDelta = currentScroll - lastScroll
+
+    if (currentScroll <= TOP_SCROLL_THRESHOLD) {
+      setNavbarVisibility(true)
+      lastScroll = currentScroll
+      return
+    }
+
+    if (Math.abs(scrollDelta) < DIRECTION_SCROLL_THRESHOLD) return
+
+    setNavbarVisibility(scrollDelta < 0)
+    lastScroll = currentScroll
+  }
 
   const setMobileMenuState = (isOpen) => {
     if (!mobileToggle || !panel) return
 
     const shouldOpen = mobileMedia.matches && isOpen
+
+    if (shouldOpen) setNavbarVisibility(true)
 
     navbar.dataset.state = shouldOpen ? 'open' : 'closed'
     mobileToggle.setAttribute('aria-expanded', String(shouldOpen))
@@ -68,6 +109,7 @@ const initNavbar = () => {
 
     const openDropdown = () => {
       window.clearTimeout(closeTimer)
+      setNavbarVisibility(true)
       closeDropdowns(dropdown)
       setDropdownState(dropdown, true)
     }
@@ -192,6 +234,8 @@ const initNavbar = () => {
     mobileToggle?.focus()
   })
 
+  navbar.dataset.scrollState = 'visible'
+  lenis.on('scroll', handleNavbarScroll)
   setMobileMenuState(false)
 }
 
