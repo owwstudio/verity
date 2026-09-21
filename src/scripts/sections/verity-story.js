@@ -6,10 +6,54 @@ const SELECTORS = {
   overview: '[data-verity-story-overview]',
   introduction: '[data-verity-story-introduction]',
   metrics: '[data-verity-story-metrics]',
+  counter: '[data-verity-story-counter]',
   lesson: '[data-verity-story-lesson]',
   lessonCopy: '[data-verity-story-lesson-copy]',
   portrait: '[data-verity-story-portrait]',
   image: '[data-verity-story-image]',
+}
+
+const createCounter = (element) => {
+  const original = element.textContent.trim()
+  const match = original.match(/^([^\d]*)([\d.,]+)(.*)$/)
+
+  if (!match) return null
+
+  const [, prefix, numericValue, suffix] = match
+  const usesDecimalComma = suffix.includes('%') && numericValue.includes(',')
+  const decimals = usesDecimalComma ? numericValue.split(',').at(-1).length : 0
+  const endValue = Number(
+    usesDecimalComma
+      ? numericValue.replace(',', '.')
+      : numericValue.replaceAll(',', ''),
+  )
+
+  if (!Number.isFinite(endValue)) return null
+
+  const state = { value: 0 }
+  const render = () => {
+    const formattedValue = usesDecimalComma
+      ? state.value.toFixed(decimals).replace('.', ',')
+      : Math.round(state.value).toLocaleString('en-US')
+
+    element.textContent = `${prefix}${formattedValue}${suffix}`
+  }
+
+  element.setAttribute('aria-label', original)
+
+  return {
+    element,
+    state,
+    endValue,
+    render,
+    reset: () => {
+      state.value = 0
+      render()
+    },
+    restore: () => {
+      element.textContent = original
+    },
+  }
 }
 
 const initVerityStory = () => {
@@ -27,6 +71,10 @@ const initVerityStory = () => {
   )
   const portrait = lesson?.querySelector(SELECTORS.portrait)
   const image = lesson?.querySelector(SELECTORS.image)
+  const counters = gsap.utils
+    .toArray(section.querySelectorAll(SELECTORS.counter))
+    .map(createCounter)
+    .filter(Boolean)
 
   if (
     !stage ||
@@ -55,6 +103,8 @@ const initVerityStory = () => {
       const lessonEntryY = () => 772 * sceneScaleY()
       const portraitEntryY = () => 486 * sceneScaleY()
       const imageEntryY = () => 1092 * sceneScaleY()
+
+      counters.forEach((counter) => counter.reset())
 
       gsap.set(overview, { autoAlpha: 1 })
       gsap.set(lesson, { autoAlpha: 0 })
@@ -148,7 +198,7 @@ const initVerityStory = () => {
             y: 0,
             scaleX: 1,
             scaleY: 1,
-            duration: 0.27,
+            duration: 0.22,
             ease: 'power2.inOut',
           },
           0.62,
@@ -159,17 +209,31 @@ const initVerityStory = () => {
             y: 0,
             scaleX: 1,
             scaleY: 1,
-            duration: 0.3,
+            duration: 0.24,
             ease: 'power2.inOut',
           },
           0.63,
         )
-        .to({}, { duration: 0.15 })
+        .to({}, { duration: 0.21 })
+
+      counters.forEach((counter, index) => {
+        timeline.to(
+          counter.state,
+          {
+            value: counter.endValue,
+            duration: 0.09,
+            ease: 'power2.out',
+            onUpdate: counter.render,
+          },
+          0.025 + index * 0.068,
+        )
+      })
 
       return () => {
         timeline.scrollTrigger?.kill()
         timeline.kill()
         section.style.removeProperty('--verity-story-length')
+        counters.forEach((counter) => counter.restore())
         gsap.set(
           [
             overview,
@@ -190,6 +254,7 @@ const initVerityStory = () => {
     '(max-width: 69.999rem) and (prefers-reduced-motion: no-preference)',
     () => {
       const targets = [introduction, metrics, ...lessonCopy, portrait, image]
+      counters.forEach((counter) => counter.reset())
       const tweens = targets.map((target) =>
         gsap.from(target, {
           y: 28,
@@ -203,12 +268,30 @@ const initVerityStory = () => {
           },
         }),
       )
+      const counterTweens = counters.map((counter) =>
+        gsap.to(counter.state, {
+          value: counter.endValue,
+          duration: 1,
+          ease: 'power2.out',
+          onUpdate: counter.render,
+          scrollTrigger: {
+            trigger: counter.element,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+          },
+        }),
+      )
 
       return () => {
         tweens.forEach((tween) => {
           tween.scrollTrigger?.kill()
           tween.kill()
         })
+        counterTweens.forEach((tween) => {
+          tween.scrollTrigger?.kill()
+          tween.kill()
+        })
+        counters.forEach((counter) => counter.restore())
         gsap.set(targets, { clearProps: 'transform,opacity,visibility' })
       }
     },

@@ -1,11 +1,14 @@
-import { gsap } from '../core/motion.js'
+import { gsap, ScrollTrigger } from '../core/motion.js'
 
 const SELECTORS = {
   section: '[data-status-stack]',
   sticky: '[data-status-stack-sticky]',
   panel: '[data-status-stack-panel]',
+  header: '[data-status-stack-header]',
   background: '[data-status-stack-background]',
   card: '[data-status-stack-card]',
+  cardToggle: '[data-status-stack-card-toggle]',
+  cardContent: '[data-status-stack-card-content]',
   action: '[data-status-stack-action]',
 }
 
@@ -26,20 +29,30 @@ const initStatusStack = () => {
 
   const sticky = section.querySelector(SELECTORS.sticky)
   const panel = section.querySelector(SELECTORS.panel)
+  const header = section.querySelector(SELECTORS.header)
   const background = section.querySelector(SELECTORS.background)
   const cards = gsap.utils.toArray(section.querySelectorAll(SELECTORS.card))
   const action = section.querySelector(SELECTORS.action)
 
-  if (!sticky || !panel || !background || cards.length !== 5 || !action) {
+  if (
+    !sticky ||
+    !panel ||
+    !header ||
+    !background ||
+    cards.length !== 5 ||
+    !action
+  ) {
     return
   }
+
+  const headerItems = [...header.children]
 
   const media = gsap.matchMedia()
 
   media.add(
     '(min-width: 70rem) and (prefers-reduced-motion: no-preference)',
     () => {
-      section.style.setProperty('--status-stack-length', '800svh')
+      section.style.setProperty('--status-stack-length', '1000svh')
 
       const scaleX = () => panel.clientWidth / 1408
       const scaleY = () => panel.clientHeight / 833
@@ -56,6 +69,7 @@ const initStatusStack = () => {
         x: () => backgroundX(0),
         y: () => backgroundY(0),
       })
+      gsap.set(headerItems, { y: 24, autoAlpha: 0 })
       gsap.set(cards, {
         y: cardEntryY,
         width: cardBaseWidth,
@@ -84,6 +98,17 @@ const initStatusStack = () => {
             ease: 'power2.inOut',
           },
           0.06,
+        )
+        .to(
+          headerItems,
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.12,
+            stagger: 0.025,
+            ease: 'power2.out',
+          },
+          0.08,
         )
         .to(
           background,
@@ -169,7 +194,7 @@ const initStatusStack = () => {
         gsap.set(sticky, {
           clearProps: '--status-panel-inset,--status-panel-radius',
         })
-        gsap.set([background, ...cards, action], {
+        gsap.set([background, ...headerItems, ...cards, action], {
           clearProps: 'transform,width,opacity,visibility,--status-card-offset',
         })
       }
@@ -179,7 +204,7 @@ const initStatusStack = () => {
   media.add(
     '(max-width: 69.999rem) and (prefers-reduced-motion: no-preference)',
     () => {
-      const targets = [...cards, action]
+      const targets = [...headerItems, ...cards, action]
       const tweens = targets.map((target) =>
         gsap.from(target, {
           y: 40,
@@ -203,6 +228,61 @@ const initStatusStack = () => {
       }
     },
   )
+
+  media.add('(max-width: 47.999rem)', () => {
+    let refreshTimer
+    const toggleEntries = cards.map((card) => ({
+      card,
+      toggle: card.querySelector(SELECTORS.cardToggle),
+      content: card.querySelector(SELECTORS.cardContent),
+    }))
+
+    if (toggleEntries.some(({ toggle, content }) => !toggle || !content)) return
+
+    const setOpenCard = (activeCard) => {
+      toggleEntries.forEach(({ card, toggle, content }) => {
+        const isOpen = card === activeCard
+
+        card.dataset.state = isOpen ? 'open' : 'closed'
+        toggle.setAttribute('aria-expanded', String(isOpen))
+        content.setAttribute('aria-hidden', String(!isOpen))
+      })
+
+      window.clearTimeout(refreshTimer)
+      refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 460)
+    }
+
+    const handleToggle = (event) => {
+      const activeEntry = toggleEntries.find(
+        ({ toggle }) => toggle === event.currentTarget,
+      )
+
+      if (!activeEntry || activeEntry.card.dataset.state === 'open') return
+
+      setOpenCard(activeEntry.card)
+    }
+
+    toggleEntries.forEach(({ toggle }, index) => {
+      toggle.addEventListener('click', handleToggle)
+      toggleEntries[index].content.setAttribute(
+        'aria-hidden',
+        String(index !== 0),
+      )
+    })
+    setOpenCard(toggleEntries[0].card)
+
+    return () => {
+      window.clearTimeout(refreshTimer)
+      toggleEntries.forEach(({ toggle, content }, index) => {
+        toggle.removeEventListener('click', handleToggle)
+        toggle.setAttribute('aria-expanded', String(index === 0))
+        content.removeAttribute('aria-hidden')
+      })
+      cards.forEach((card, index) => {
+        card.dataset.state = index === 0 ? 'open' : 'closed'
+      })
+    }
+  })
 }
 
 export { initStatusStack }

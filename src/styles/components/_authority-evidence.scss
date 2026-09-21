@@ -410,21 +410,82 @@
 
 @media (width < 48rem) {
   .authority-evidence {
+    padding: 0.5rem;
+
     &__stage {
-      padding-inline: 0.5rem;
+      display: block;
+      padding: 0;
+      border-radius: 1.25rem;
+    }
+
+    &__background-frame {
+      display: none;
+      position: sticky;
+      inset-block-start: 0;
+      inline-size: 100%;
+      block-size: 100svh;
+      margin-block-end: -100svh;
+      overflow: hidden;
+    }
+
+    &__background-rotation {
+      inline-size: 120%;
+      block-size: 120%;
+      margin: -10%;
+    }
+
+    &__background {
+      object-position: 50% 50%;
     }
 
     &__scene {
-      padding-inline: 1rem;
+      gap: 2rem;
+      padding: 4rem 1rem;
+    }
+
+    &__scene + &__scene {
+      border-block-start: 0.0625rem solid rgb(255 255 255 / 14%);
+    }
+
+    &__eyebrow {
+      font-size: 0.75rem;
+    }
+
+    &__intro-title,
+    &__criteria-title,
+    &__proof-title {
+      font-size: 1.5rem;
+      line-height: 1.12;
     }
 
     &__intro-panel,
     &__proof-panel {
-      padding: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 1.25rem;
     }
 
     &__intro-title {
       inline-size: auto;
+    }
+
+    &__intro-icon {
+      inline-size: 2.5rem;
+      block-size: 2.5rem;
+      margin-block-start: 3rem;
+    }
+
+    &__intro-copy {
+      margin-block-start: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    &__intro-copy p + p {
+      margin-block-start: 1.25rem;
+    }
+
+    &__criteria-heading {
+      gap: 1rem;
     }
 
     &__criteria-grid,
@@ -432,8 +493,84 @@
       grid-template-columns: 1fr;
     }
 
+    &__criteria-grid {
+      gap: 0.75rem;
+    }
+
     &__criterion {
-      min-block-size: 15rem;
+      display: grid;
+      grid-template-columns: 2.75rem minmax(0, 1fr);
+      min-block-size: 0;
+      gap: 1rem;
+      align-items: start;
+      justify-content: normal;
+      padding: 1.25rem;
+      border-radius: 1.25rem;
+    }
+
+    &__card-icon {
+      inline-size: 2.75rem;
+      block-size: 2.75rem;
+
+      img {
+        inline-size: 1.25rem;
+        block-size: 1.25rem;
+      }
+    }
+
+    &__item-copy {
+      gap: 0.375rem;
+    }
+
+    &__item-title {
+      font-size: 0.9375rem;
+      line-height: 1.4;
+    }
+
+    &__item-text,
+    &__proof-description {
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    &__proof-heading {
+      order: 1;
+      gap: 0.75rem;
+    }
+
+    &__proof-panel {
+      order: 2;
+    }
+
+    &__steps {
+      gap: 0;
+    }
+
+    &__step {
+      position: relative;
+      grid-template-columns: 2.75rem minmax(0, 1fr);
+      gap: 1rem;
+      padding-block-end: 1.75rem;
+
+      &:not(:last-child)::after {
+        position: absolute;
+        inset-block: 3rem 0.25rem;
+        inset-inline-start: 1.3438rem;
+        inline-size: 0.0625rem;
+        background: rgb(209 255 201 / 28%);
+        content: '';
+      }
+
+      &:last-child {
+        padding-block-end: 0;
+      }
+    }
+
+    &__action {
+      order: 3;
+      inline-size: 100%;
+      justify-content: center;
+      margin-block-start: 0.5rem;
     }
   }
 }

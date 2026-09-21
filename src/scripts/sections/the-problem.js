@@ -15,6 +15,9 @@ const SELECTORS = {
   accentText: '[data-problem-accent-text]',
   principles: '[data-problem-principles]',
   assurance: '[data-problem-assurance]',
+  mobileProgress: '[data-problem-mobile-progress]',
+  mobileCurrent: '[data-problem-mobile-current]',
+  mobileProgressFill: '[data-problem-mobile-progress-fill]',
   navbar: '[data-navbar]',
 }
 
@@ -26,11 +29,23 @@ const BACKGROUND_STATES = [
   { x: '40.035vw', y: '0.868vw', scale: 0.737 },
 ]
 
+const MOBILE_BACKGROUND_STATES = [
+  { xPercent: 0, yPercent: 0, scale: 1.08 },
+  { xPercent: -8, yPercent: -3, scale: 1.16 },
+  { xPercent: 7, yPercent: -7, scale: 1.22 },
+  { xPercent: -10, yPercent: 5, scale: 1.18 },
+  { xPercent: 9, yPercent: -4, scale: 1.24 },
+  { xPercent: -4, yPercent: 7, scale: 1.12 },
+  { xPercent: 5, yPercent: 0, scale: 1.18 },
+]
+
+const NAVBAR_TOP_THRESHOLD = 8
+
 const setNavbarTheme = (navbar, theme) => {
   if (!navbar) return
 
-  if (theme === 'glass') {
-    navbar.dataset.navbarTheme = theme
+  if (theme === 'glass' || window.scrollY > NAVBAR_TOP_THRESHOLD) {
+    navbar.dataset.navbarTheme = 'glass'
     return
   }
 
@@ -209,6 +224,9 @@ const initTheProblem = () => {
   const timelineItems = gsap.utils.toArray(SELECTORS.timelineItem, section)
   const principles = section.querySelector(SELECTORS.principles)
   const assurance = section.querySelector(SELECTORS.assurance)
+  const mobileProgress = section.querySelector(SELECTORS.mobileProgress)
+  const mobileCurrent = section.querySelector(SELECTORS.mobileCurrent)
+  const mobileProgressFill = section.querySelector(SELECTORS.mobileProgressFill)
   const navbar = window.document.querySelector(SELECTORS.navbar)
   const reducedMotion = window.matchMedia(
     '(prefers-reduced-motion: reduce)',
@@ -400,6 +418,150 @@ const initTheProblem = () => {
         splitTexts.forEach(({ element, markup, words }) => {
           gsap.set(words, { clearProps: '--problem-word-fill' })
           element.innerHTML = markup
+        })
+      }
+    },
+  )
+
+  media.add(
+    '(max-width: 55.99rem) and (prefers-reduced-motion: no-preference)',
+    () => {
+      if (
+        !background ||
+        !heading ||
+        !timelineItems.length ||
+        !principles ||
+        !assurance ||
+        !mobileProgress ||
+        !mobileCurrent ||
+        !mobileProgressFill
+      ) {
+        return undefined
+      }
+
+      const storyCount = timelineItems.length + 2
+      const sceneCount = storyCount + 1
+      let activeScene = -1
+      let backgroundTween
+
+      section.style.setProperty(
+        '--problem-mobile-length',
+        `${sceneCount * 85}svh`,
+      )
+      section.dataset.problemMobileScene = 'intro'
+      gsap.set(background, {
+        ...MOBILE_BACKGROUND_STATES[0],
+        transformOrigin: '50% 50%',
+        willChange: 'transform',
+      })
+      gsap.set(mobileProgressFill, {
+        scaleX: 0,
+        transformOrigin: '0% 50%',
+      })
+
+      const setPosition = (element, position) => {
+        element.dataset.problemMobilePosition = position
+      }
+
+      const updateScene = (sceneIndex) => {
+        activeScene = Math.max(0, Math.min(sceneCount - 1, sceneIndex))
+        const isTimelineScene =
+          activeScene > 0 && activeScene <= timelineItems.length
+        const timelineIndex = isTimelineScene ? activeScene - 1 : -1
+        const principlesScene = timelineItems.length + 1
+        const assuranceScene = timelineItems.length + 2
+
+        section.dataset.problemMobileScene =
+          activeScene === 0
+            ? 'intro'
+            : isTimelineScene
+              ? 'timeline'
+              : activeScene === principlesScene
+                ? 'principles'
+                : 'assurance'
+
+        setPosition(heading, activeScene === 0 ? 'active' : 'before')
+
+        timelineItems.forEach((item, index) => {
+          const position =
+            index === timelineIndex
+              ? 'active'
+              : timelineIndex < 0 && activeScene === 0
+                ? 'after'
+                : index < timelineIndex || activeScene > timelineItems.length
+                  ? 'before'
+                  : 'after'
+
+          setPosition(item, position)
+        })
+
+        setPosition(
+          principles,
+          activeScene === principlesScene
+            ? 'active'
+            : activeScene < principlesScene
+              ? 'after'
+              : 'before',
+        )
+        setPosition(
+          assurance,
+          activeScene === assuranceScene ? 'active' : 'after',
+        )
+
+        const storyScene = Math.max(0, activeScene)
+
+        mobileCurrent.textContent = String(
+          Math.max(1, Math.min(storyCount, storyScene)),
+        ).padStart(2, '0')
+        mobileProgress.setAttribute('aria-valuenow', String(storyScene))
+
+        backgroundTween?.kill()
+        backgroundTween = gsap.to(background, {
+          ...MOBILE_BACKGROUND_STATES[activeScene],
+          duration: 0.85,
+          ease: 'power2.inOut',
+          overwrite: true,
+        })
+      }
+
+      const storyTrigger = ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        invalidateOnRefresh: true,
+        onUpdate: ({ progress: scrollProgress }) => {
+          const nextScene = Math.min(
+            sceneCount - 1,
+            Math.floor(scrollProgress * sceneCount),
+          )
+          const storyProgress = Math.max(
+            0,
+            Math.min(1, (scrollProgress * sceneCount - 1) / (sceneCount - 1)),
+          )
+
+          gsap.set(mobileProgressFill, { scaleX: storyProgress })
+
+          if (nextScene !== activeScene) updateScene(nextScene)
+        },
+      })
+
+      updateScene(0)
+
+      return () => {
+        storyTrigger.kill()
+        backgroundTween?.kill()
+        section.style.removeProperty('--problem-mobile-length')
+        delete section.dataset.problemMobileScene
+        delete heading.dataset.problemMobilePosition
+        timelineItems.forEach(
+          (item) => delete item.dataset.problemMobilePosition,
+        )
+        delete principles.dataset.problemMobilePosition
+        delete assurance.dataset.problemMobilePosition
+        mobileProgress.setAttribute('aria-valuenow', '0')
+        mobileCurrent.textContent = '01'
+        gsap.set([background, mobileProgressFill], {
+          clearProps: 'transform,willChange',
         })
       }
     },

@@ -14,7 +14,7 @@ section.verity-story(
           ul.verity-story__metrics(data-verity-story-metrics)
             each metric in verityStory.metrics
               li.verity-story__metric
-                strong.verity-story__metric-value= metric.value
+                strong.verity-story__metric-value(data-verity-story-counter)= metric.value
                 span.verity-story__metric-label= metric.label
           .verity-story__metrics-fade.verity-story__metrics-fade--top(
             aria-hidden='true'
@@ -33,21 +33,21 @@ section.verity-story(
           blockquote.verity-story__quote
             p= `“${verityStory.lesson.quote}”`
             cite= verityStory.lesson.attribution
-        img.verity-story__portrait(
-          src=verityStory.lesson.portrait.src,
-          alt=verityStory.lesson.portrait.alt,
-          width='1200',
-          height='1000',
-          loading='lazy',
-          decoding='async',
-          data-verity-story-portrait
-        )
-        img.verity-story__lesson-image(
-          src=verityStory.lesson.image.src,
-          alt=verityStory.lesson.image.alt,
-          width='1200',
-          height='680',
-          loading='lazy',
-          decoding='async',
-          data-verity-story-image
-        )
+        figure.verity-story__portrait(data-verity-story-portrait)
+          img.verity-story__portrait-media(
+            src=verityStory.lesson.portrait.src,
+            alt=verityStory.lesson.portrait.alt,
+            width='1200',
+            height='1000',
+            loading='lazy',
+            decoding='async'
+          )
+        figure.verity-story__lesson-image(data-verity-story-image)
+          img.verity-story__lesson-image-media(
+            src=verityStory.lesson.image.src,
+            alt=verityStory.lesson.image.alt,
+            width='1200',
+            height='680',
+            loading='lazy',
+            decoding='async'
+          )

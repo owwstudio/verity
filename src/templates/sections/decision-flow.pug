@@ -51,7 +51,21 @@ section.decision-flow(
                   .decision-flow__step-details-inner
                     p= step.description
 
-          .decision-flow__evidence(data-node-id=decisionFlow.evidence.nodeId)
+          .decision-flow__evidence(
+            data-node-id=decisionFlow.evidence.nodeId,
+            data-decision-flow-evidence
+          )
+            button.decision-flow__evidence-preview(
+              type='button',
+              aria-label='View evidence slide',
+              data-decision-flow-evidence-preview
+            )
+              img(
+                src='/src/assets/icons/arrow-circle-right.svg',
+                alt='',
+                width='38',
+                height='38'
+              )
             p.decision-flow__evidence-copy(data-decision-flow-reveal)= decisionFlow.evidence.text
             +button(decisionFlow.evidence.action.label, decisionFlow.evidence.action.href, 'inverse', decisionFlow.evidence.action.icon).button--with-icon(
               data-decision-flow-reveal
@@ -71,3 +85,16 @@ section.decision-flow(
               data-node-id=step.image.nodeId,
               data-decision-flow-image
             )
+
+      .decision-flow__mobile-progress(
+        role='progressbar',
+        aria-label='Decision flow progress',
+        aria-valuemin='0',
+        aria-valuemax='100',
+        aria-valuenow='0',
+        data-decision-flow-progress
+      )
+        span.decision-flow__mobile-progress-track
+          span.decision-flow__mobile-progress-bar(
+            data-decision-flow-progress-bar
+          )

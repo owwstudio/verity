@@ -141,6 +141,14 @@
     }
   }
 
+  &__card-toggle {
+    display: none;
+  }
+
+  &__card-content {
+    display: contents;
+  }
+
   &__card-visual,
   &__card-copy {
     position: relative;
@@ -171,26 +179,6 @@
     block-size: 10.75rem;
     object-fit: contain;
     translate: -50% -50%;
-  }
-
-  &__card[data-card-index='1'] &__icon {
-    inline-size: 8.25rem;
-    block-size: 8.25rem;
-  }
-
-  &__card[data-card-index='2'] &__icon {
-    inline-size: 9.5rem;
-    block-size: 8.25rem;
-  }
-
-  &__card[data-card-index='3'] &__icon {
-    inline-size: 9.875rem;
-    block-size: 7.5rem;
-  }
-
-  &__card[data-card-index='4'] &__icon {
-    inline-size: 8.75rem;
-    block-size: 8.75rem;
   }
 
   &__card-copy {
@@ -313,7 +301,7 @@
 
 @media (width >= 70rem) and (prefers-reduced-motion: no-preference) {
   .status-stack {
-    block-size: var(--status-stack-length, 800svh);
+    block-size: var(--status-stack-length, 1000svh);
 
     &__sticky {
       --status-panel-inset: 0rem;
@@ -327,6 +315,8 @@
     }
 
     &__background,
+    &__eyebrow,
+    &__title,
     &__card,
     &__action {
       will-change: transform, opacity;
@@ -396,33 +386,128 @@
     }
 
     &__card {
-      grid-template-columns: 1fr;
+      display: block;
       min-block-size: 0;
+      border-radius: 1rem;
     }
 
     &__card-visual {
-      min-block-size: 17rem;
-      border-block-end: 0.0625rem solid rgb(255 255 255 / 14%);
-      border-inline-end: 0;
+      display: none;
+    }
+
+    &__card-toggle {
+      display: grid;
+      inline-size: 100%;
+      min-block-size: 5rem;
+      grid-template-columns: auto 2.75rem minmax(0, 1fr) 1.5rem;
+      gap: 0.875rem;
+      align-items: center;
+      padding: 1rem;
+      color: inherit;
+      text-align: start;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+    }
+
+    &__toggle-number {
+      align-self: center;
+      font-size: 0.75rem;
+      line-height: 1;
+      opacity: 0.62;
+    }
+
+    &__toggle-icon {
+      inline-size: 2.75rem;
+      block-size: 2.75rem;
+      object-fit: contain;
+    }
+
+    &__toggle-title {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    &__toggle-indicator {
+      position: relative;
+      inline-size: 1.5rem;
+      block-size: 1.5rem;
+      border: 0.0625rem solid rgb(255 255 255 / 26%);
+      border-radius: 50%;
+
+      &::before,
+      &::after {
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: 50%;
+        inline-size: 0.625rem;
+        block-size: 0.0625rem;
+        background: currentcolor;
+        content: '';
+        transform: translate(-50%, -50%);
+        transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      &::after {
+        transform: translate(-50%, -50%) rotate(90deg);
+      }
+    }
+
+    &__card[data-state='open'] &__toggle-indicator::after {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    &__card-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition:
+        grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 240ms ease;
+    }
+
+    &__card[data-state='open'] &__card-content {
+      grid-template-rows: 1fr;
+      opacity: 1;
     }
 
     &__card-copy {
-      min-block-size: 22rem;
-      gap: 2rem;
+      min-block-size: 0;
+      gap: 1.25rem;
+      padding: 0 1rem;
+      overflow: hidden;
+      transition: padding-block-end 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &__card[data-state='open'] &__card-copy {
+      padding-block-end: 1.25rem;
+    }
+
+    &__card-title {
+      display: none;
+    }
+
+    &__mark,
+    &__card-text,
+    &__card-note {
+      padding-block-start: 1rem;
+      font-size: 0.9375rem;
     }
 
     &__roadmap {
-      padding-inline-start: 5rem;
+      padding-inline-start: 4rem;
     }
 
     &__milestone {
       &::before {
-        inset-inline-start: -5rem;
+        inset-inline-start: -4rem;
       }
 
       &::after {
-        inset-inline-start: -4.125rem;
-        inline-size: 3rem;
+        inset-inline-start: -3.125rem;
+        inline-size: 2rem;
       }
     }
 
@@ -442,6 +527,13 @@
       opacity: 1;
       visibility: visible;
       transform: none;
+    }
+
+    &__card-content,
+    &__toggle-indicator::before,
+    &__toggle-indicator::after,
+    &__card-copy {
+      transition-duration: 0.01ms;
     }
   }
 }

@@ -91,6 +91,7 @@
   &__metric-value {
     font-size: 4rem;
     font-weight: 400;
+    font-variant-numeric: tabular-nums;
     line-height: normal;
     letter-spacing: -0.04em;
     white-space: nowrap;
@@ -182,8 +183,17 @@
   &__lesson-image {
     position: absolute;
     display: block;
-    object-fit: cover;
+    margin: 0;
+    overflow: hidden;
     border-radius: 0.75rem;
+  }
+
+  &__portrait-media,
+  &__lesson-image-media {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
     filter: none;
     mask-image: none;
   }
@@ -191,8 +201,8 @@
   &__portrait {
     inset-block: auto min(7.25rem, 13svh);
     inset-inline-start: 3rem;
-    inline-size: min(16.5rem, 30svh);
-    block-size: min(15.1875rem, 27.6svh);
+    inline-size: min(13.5rem, 24svh);
+    block-size: min(12.4375rem, 22.6svh);
   }
 
   &__lesson-image {
@@ -318,6 +328,22 @@
     &__lesson-title,
     &__lesson-content {
       grid-column: auto;
+    }
+
+    &__lesson-title {
+      order: 1;
+    }
+
+    &__portrait {
+      order: 2;
+    }
+
+    &__lesson-content {
+      order: 3;
+    }
+
+    &__lesson-image {
+      order: 4;
     }
 
     &__metric {

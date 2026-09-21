@@ -13,6 +13,10 @@ const SELECTORS = {
   rowDetails: '[data-value-pools-row-details]',
 }
 
+const DESKTOP_MEDIA = '(min-width: 70rem)'
+const DESKTOP_MINIMUM_RUNWAY = 1.25
+const DESKTOP_TRAVEL_MULTIPLIER = 2
+
 const setRowExpanded = (row, expanded) => {
   const trigger = row.querySelector(SELECTORS.rowTrigger)
   const details = row.querySelector(SELECTORS.rowDetails)
@@ -160,6 +164,7 @@ const initValuePools = () => {
     '(min-width: 56rem) and (prefers-reduced-motion: no-preference)',
     () => {
       let tableTravel = 0
+      let tableScrollDistance = 1
 
       const updateTableTravel = () => {
         const contentStyles = window.getComputedStyle(tableContent)
@@ -172,7 +177,13 @@ const initValuePools = () => {
           0,
           requiredHeight - tableScreen.clientHeight + 24,
         )
-        tableRunway.style.blockSize = `${tableTravel}px`
+        tableScrollDistance = window.matchMedia(DESKTOP_MEDIA).matches
+          ? Math.max(
+              tableTravel * DESKTOP_TRAVEL_MULTIPLIER,
+              tableScreen.clientHeight * DESKTOP_MINIMUM_RUNWAY,
+            )
+          : Math.max(tableTravel, 1)
+        tableRunway.style.blockSize = `${tableScrollDistance}px`
       }
 
       updateTableTravel()
@@ -183,7 +194,7 @@ const initValuePools = () => {
         scrollTrigger: {
           trigger: tableScreen,
           start: 'top top',
-          end: () => `+=${Math.max(tableTravel, 1)}`,
+          end: () => `+=${tableScrollDistance}`,
           scrub: 0.7,
           invalidateOnRefresh: true,
           onRefreshInit: updateTableTravel,

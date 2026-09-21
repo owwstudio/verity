@@ -7,6 +7,8 @@ const SELECTORS = {
   menu: '[data-navbar-dropdown-menu]',
   mobileToggle: '[data-navbar-mobile-toggle]',
   panel: '[data-navbar-panel]',
+  darkSection:
+    '[data-problem], [data-decision-flow], [data-ten-to-one], [data-authority-evidence], [data-status-stack]',
 }
 
 const TOP_SCROLL_THRESHOLD = 8
@@ -26,6 +28,29 @@ const initNavbar = () => {
   let lastScroll = window.scrollY
   let isNavbarVisible = true
 
+  const setNavbarContrast = () => {
+    const navbarHeight = navbar.getBoundingClientRect().height
+    const sampleY = Math.min(navbarHeight + 1, window.innerHeight - 1)
+    const surface = window.document
+      .elementsFromPoint(window.innerWidth / 2, sampleY)
+      .find((element) => !navbar.contains(element))
+    const section = surface?.closest('section, footer')
+    const hasDarkBackground = section?.matches(SELECTORS.darkSection) ?? false
+
+    navbar.dataset.navbarContrast = hasDarkBackground ? 'light' : 'dark'
+  }
+
+  const setNavbarTheme = (scrollPosition = window.scrollY) => {
+    setNavbarContrast()
+
+    if (scrollPosition <= TOP_SCROLL_THRESHOLD) {
+      delete navbar.dataset.navbarTheme
+      return
+    }
+
+    navbar.dataset.navbarTheme = 'glass'
+  }
+
   const isNavbarEngaged = () =>
     navbar.dataset.state === 'open' ||
     dropdowns.some((dropdown) => dropdown.dataset.state === 'open') ||
@@ -33,6 +58,8 @@ const initNavbar = () => {
 
   const setNavbarVisibility = (isVisible) => {
     if (!isVisible && isNavbarEngaged()) return
+
+    if (isVisible) setNavbarTheme()
     if (isVisible === isNavbarVisible) return
 
     isNavbarVisible = isVisible
@@ -45,6 +72,8 @@ const initNavbar = () => {
   const handleNavbarScroll = ({ scroll = window.scrollY } = {}) => {
     const currentScroll = Math.max(0, scroll)
     const scrollDelta = currentScroll - lastScroll
+
+    setNavbarTheme(currentScroll)
 
     if (currentScroll <= TOP_SCROLL_THRESHOLD) {
       setNavbarVisibility(true)
@@ -234,8 +263,10 @@ const initNavbar = () => {
     mobileToggle?.focus()
   })
 
+  setNavbarTheme(lastScroll)
   navbar.dataset.scrollState = 'visible'
   lenis.on('scroll', handleNavbarScroll)
+  window.addEventListener('resize', setNavbarContrast)
   setMobileMenuState(false)
 }
 

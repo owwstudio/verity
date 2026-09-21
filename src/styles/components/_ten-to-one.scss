@@ -306,15 +306,21 @@
     block-size: var(--ten-to-one-length, 600svh);
 
     &__sticky {
+      --ten-to-one-inset: 1rem;
+
       position: sticky;
       inset-block-start: 0;
       block-size: 100svh;
       min-block-size: 0;
+      padding: var(--ten-to-one-inset);
       overflow: hidden;
     }
 
     &__panel {
-      block-size: min(calc(100svh - 2rem), 52.0625rem);
+      inline-size: 100%;
+      max-inline-size: 88rem;
+      block-size: 100%;
+      max-block-size: 52.0625rem;
       min-block-size: 0;
     }
 
@@ -415,6 +421,7 @@
   .ten-to-one {
     &__panel {
       padding-inline: 1.5rem;
+      gap: 4rem;
       border-radius: 1.5rem;
     }
 
@@ -431,29 +438,98 @@
     &__principles {
       grid-template-columns: 1fr;
       block-size: auto;
+      gap: 1rem;
     }
 
     &__principle {
-      min-block-size: 9rem;
-      padding-inline: 0;
+      min-block-size: clamp(18rem, 92vw, 22rem);
+      padding: 0;
+      overflow: hidden;
+      background: #001e19;
+      border: 0.0625rem solid rgb(255 255 255 / 14%);
+      border-radius: 1.25rem;
+      box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 18%);
 
       & + & {
-        border-block-start: 0.0625rem solid rgb(255 255 255 / 16%);
-        border-inline-start: 0;
+        border-inline-start: 0.0625rem solid rgb(255 255 255 / 14%);
       }
     }
 
     &__principle-default {
-      min-block-size: 6rem;
+      display: none;
+    }
+
+    &__principle-hover {
+      position: absolute;
+      opacity: 1;
+    }
+
+    &__principle-image,
+    &__principle[data-principle-index] &__principle-image {
+      inset: -6% 0;
+      inline-size: 100%;
+      block-size: 112%;
+      object-fit: cover;
+      object-position: 50% 50%;
+      transform: scale(1.04);
+    }
+
+    &__principle-shade {
+      background: linear-gradient(
+        180deg,
+        rgb(0 30 25 / 88%) 0%,
+        rgb(0 30 25 / 34%) 42%,
+        rgb(0 30 25 / 96%) 100%
+      );
+    }
+
+    &__principle-content {
+      padding: 1.25rem;
+    }
+
+    &__principle-heading {
+      gap: 0.625rem;
+    }
+
+    &__hover-number {
+      font-size: 0.875rem;
+    }
+
+    &__hover-label {
+      font-size: 1rem;
+    }
+
+    &__principle-description {
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    &__today-title {
+      font-size: 1.5rem;
     }
 
     &__today-copy {
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
-    &__statement,
+    &__statement {
+      font-size: 1.125rem;
+      line-height: 1.35;
+    }
+
     &__detail {
-      font-size: 1.5rem;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+
+    &__action {
+      inline-size: 100%;
+      justify-content: space-between;
+    }
+
+    &__action .button__icon {
+      flex: 0 0 2.375rem;
+      aspect-ratio: 1;
     }
   }
 }

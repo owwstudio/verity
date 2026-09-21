@@ -124,10 +124,11 @@
 @media (width < 48rem) {
   .industry-pools {
     &__inner {
-      padding-block: 5rem;
+      padding-block: 4.5rem max(2rem, env(safe-area-inset-bottom));
       grid-template-columns: 1fr;
-      gap: 3rem;
-      align-content: center;
+      grid-template-rows: minmax(0, 1fr) auto;
+      gap: 2rem;
+      align-content: stretch;
     }
 
     &__action,
@@ -135,21 +136,47 @@
       grid-column: 1;
     }
 
+    &__action {
+      display: flex;
+      order: 2;
+    }
+
+    &__action .button {
+      inline-size: 100%;
+      min-inline-size: 0;
+      justify-content: space-between;
+    }
+
+    &__action .button__label {
+      min-inline-size: 0;
+    }
+
+    &__action .button__icon {
+      flex: 0 0 2.375rem;
+      aspect-ratio: 1;
+    }
+
     &__list {
-      grid-auto-rows: minmax(4rem, auto);
+      order: 1;
+      grid-auto-rows: minmax(3rem, auto);
+      gap: 0.25rem;
+      align-self: center;
     }
 
     &__option {
-      min-block-size: 4rem;
+      inline-size: 100%;
+      min-block-size: 3rem;
       block-size: auto;
-      font-size: clamp(1.5rem, 7vw, 2rem);
+      padding-block: 0.5rem;
+      font-size: clamp(1.125rem, 5.5vw, 1.5rem);
+      line-height: 1.15;
       white-space: normal;
     }
 
     &__indicator {
       inset-block-start: 50%;
-      inline-size: 3rem;
-      block-size: 3rem;
+      inline-size: 2.25rem;
+      block-size: 2.25rem;
       transform: translate(-0.5rem, -50%) scale(0.88);
     }
 
@@ -158,7 +185,8 @@
     }
 
     &__option[data-state='active'] &__label {
-      transform: translateX(3.5rem);
+      max-inline-size: calc(100% - 2.75rem);
+      transform: translateX(2.75rem);
     }
   }
 }

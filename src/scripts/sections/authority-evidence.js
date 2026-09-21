@@ -4,6 +4,7 @@ const SELECTORS = {
   section: '[data-authority-evidence]',
   stage: '[data-authority-evidence-stage]',
   background: '[data-authority-evidence-background]',
+  backgroundRotation: '[data-authority-evidence-background-rotation]',
   scene: '[data-authority-evidence-scene]',
   card: '[data-authority-evidence-card]',
   step: '[data-authority-evidence-step]',
@@ -69,6 +70,7 @@ const initAuthorityEvidence = () => {
 
   const stage = section.querySelector(SELECTORS.stage)
   const background = section.querySelector(SELECTORS.background)
+  const backgroundRotation = section.querySelector(SELECTORS.backgroundRotation)
   const intro = section.querySelector(
     `${SELECTORS.scene}[data-authority-evidence-scene='intro']`,
   )
@@ -81,7 +83,15 @@ const initAuthorityEvidence = () => {
   const cards = gsap.utils.toArray(section.querySelectorAll(SELECTORS.card))
   const steps = gsap.utils.toArray(section.querySelectorAll(SELECTORS.step))
 
-  if (!stage || !background || !intro || !criteria || !proof) return
+  if (
+    !stage ||
+    !background ||
+    !backgroundRotation ||
+    !intro ||
+    !criteria ||
+    !proof
+  )
+    return
 
   const media = gsap.matchMedia()
 
@@ -316,13 +326,32 @@ const initAuthorityEvidence = () => {
           },
         }),
       )
+      const backgroundTween = gsap.fromTo(
+        backgroundRotation,
+        { xPercent: -5, yPercent: -4, scale: 1.08 },
+        {
+          xPercent: 5,
+          yPercent: 4,
+          scale: 1.08,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.8,
+          },
+        },
+      )
 
       return () => {
         tweens.forEach((tween) => {
           tween.scrollTrigger?.kill()
           tween.kill()
         })
+        backgroundTween.scrollTrigger?.kill()
+        backgroundTween.kill()
         gsap.set(scenes, { clearProps: 'transform,opacity,visibility' })
+        gsap.set(backgroundRotation, { clearProps: 'transform' })
       }
     },
   )

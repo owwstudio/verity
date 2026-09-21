@@ -6,7 +6,9 @@ section.authority-evidence(
   .authority-evidence__sticky
     .authority-evidence__stage(data-authority-evidence-stage)
       .authority-evidence__background-frame(data-authority-evidence-background)
-        .authority-evidence__background-rotation
+        .authority-evidence__background-rotation(
+          data-authority-evidence-background-rotation
+        )
           img.authority-evidence__background(
             src=authorityEvidence.background.src,
             alt=authorityEvidence.background.alt,
@@ -49,12 +51,7 @@ section.authority-evidence(
               data-authority-evidence-card
             )
               .authority-evidence__card-icon.authority-evidence__card-icon--light
-                img(
-                  src=authorityEvidence.cardIcon,
-                  alt='',
-                  width='23',
-                  height='25'
-                )
+                img(src=item.icon, alt='', width='24', height='24')
               .authority-evidence__item-copy
                 h3.authority-evidence__item-title= item.title
                 p.authority-evidence__item-text= item.text
@@ -73,12 +70,7 @@ section.authority-evidence(
             each step in authorityEvidence.proof.steps
               .authority-evidence__step(data-authority-evidence-step)
                 .authority-evidence__card-icon.authority-evidence__card-icon--green
-                  img(
-                    src=authorityEvidence.stepIcon,
-                    alt='',
-                    width='23',
-                    height='25'
-                  )
+                  img(src=step.icon, alt='', width='24', height='24')
                 .authority-evidence__item-copy
                   h3.authority-evidence__item-title= step.title
                   p.authority-evidence__item-text= step.text

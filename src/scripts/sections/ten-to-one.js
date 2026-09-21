@@ -8,6 +8,7 @@ const SELECTORS = {
   intro: '[data-ten-to-one-intro]',
   threshold: '[data-ten-to-one-threshold]',
   principle: '[data-ten-to-one-principle]',
+  principleImage: '[data-ten-to-one-principle-image]',
   today: '[data-ten-to-one-today]',
 }
 
@@ -24,6 +25,9 @@ const initTenToOne = () => {
   const principles = gsap.utils.toArray(
     section.querySelectorAll(SELECTORS.principle),
   )
+  const principleImages = gsap.utils.toArray(
+    section.querySelectorAll(SELECTORS.principleImage),
+  )
   const today = section.querySelector(SELECTORS.today)
 
   if (
@@ -33,6 +37,7 @@ const initTenToOne = () => {
     !intro ||
     !threshold ||
     principles.length !== 5 ||
+    principleImages.length !== principles.length ||
     !today
   ) {
     return
@@ -130,8 +135,8 @@ const initTenToOne = () => {
         .to(
           sticky,
           {
-            padding: 0,
-            duration: 0.1,
+            '--ten-to-one-inset': '0rem',
+            duration: 0.08,
             ease: 'power2.inOut',
           },
           0.84,
@@ -139,26 +144,27 @@ const initTenToOne = () => {
         .to(
           panel,
           {
-            width: () => sticky.clientWidth,
-            maxWidth: () => sticky.clientWidth,
-            height: () => sticky.clientHeight,
+            maxWidth: '100vw',
+            maxHeight: '100svh',
             borderRadius: 0,
             backgroundColor: '#00130e',
-            duration: 0.1,
+            duration: 0.08,
             ease: 'power2.inOut',
           },
           0.84,
         )
-        .to(background, { autoAlpha: 0, duration: 0.1 }, 0.9)
+        .to(section, { backgroundColor: '#00130e', duration: 0.08 }, 0.84)
+        .to(background, { autoAlpha: 0, duration: 0.07 }, 0.93)
         .to(today, { autoAlpha: 0, duration: 0.07 }, 0.93)
 
       return () => {
         timeline.scrollTrigger?.kill()
         timeline.kill()
         section.style.removeProperty('--ten-to-one-length')
-        gsap.set(sticky, { clearProps: 'padding' })
+        section.style.removeProperty('background-color')
+        sticky.style.removeProperty('--ten-to-one-inset')
         gsap.set(panel, {
-          clearProps: 'width,maxWidth,height,borderRadius,backgroundColor',
+          clearProps: 'maxWidth,maxHeight,borderRadius,backgroundColor',
         })
         gsap.set([background, intro, threshold, ...principles, today], {
           clearProps: 'transform,opacity,visibility',
@@ -191,6 +197,38 @@ const initTenToOne = () => {
           tween.kill()
         })
         gsap.set(targets, { clearProps: 'transform,opacity,visibility' })
+      }
+    },
+  )
+
+  media.add(
+    '(max-width: 47.999rem) and (prefers-reduced-motion: no-preference)',
+    () => {
+      const imageTweens = principleImages.map((image, index) =>
+        gsap.fromTo(
+          image,
+          { yPercent: -4, scale: 1.06 },
+          {
+            yPercent: 4,
+            scale: 1.06,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: principles[index],
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.8,
+              invalidateOnRefresh: true,
+            },
+          },
+        ),
+      )
+
+      return () => {
+        imageTweens.forEach((tween) => {
+          tween.scrollTrigger?.kill()
+          tween.kill()
+        })
+        gsap.set(principleImages, { clearProps: 'transform' })
       }
     },
   )

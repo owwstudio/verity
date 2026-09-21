@@ -598,9 +598,7 @@
       "src": "/src/assets/images/authority-evidence-background.png",
       "alt": ""
     },
-    "icon": "/src/assets/icons/authority-evidence-copy-cube.svg",
-    "cardIcon": "/src/assets/icons/authority-evidence-card-cube.svg",
-    "stepIcon": "/src/assets/icons/authority-evidence-step-cube.svg",
+    "icon": "/src/assets/images/Circuitry.svg",
     "introduction": {
       "title": "Human authority in. Independent proof out.",
       "paragraphs": [
@@ -614,18 +612,22 @@
       "title": "Built for consequential decisions",
       "items": [
         {
+          "icon": "/src/assets/images/ChartDonut.svg",
           "title": "Business-critical",
           "text": "Decisions need to be made with confidence."
         },
         {
+          "icon": "/src/assets/images/Gavel.svg",
           "title": "Risk / Legal / Audit",
           "text": "Production is gated by Risk, Legal, Security, or Audit."
         },
         {
+          "icon": "/src/assets/images/OpenAiLogo.svg",
           "title": "Existing systems",
           "text": "Existing cloud, AI, and enterprise systems need to work together."
         },
         {
+          "icon": "/src/assets/images/Faders.svg",
           "title": "Regulatory evidence",
           "text": "Decisions must meet regulatory and evidence requirements."
         }
@@ -638,22 +640,27 @@
       "description": "One consequential decision. 3–4 weeks.",
       "steps": [
         {
+          "icon": "/src/assets/images/fi_152551.svg",
           "title": "Baseline",
           "text": "Understand the current state and establish the baseline."
         },
         {
+          "icon": "/src/assets/images/fi_14678004.svg",
           "title": "Value Hypothesis",
           "text": "Test the value hypothesis against the 10:1 threshold."
         },
         {
+          "icon": "/src/assets/images/fi_10130499.svg",
           "title": "Decision",
           "text": "Map the decision and execution chain across systems."
         },
         {
+          "icon": "/src/assets/images/fi_484613.svg",
           "title": "Execution",
           "text": "Identify control gaps in policy, data, process, and authority."
         },
         {
+          "icon": "/src/assets/images/fi_535193.svg",
           "title": "Evidence",
           "text": "Agree measurement method and generate evidence for go / no-go."
         }
@@ -722,28 +729,28 @@
       {
         "number": "01",
         "title": "First proof deployments",
-        "icon": "/src/assets/icons/status-diamond.svg",
+        "icon": "/src/assets/images/status-icon-01.svg",
         "mark": "©",
         "text": "Early-stage product entering its first proof deployments."
       },
       {
         "number": "02",
         "title": "Patent applications",
-        "icon": "/src/assets/icons/status-square.svg",
+        "icon": "/src/assets/images/status-icon-02.svg",
         "text": "Seven foundational patent applications filed with the USPTO on 30 June 2026.",
         "note": "Filing is not evidence of grant, technical effectiveness, or customer value."
       },
       {
         "number": "03",
         "title": "Independent review",
-        "icon": "/src/assets/icons/status-triangle.svg",
+        "icon": "/src/assets/images/status-icon-03.svg",
         "text": "Independent review of the complete post-quantum cryptographic implementation is scheduled for Q4 2026.",
         "note": "The cryptographic profile is described as post-quantum-hardened, not post-quantum-secure."
       },
       {
         "number": "04",
         "title": "Assurance roadmap",
-        "icon": "/src/assets/icons/status-roadmap.svg",
+        "icon": "/src/assets/images/status-icon-04.svg",
         "roadmap": [
           {
             "title": "TISAX 2023–2026",
@@ -770,7 +777,7 @@
       {
         "number": "05",
         "title": "Your keys, your control",
-        "icon": "/src/assets/icons/status-key.svg",
+        "icon": "/src/assets/images/status-icon-05.svg",
         "mark": "©",
         "text": "Signing and encryption keys remain in your own HSM or KMS."
       }

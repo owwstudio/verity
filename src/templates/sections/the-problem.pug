@@ -41,7 +41,8 @@ section#the-problem.the-problem(
           li.the-problem__timeline-item(
             data-node-id=item.nodeId,
             data-problem-timeline-item,
-            data-problem-timeline-index=index
+            data-problem-timeline-index=index,
+            data-problem-step=index + 1
           )
             if item.type === 'statement'
               p.the-problem__text(data-problem-text)= item.text
@@ -91,3 +92,20 @@ section#the-problem.the-problem(
             li.the-problem__assurance-secondary-item
               span.the-problem__assurance-diamond(aria-hidden='true') ◇
               span= standard
+
+    .the-problem__mobile-progress(
+      role='progressbar',
+      aria-label='The problem story progress',
+      aria-valuemin='0',
+      aria-valuemax=problem.timeline.length + 2,
+      aria-valuenow='0',
+      data-problem-mobile-progress
+    )
+      span.the-problem__mobile-progress-count
+        span(data-problem-mobile-current) 01
+        span(aria-hidden='true') /
+        span 0#{ problem.timeline.length + 2 }
+      span.the-problem__mobile-progress-track(aria-hidden='true')
+        span.the-problem__mobile-progress-fill(
+          data-problem-mobile-progress-fill
+        )
