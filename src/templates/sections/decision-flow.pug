@@ -72,18 +72,24 @@ section.decision-flow(
             )
 
         figure.decision-flow__media(data-decision-flow-media)
-          each step, index in decisionFlow.steps
-            img.decision-flow__image(
-              src=step.image.src,
-              alt=step.image.alt,
-              width='844',
-              height='681',
-              loading='eager',
-              decoding='async',
-              data-state=index === 0 ? 'active' : 'inactive',
-              aria-hidden=index === 0 ? null : 'true',
-              data-node-id=step.image.nodeId,
-              data-decision-flow-image
+          video.decision-flow__video(
+            muted,
+            playsinline,
+            preload='none',
+            poster=decisionFlow.video.poster,
+            role='img',
+            aria-label=decisionFlow.video.alt,
+            data-decision-flow-video
+          )
+            source(
+              src=decisionFlow.video.webm,
+              type='video/webm',
+              data-decision-flow-video-webm
+            )
+            source(
+              src=decisionFlow.video.mov,
+              type='video/quicktime; codecs=hvc1',
+              data-decision-flow-video-mov
             )
 
       .decision-flow__mobile-progress(

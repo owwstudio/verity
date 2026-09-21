@@ -558,13 +558,13 @@
 
     .the-problem__timeline-item {
       inset-block: auto max(4rem, calc(env(safe-area-inset-bottom) + 2rem));
-      inset-inline: auto;
-      inset-inline-start: 50%;
+      inset-inline: 0;
       display: grid;
       inline-size: min(
         calc(100% - var(--layout-page-gutter) - var(--layout-page-gutter)),
         42rem
       );
+      margin-inline: auto;
       max-block-size: calc(100svh - 11rem);
       padding: 1.25rem;
       gap: 1rem;
@@ -575,7 +575,6 @@
       box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 18%);
       opacity: 0;
       visibility: hidden;
-      translate: -50% 0;
       transform: translateY(46svh) scale(0.96);
       backdrop-filter: blur(20px) saturate(145%) contrast(104%);
     }
@@ -615,12 +614,12 @@
 
     .the-problem__principles {
       inset-block-end: max(4rem, calc(env(safe-area-inset-bottom) + 2rem));
-      inset-inline: auto;
-      inset-inline-start: 50%;
+      inset-inline: 0;
       inline-size: min(
         calc(100% - var(--layout-page-gutter) - var(--layout-page-gutter)),
         42rem
       );
+      margin-inline: auto;
       max-inline-size: none;
       padding: 1.5rem;
       gap: 1rem;
@@ -633,7 +632,6 @@
       line-height: 1.2;
       opacity: 0;
       visibility: hidden;
-      translate: -50% 0;
       transform: translateY(46svh) scale(0.96);
       backdrop-filter: blur(20px) saturate(145%) contrast(104%);
     }
@@ -650,21 +648,20 @@
 
     .the-problem__assurance {
       inset-block: auto max(3rem, calc(env(safe-area-inset-bottom) + 1.5rem));
-      inset-inline: auto;
-      inset-inline-start: 50%;
+      inset-inline: 0;
       display: grid;
       grid-template-columns: 1fr;
       inline-size: min(
         calc(100% - var(--layout-page-gutter) - var(--layout-page-gutter)),
         42rem
       );
+      margin-inline: auto;
       max-inline-size: none;
       min-block-size: 0;
       padding: 1.25rem;
       gap: 1.25rem;
       opacity: 0;
       visibility: hidden;
-      translate: -50% 0;
       transform: translateY(46svh) scale(0.96);
     }
 

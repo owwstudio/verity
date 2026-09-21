@@ -12,7 +12,9 @@ const SELECTORS = {
   trigger: '[data-decision-flow-trigger]',
   details: '[data-decision-flow-details]',
   media: '[data-decision-flow-media]',
-  image: '[data-decision-flow-image]',
+  video: '[data-decision-flow-video]',
+  videoWebm: '[data-decision-flow-video-webm]',
+  videoMov: '[data-decision-flow-video-mov]',
   evidence: '[data-decision-flow-evidence]',
   evidencePreview: '[data-decision-flow-evidence-preview]',
   progress: '[data-decision-flow-progress]',
@@ -20,6 +22,10 @@ const SELECTORS = {
 }
 
 const DESKTOP_MEDIA = '(min-width: 70rem)'
+const VIDEO_VH_PER_SECOND = 50
+const VIDEO_SMOOTHNESS = 0.1
+
+const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value))
 
 const updateStepState = (steps, activeIndex) => {
   steps.forEach((step, index) => {
@@ -30,17 +36,6 @@ const updateStepState = (steps, activeIndex) => {
     step.dataset.state = isActive ? 'active' : 'inactive'
     trigger?.setAttribute('aria-expanded', String(isActive))
     details?.setAttribute('aria-hidden', String(!isActive))
-  })
-}
-
-const updateImageState = (images, activeIndex) => {
-  images.forEach((image, index) => {
-    const isActive = index === activeIndex
-
-    image.dataset.state = isActive ? 'active' : 'inactive'
-
-    if (isActive) image.removeAttribute('aria-hidden')
-    else image.setAttribute('aria-hidden', 'true')
   })
 }
 
@@ -56,7 +51,9 @@ const initDecisionFlow = () => {
   const divider = section.querySelector(SELECTORS.divider)
   const steps = gsap.utils.toArray(SELECTORS.step, section)
   const mediaElement = section.querySelector(SELECTORS.media)
-  const images = gsap.utils.toArray(SELECTORS.image, section)
+  const video = section.querySelector(SELECTORS.video)
+  const videoWebm = video?.querySelector(SELECTORS.videoWebm)
+  const videoMov = video?.querySelector(SELECTORS.videoMov)
   const evidence = section.querySelector(SELECTORS.evidence)
   const evidencePreview = section.querySelector(SELECTORS.evidencePreview)
   const progress = section.querySelector(SELECTORS.progress)
@@ -69,7 +66,9 @@ const initDecisionFlow = () => {
     !divider ||
     !steps.length ||
     !mediaElement ||
-    images.length !== steps.length ||
+    !video ||
+    !videoWebm ||
+    !videoMov ||
     !evidence ||
     !evidencePreview ||
     !progress ||
@@ -82,9 +81,57 @@ const initDecisionFlow = () => {
     '(prefers-reduced-motion: reduce)',
   ).matches
   let activeIndex = 0
-  let imageTransition
+  let videoDuration = 23
+  let videoReady = false
+  let videoSeeking = false
+  let videoFrameRequest
+  let previousFrameTime = window.performance.now()
+  let videoUnlocked = false
+  const videoProgress = { current: 0, target: 0 }
 
-  const activateStep = (index, immediate = false) => {
+  const updateVideoTime = () => {
+    if (!videoReady || videoSeeking) return
+
+    const targetTime = videoProgress.current * videoDuration
+
+    if (Math.abs(video.currentTime - targetTime) <= 0.015) return
+
+    videoSeeking = true
+
+    try {
+      video.currentTime = targetTime
+    } catch {
+      videoSeeking = false
+    }
+  }
+
+  const setVideoProgress = (progressValue, immediate = false) => {
+    videoProgress.target = clamp(progressValue)
+
+    if (!immediate && !reducedMotion) return
+
+    videoProgress.current = videoProgress.target
+    updateVideoTime()
+  }
+
+  const renderVideoFrame = (timestamp) => {
+    const deltaTime = Math.min((timestamp - previousFrameTime) / 1000, 0.1)
+    const difference = videoProgress.target - videoProgress.current
+
+    previousFrameTime = timestamp
+    videoProgress.current +=
+      difference *
+      (1 - Math.exp(-VIDEO_SMOOTHNESS * 60 * Math.max(deltaTime, 0)))
+
+    if (Math.abs(difference) < 0.00005) {
+      videoProgress.current = videoProgress.target
+    }
+
+    updateVideoTime()
+    videoFrameRequest = window.requestAnimationFrame(renderVideoFrame)
+  }
+
+  const activateStep = (index, immediate = false, syncVideo = true) => {
     if (index < 0 || index >= steps.length) return
 
     const previousIndex = activeIndex
@@ -93,77 +140,51 @@ const initDecisionFlow = () => {
 
     activeIndex = index
     updateStepState(steps, activeIndex)
-    imageTransition?.kill()
-    gsap.killTweensOf(images)
-    updateImageState(images, activeIndex)
 
-    if (immediate || reducedMotion) {
-      gsap.set(images, {
-        clearProps: 'transform,opacity,visibility,zIndex,willChange',
-      })
-      return
+    if (syncVideo) {
+      setVideoProgress(index / Math.max(1, steps.length - 1), immediate)
     }
-
-    const previousImage = images[previousIndex]
-    const nextImage = images[activeIndex]
-
-    images.forEach((image, imageIndex) => {
-      if (imageIndex === previousIndex || imageIndex === activeIndex) return
-
-      gsap.set(image, { autoAlpha: 0, y: 0, scale: 1, zIndex: 0 })
-    })
-
-    gsap.set(previousImage, {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      zIndex: 1,
-      willChange: 'transform,opacity',
-    })
-    gsap.set(nextImage, {
-      autoAlpha: 0,
-      y: 24,
-      scale: 0.97,
-      zIndex: 2,
-      willChange: 'transform,opacity',
-    })
-
-    imageTransition = gsap.timeline({
-      onComplete: () => {
-        gsap.set(images, {
-          clearProps: 'transform,opacity,visibility,zIndex,willChange',
-        })
-      },
-    })
-
-    imageTransition
-      .to(
-        previousImage,
-        {
-          autoAlpha: 0,
-          y: -16,
-          scale: 1.02,
-          duration: 0.45,
-          ease: 'power2.inOut',
-        },
-        0,
-      )
-      .to(
-        nextImage,
-        {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.65,
-          ease: 'power3.out',
-        },
-        0.12,
-      )
   }
 
-  images.forEach((image) => {
-    if (!image.complete) image.decode?.().catch(() => {})
+  const isSafari =
+    /safari/i.test(window.navigator.userAgent) &&
+    !/(chrome|chromium|crios|android)/i.test(window.navigator.userAgent)
+  const videoSource = isSafari ? videoMov.src : videoWebm.src
+  const handleVideoMetadata = () => {
+    if (Number.isFinite(video.duration)) videoDuration = video.duration
+    videoReady = true
+    setVideoProgress(videoProgress.target, true)
+    ScrollTrigger.refresh()
+  }
+  const handleVideoSeeked = () => {
+    videoSeeking = false
+  }
+  const unlockVideo = async () => {
+    if (videoUnlocked) return
+
+    videoUnlocked = true
+
+    try {
+      await video.play()
+      video.pause()
+      setVideoProgress(videoProgress.target, true)
+    } catch {
+      videoUnlocked = false
+    }
+  }
+
+  video.addEventListener('loadedmetadata', handleVideoMetadata)
+  video.addEventListener('seeked', handleVideoSeeked)
+  window.document.addEventListener('touchstart', unlockVideo, {
+    passive: true,
   })
+  window.document.addEventListener('click', unlockVideo)
+  video.preload = 'auto'
+  video.src = videoSource
+  video.load()
+  videoFrameRequest = window.requestAnimationFrame(renderVideoFrame)
+
+  if (video.readyState >= 1) handleVideoMetadata()
 
   activateStep(0, true)
 
@@ -229,10 +250,12 @@ const initDecisionFlow = () => {
       const desktopMedia = window.matchMedia(DESKTOP_MEDIA)
       const updateSectionLength = () => {
         const trailingScenes = desktopMedia.matches ? 3 : 2
+        const sceneLength = (steps.length + trailingScenes) * 100
+        const videoLength = Math.round(videoDuration * VIDEO_VH_PER_SECOND)
 
         section.style.setProperty(
           '--decision-flow-length',
-          `${steps.length + trailingScenes}00svh`,
+          `${Math.max(sceneLength, videoLength)}svh`,
         )
       }
 
@@ -342,7 +365,11 @@ const initDecisionFlow = () => {
             Math.floor(contentProgress * steps.length),
           )
 
-          if (nextIndex !== activeIndex) activateStep(nextIndex)
+          setVideoProgress(contentProgress)
+
+          if (nextIndex !== activeIndex) {
+            activateStep(nextIndex, false, false)
+          }
         },
       })
 
@@ -366,11 +393,8 @@ const initDecisionFlow = () => {
             clearProps: 'transform,opacity,visibility',
           },
         )
-        imageTransition?.kill()
-        gsap.set(images, {
-          clearProps: 'transform,opacity,visibility,zIndex,willChange',
-        })
-        activateStep(0, true)
+        setVideoProgress(0, true)
+        activateStep(0, true, false)
       }
     },
   )
@@ -380,11 +404,17 @@ const initDecisionFlow = () => {
     () => {
       const sceneCount = steps.length + 2
       let mobileSceneIndex = 0
+      const updateSectionLength = () => {
+        const sceneLength = sceneCount * 80
+        const videoLength = Math.round(videoDuration * VIDEO_VH_PER_SECOND)
 
-      section.style.setProperty(
-        '--decision-flow-length',
-        `${sceneCount * 80}svh`,
-      )
+        section.style.setProperty(
+          '--decision-flow-length',
+          `${Math.max(sceneLength, videoLength)}svh`,
+        )
+      }
+
+      updateSectionLength()
       section.dataset.mobileScene = 'intro'
       gsap.set(progressBar, { scaleX: 0, transformOrigin: '0% 50%' })
       gsap.set(content, { y: 32, autoAlpha: 0 })
@@ -426,10 +456,10 @@ const initDecisionFlow = () => {
           section.dataset.mobileScene = 'intro'
         } else if (mobileSceneIndex === sceneCount - 1) {
           section.dataset.mobileScene = 'evidence'
-          activateStep(steps.length - 1)
+          activateStep(steps.length - 1, false, false)
         } else {
           section.dataset.mobileScene = 'steps'
-          activateStep(mobileSceneIndex - 1)
+          activateStep(mobileSceneIndex - 1, false, false)
         }
 
         updateMobilePositions(mobileSceneIndex)
@@ -458,12 +488,19 @@ const initDecisionFlow = () => {
         start: 'top top',
         end: 'bottom bottom',
         invalidateOnRefresh: true,
+        onRefreshInit: updateSectionLength,
         onUpdate: ({ progress: scrollProgress }) => {
+          const stepStart = 1 / sceneCount
+          const stepEnd = 1 - 1 / sceneCount
+          const scrubProgress = clamp(
+            (scrollProgress - stepStart) / (stepEnd - stepStart),
+          )
           const nextSceneIndex = Math.min(
             sceneCount - 1,
             Math.floor(scrollProgress * sceneCount),
           )
 
+          setVideoProgress(scrubProgress)
           gsap.set(progressBar, { scaleX: scrollProgress })
           progress.setAttribute(
             'aria-valuenow',
@@ -527,14 +564,16 @@ const initDecisionFlow = () => {
         gsap.set([header, content, progressBar], {
           clearProps: 'transform,opacity,visibility',
         })
-        imageTransition?.kill()
-        gsap.set(images, {
-          clearProps: 'transform,opacity,visibility,zIndex,willChange',
-        })
-        activateStep(0, true)
+        setVideoProgress(0, true)
+        activateStep(0, true, false)
       }
     },
   )
+
+  window.addEventListener('pagehide', () => {
+    window.cancelAnimationFrame(videoFrameRequest)
+    video.pause()
+  })
 }
 
 export { initDecisionFlow }
