@@ -27,10 +27,16 @@ mixin navbarSimpleDropdown(name, label, config)
       data-navbar-dropdown-menu,
       data-node-id=config.nodeId
     )
+      span.navbar__ribbon= navbar.ribbon
       ul.navbar__dropdown-list
         each item in config.items
           li.navbar__dropdown-item
-            a.navbar__dropdown-link(href=item.href)= item.label
+            if item.href
+              a.navbar__dropdown-link(href=item.href)= item.label
+            else
+              span.navbar__dropdown-link.navbar__dropdown-link--pending(
+                aria-disabled='true'
+              )= item.label
 
 mixin navbar
   nav.navbar(
@@ -40,13 +46,9 @@ mixin navbar
     data-navbar-position='fixed',
     data-node-id='278:35'
   )
-    a.navbar__brand(href='/', aria-label='Verity home', data-navbar-logo)
-      img.navbar__logo(
-        src='/src/assets/icons/verity-logo.svg',
-        alt='',
-        width='99',
-        height='15'
-      )
+    a.navbar__brand(href='/', aria-label=navbar.brand.label, data-navbar-logo)
+      img.navbar__mark(src=navbar.brand.mark, alt='', width='85', height='94')
+      span.navbar__wordmark= navbar.brand.wordmark
 
     button.navbar__mobile-toggle(
       type='button',
@@ -98,13 +100,20 @@ mixin navbar
             data-navbar-dropdown-menu,
             data-node-id=navbar.solutions.nodeId
           )
+            span.navbar__ribbon= navbar.ribbon
             each group in navbar.solutions.groups
               .navbar__dropdown-group
-                p.navbar__dropdown-heading= group.label
+                if group.label
+                  p.navbar__dropdown-heading= group.label
                 ul.navbar__dropdown-list
                   each item in group.items
                     li.navbar__dropdown-item
-                      a.navbar__dropdown-link(href=item.href)= item.label
+                      if item.href
+                        a.navbar__dropdown-link(href=item.href)= item.label
+                      else
+                        span.navbar__dropdown-link.navbar__dropdown-link--pending(
+                          aria-disabled='true'
+                        )= item.label
         li.navbar__item
           a.navbar__link(href='/assurance/') Assurance
 
@@ -114,52 +123,6 @@ mixin navbar
           +navbarSimpleDropdown('how-it-works', 'How it works', navbar.howItWorks)
 
         .navbar__controls
-          .navbar__language-wrap(
-            data-navbar-dropdown='language',
-            data-state='closed'
-          )
-            button.navbar__language(
-              type='button',
-              aria-label=`Change language. Current language: ${navbar.language.current.label}`,
-              aria-expanded='false',
-              aria-controls='navbar-language-menu',
-              aria-haspopup='true',
-              data-navbar-dropdown-toggle
-            )
-              span.navbar__language-current
-                span.navbar__language-icon(aria-hidden='true')
-                  img(
-                    src=navbar.language.current.icon,
-                    alt='',
-                    width='28',
-                    height='28'
-                  )
-                span.navbar__language-label= navbar.language.current.label
-              span.navbar__language-caret(aria-hidden='true')
-                img(
-                  src='/src/assets/icons/caret-down.svg',
-                  alt='',
-                  width='16',
-                  height='16'
-                )
-
-            #navbar-language-menu.navbar__dropdown.navbar__dropdown--language(
-              aria-hidden='true',
-              inert,
-              data-navbar-dropdown-menu
-            )
-              ul.navbar__dropdown-list
-                each language in navbar.language.items
-                  li.navbar__dropdown-item
-                    a.navbar__dropdown-link.navbar__dropdown-link--language(
-                      href=language.href,
-                      hreflang=language.lang,
-                      lang=language.lang
-                    )
-                      span.navbar__dropdown-icon(aria-hidden='true')
-                        img(src=language.icon, alt='', width='28', height='28')
-                      span= language.label
-
-          +button('Book a demo', '/book-a-demo/', 'primary').navbar__cta.button--compact(
+          +button(navbar.action.label, navbar.action.href, 'primary').navbar__cta.button--compact(
             data-navbar-cta
           )

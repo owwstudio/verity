@@ -15,6 +15,7 @@ const SELECTORS = {
   accentText: '[data-problem-accent-text]',
   principles: '[data-problem-principles]',
   assurance: '[data-problem-assurance]',
+  statement: '[data-problem-statement]',
   mobileProgress: '[data-problem-mobile-progress]',
   mobileCurrent: '[data-problem-mobile-current]',
   mobileProgressFill: '[data-problem-mobile-progress-fill]',
@@ -36,6 +37,7 @@ const MOBILE_BACKGROUND_STATES = [
   { xPercent: -10, yPercent: 5, scale: 1.18 },
   { xPercent: 9, yPercent: -4, scale: 1.24 },
   { xPercent: -4, yPercent: 7, scale: 1.12 },
+  { xPercent: 5, yPercent: 0, scale: 1.18 },
   { xPercent: 5, yPercent: 0, scale: 1.18 },
 ]
 
@@ -224,6 +226,7 @@ const initTheProblem = () => {
   const timelineItems = gsap.utils.toArray(SELECTORS.timelineItem, section)
   const principles = section.querySelector(SELECTORS.principles)
   const assurance = section.querySelector(SELECTORS.assurance)
+  const statement = section.querySelector(SELECTORS.statement)
   const mobileProgress = section.querySelector(SELECTORS.mobileProgress)
   const mobileCurrent = section.querySelector(SELECTORS.mobileCurrent)
   const mobileProgressFill = section.querySelector(SELECTORS.mobileProgressFill)
@@ -270,6 +273,7 @@ const initTheProblem = () => {
       gsap.set(timelineItems[3], { y: '113.751vw' })
       gsap.set(principles, { y: '20vh', autoAlpha: 0 })
       gsap.set(assurance, { y: '80vh', autoAlpha: 0 })
+      gsap.set(statement, { y: '20vh', autoAlpha: 0 })
 
       const timeline = gsap.timeline({
         scrollTrigger: {
@@ -404,13 +408,25 @@ const initTheProblem = () => {
       timeline
         .to(
           assurance,
-          { y: '-80vh', autoAlpha: 0, duration: 0.8, ease: 'power1.in' },
+          { y: '-80vh', autoAlpha: 0, duration: 0.6, ease: 'power1.in' },
           6.1,
         )
         .to(interlude, { opacity: 1, duration: 0.8, ease: 'none' }, 6.1)
         .to(background, { opacity: 0, duration: 0.8, ease: 'none' }, 6.1)
 
-      timeline.to(closing, { opacity: 1, duration: 0.8, ease: 'none' }, 7.6)
+      timeline
+        .to(
+          statement,
+          { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power2.out' },
+          6.75,
+        )
+        .to(
+          statement,
+          { y: '-8vh', autoAlpha: 0, duration: 0.6, ease: 'power1.in' },
+          7.75,
+        )
+
+      timeline.to(closing, { opacity: 1, duration: 0.8, ease: 'none' }, 8.15)
 
       return () => {
         timeline.kill()
@@ -432,6 +448,7 @@ const initTheProblem = () => {
         !timelineItems.length ||
         !principles ||
         !assurance ||
+        !statement ||
         !mobileProgress ||
         !mobileCurrent ||
         !mobileProgressFill
@@ -439,7 +456,7 @@ const initTheProblem = () => {
         return undefined
       }
 
-      const storyCount = timelineItems.length + 2
+      const storyCount = timelineItems.length + 3
       const sceneCount = storyCount + 1
       let activeScene = -1
       let backgroundTween
@@ -470,6 +487,7 @@ const initTheProblem = () => {
         const timelineIndex = isTimelineScene ? activeScene - 1 : -1
         const principlesScene = timelineItems.length + 1
         const assuranceScene = timelineItems.length + 2
+        const statementScene = timelineItems.length + 3
 
         section.dataset.problemMobileScene =
           activeScene === 0
@@ -478,7 +496,9 @@ const initTheProblem = () => {
               ? 'timeline'
               : activeScene === principlesScene
                 ? 'principles'
-                : 'assurance'
+                : activeScene === assuranceScene
+                  ? 'assurance'
+                  : 'statement'
 
         setPosition(heading, activeScene === 0 ? 'active' : 'before')
 
@@ -505,7 +525,15 @@ const initTheProblem = () => {
         )
         setPosition(
           assurance,
-          activeScene === assuranceScene ? 'active' : 'after',
+          activeScene === assuranceScene
+            ? 'active'
+            : activeScene < assuranceScene
+              ? 'after'
+              : 'before',
+        )
+        setPosition(
+          statement,
+          activeScene === statementScene ? 'active' : 'after',
         )
 
         const storyScene = Math.max(0, activeScene)
@@ -558,6 +586,7 @@ const initTheProblem = () => {
         )
         delete principles.dataset.problemMobilePosition
         delete assurance.dataset.problemMobilePosition
+        delete statement.dataset.problemMobilePosition
         mobileProgress.setAttribute('aria-valuenow', '0')
         mobileCurrent.textContent = '01'
         gsap.set([background, mobileProgressFill], {

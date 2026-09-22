@@ -298,6 +298,25 @@
     filter: brightness(0) invert(1);
   }
 
+  &__detail-icon--composite {
+    position: relative;
+    display: block;
+  }
+
+  &__detail-icon-main {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  &__detail-icon-badge {
+    position: absolute;
+    inset-block-start: -0.2rem;
+    inset-inline-end: -0.3rem;
+    inline-size: 0.6875rem;
+    block-size: 0.6875rem;
+  }
+
   &__detail-text {
     max-inline-size: 19.125rem;
     margin: 0.75rem 0 0;

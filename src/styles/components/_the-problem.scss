@@ -126,6 +126,7 @@
 
   &__timeline,
   &__principles,
+  &__statement,
   &__cost-list,
   &__assurance-primary,
   &__assurance-secondary {
@@ -258,6 +259,31 @@
     z-index: 1;
   }
 
+  &__assurance-headline {
+    margin: 0;
+    color: #fff;
+    font-size: 1.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  &__assurance-certifications,
+  &__assurance-roadmap {
+    display: grid;
+    gap: 1.25rem;
+    align-content: start;
+  }
+
+  &__assurance-roadmap-heading {
+    margin: 0;
+    color: rgb(255 255 255 / 50%);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   &__assurance-primary,
   &__assurance-secondary {
     display: grid;
@@ -282,6 +308,24 @@
     border-radius: 0.75rem;
     font-family: Arial, sans-serif;
     font-size: 1.5rem;
+  }
+
+  &__assurance-globe {
+    flex: 0 0 5rem;
+    inline-size: 5rem;
+    block-size: 5rem;
+    color: #fff;
+  }
+
+  &__assurance-globe circle,
+  &__assurance-globe path {
+    vector-effect: non-scaling-stroke;
+  }
+
+  &__assurance-globe text {
+    font-family: var(--font-family-display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
   }
 
   &__assurance-name {
@@ -317,6 +361,26 @@
     font-family: Arial, sans-serif;
     font-size: 1.5rem;
     font-weight: 400;
+  }
+
+  &__statement {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+    align-items: center;
+    color: var(--color-action-primary-text);
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  &__statement-item:nth-child(2) {
+    text-align: center;
+  }
+
+  &__statement-item:nth-child(3) {
+    text-align: end;
   }
 
   &__mobile-progress {
@@ -413,9 +477,9 @@
       inset-block-start: 33.25%;
       inset-inline: 5.208%;
       display: grid;
-      grid-template-columns: minmax(14rem, 1fr) 0.0625rem minmax(0, 2fr);
-      gap: clamp(2rem, 5.556vw, 5rem);
-      align-items: center;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(2rem, 3.5vw, 3rem);
+      align-content: center;
       min-block-size: 46%;
       padding: 3rem clamp(2.5rem, 4.722vw, 4.25rem);
       visibility: hidden;
@@ -424,17 +488,27 @@
     }
 
     &__assurance-primary {
-      gap: 3rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1.5rem, 3vw, 2.5rem);
     }
 
-    &__assurance-divider {
-      display: block;
-      inline-size: 0.0625rem;
-      block-size: 18rem;
+    &__assurance-roadmap {
+      padding-block-start: clamp(1.5rem, 3vw, 2.25rem);
+      border-block-start: 0.0625rem solid rgb(255 255 255 / 18%);
     }
 
     &__assurance-secondary {
-      gap: 2.5rem 4rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem 3rem;
+    }
+
+    &__statement {
+      position: absolute;
+      inset-block-start: calc(50% - 0.875rem);
+      inset-inline: 0;
+      visibility: hidden;
+      opacity: 0;
+      will-change: transform, opacity;
     }
 
     &__closing-glow {
@@ -453,14 +527,22 @@
 
     &__timeline,
     &__principles,
-    &__assurance {
+    &__assurance,
+    &__statement {
       max-inline-size: 42rem;
     }
 
     &__closing,
-    &__depth,
-    &__interlude {
+    &__depth {
       display: none;
+    }
+
+    &__statement {
+      grid-template-columns: 1fr;
+    }
+
+    &__statement-item:nth-child(n) {
+      text-align: start;
     }
   }
 }
@@ -497,6 +579,16 @@
       background: rgb(0 18 15 / 62%);
     }
 
+    .the-problem__interlude {
+      display: block;
+      opacity: 0;
+      transition: opacity 520ms ease;
+    }
+
+    &[data-problem-mobile-scene='statement'] .the-problem__interlude {
+      opacity: 1;
+    }
+
     .the-problem__layout {
       position: absolute;
       z-index: 2;
@@ -511,7 +603,8 @@
     .the-problem__heading,
     .the-problem__timeline-item,
     .the-problem__principles,
-    .the-problem__assurance {
+    .the-problem__assurance,
+    .the-problem__statement {
       position: absolute;
       transition:
         opacity 420ms ease,
@@ -658,8 +751,10 @@
       margin-inline: auto;
       max-inline-size: none;
       min-block-size: 0;
+      max-block-size: calc(100svh - 8rem);
       padding: 1.25rem;
       gap: 1.25rem;
+      overflow-y: auto;
       opacity: 0;
       visibility: hidden;
       transform: translateY(46svh) scale(0.96);
@@ -671,11 +766,22 @@
       transform: translateY(0) scale(1);
     }
 
+    .the-problem__assurance[data-problem-mobile-position='before'] {
+      transform: translateY(-52svh) scale(0.96);
+    }
+
     .the-problem__assurance-primary,
     .the-problem__assurance-secondary {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 1rem;
+    }
+
+    .the-problem__assurance-primary {
+      grid-template-columns: 1fr;
+    }
+
+    .the-problem__assurance-secondary {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .the-problem__assurance-primary-item,
@@ -683,12 +789,14 @@
       gap: 0.625rem;
     }
 
-    .the-problem__assurance-badge {
-      flex-basis: 2.25rem;
-      inline-size: 2.25rem;
-      block-size: 2.25rem;
-      border-radius: 0.625rem;
-      font-size: 1rem;
+    .the-problem__assurance-globe {
+      flex-basis: 3rem;
+      inline-size: 3rem;
+      block-size: 3rem;
+    }
+
+    .the-problem__assurance-headline {
+      font-size: 1.25rem;
     }
 
     .the-problem__assurance-name,
@@ -702,6 +810,24 @@
 
     .the-problem__assurance-diamond {
       font-size: 1rem;
+    }
+
+    .the-problem__statement {
+      inset-block-start: 50%;
+      inset-inline: var(--layout-page-gutter);
+      inline-size: auto;
+      margin: 0;
+      gap: 1.5rem;
+      font-size: clamp(1.375rem, 6vw, 1.75rem);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(46svh);
+    }
+
+    .the-problem__statement[data-problem-mobile-position='active'] {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-50%);
     }
 
     .the-problem__mobile-progress {

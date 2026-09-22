@@ -1,3 +1,32 @@
+mixin assuranceGlobe(label, index)
+  - const maskId = `assurance-globe-band-${index}`
+  svg.the-problem__assurance-globe(
+    viewBox='0 0 96 96',
+    role='img',
+    aria-label=label,
+    fill='none',
+    stroke='currentColor'
+  )
+    mask(id=maskId)
+      rect(x='0', y='0', width='96', height='36', fill='#fff')
+      rect(x='0', y='60', width='96', height='36', fill='#fff')
+    circle(cx='48', cy='48', r='45', stroke-width='1.1')
+    g(stroke-width='0.9', opacity='0.72')
+      path(d='M6.3 31a46 26 0 0 1 83.4 0')
+      path(d='M6.3 65a46 26 0 0 0 83.4 0')
+      g(mask=`url(#${maskId})`)
+        path(d='M48 3v90')
+        path(d='M48 3a25 45 0 0 0 0 90')
+        path(d='M48 3a25 45 0 0 1 0 90')
+    text(
+      x='48',
+      y='52',
+      text-anchor='middle',
+      font-size='13',
+      stroke='none',
+      fill='currentColor'
+    )= label
+
 section#the-problem.the-problem(
   aria-labelledby='the-problem-title',
   data-problem,
@@ -66,45 +95,48 @@ section#the-problem.the-problem(
           li.the-problem__principle= principle
 
       .the-problem__assurance(
-        aria-label='Assurance standards',
+        aria-label=problem.assurance.headline,
         data-node-id=problem.assurance.nodeId,
         data-problem-assurance
       )
-        ul.the-problem__assurance-primary
-          each standard in problem.assurance.primary
-            li.the-problem__assurance-primary-item
-              span.the-problem__assurance-badge(aria-hidden='true') ◇
-              span.the-problem__assurance-name
-                strong= standard.name
-                if standard.detail
+        h3.the-problem__assurance-headline= problem.assurance.headline
+
+        .the-problem__assurance-certifications
+          ul.the-problem__assurance-primary
+            each standard, index in problem.assurance.primary
+              li.the-problem__assurance-primary-item
+                +assuranceGlobe(standard.badge, index)
+                span.the-problem__assurance-name
+                  strong= standard.name
                   small= standard.detail
 
-        img.the-problem__assurance-divider(
-          src='/src/assets/icons/assurance-divider.svg',
-          alt='',
-          width='1',
-          height='288',
-          aria-hidden='true'
-        )
+        .the-problem__assurance-roadmap
+          p.the-problem__assurance-roadmap-heading= problem.assurance.roadmapLabel
+          ul.the-problem__assurance-secondary
+            each standard in problem.assurance.secondary
+              li.the-problem__assurance-secondary-item
+                span.the-problem__assurance-diamond(aria-hidden='true') ◇
+                span= standard
 
-        ul.the-problem__assurance-secondary
-          each standard in problem.assurance.secondary
-            li.the-problem__assurance-secondary-item
-              span.the-problem__assurance-diamond(aria-hidden='true') ◇
-              span= standard
+      ul.the-problem__statement(
+        data-node-id=problem.interlude.nodeId,
+        data-problem-statement
+      )
+        each statement in problem.interlude.items
+          li.the-problem__statement-item= statement
 
     .the-problem__mobile-progress(
       role='progressbar',
       aria-label='The problem story progress',
       aria-valuemin='0',
-      aria-valuemax=problem.timeline.length + 2,
+      aria-valuemax=problem.timeline.length + 3,
       aria-valuenow='0',
       data-problem-mobile-progress
     )
       span.the-problem__mobile-progress-count
         span(data-problem-mobile-current) 01
         span(aria-hidden='true') /
-        span 0#{ problem.timeline.length + 2 }
+        span 0#{ problem.timeline.length + 3 }
       span.the-problem__mobile-progress-track(aria-hidden='true')
         span.the-problem__mobile-progress-fill(
           data-problem-mobile-progress-fill

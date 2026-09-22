@@ -88,6 +88,7 @@
   }
 
   &[data-navbar-theme='glass'] &__logo,
+  &[data-navbar-theme='glass'] &__mark,
   &[data-navbar-theme='glass'] &__language-caret {
     filter: brightness(0) invert(1);
   }
@@ -97,15 +98,39 @@
   }
 
   &[data-navbar-theme='glass'][data-navbar-contrast='dark'] &__logo,
+  &[data-navbar-theme='glass'][data-navbar-contrast='dark'] &__mark,
   &[data-navbar-theme='glass'][data-navbar-contrast='dark'] &__language-caret {
     filter: none;
   }
 
   &__brand {
+    --hh-scale: 0.34;
+    --hh-wordmark-scale: 1.2;
+
+    display: flex;
     grid-row: 1;
     grid-column: 2;
-    inline-size: 6.1548rem;
-    block-size: 0.8938rem;
+    inline-size: auto;
+    block-size: auto;
+    flex-direction: column;
+    gap: calc(15px * var(--hh-scale));
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &__mark {
+    display: block;
+    inline-size: calc(85px * var(--hh-scale));
+    block-size: calc(94.0426px * var(--hh-scale));
+  }
+
+  &__wordmark {
+    font-family: Arial, sans-serif;
+    font-size: calc(36px * var(--hh-scale) * var(--hh-wordmark-scale));
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   &__mobile-toggle {
@@ -209,11 +234,15 @@
   }
 
   &__dropdown--solutions {
-    display: grid;
-    inline-size: 27.875rem;
+    display: block;
+    inline-size: max-content;
+    min-inline-size: 15rem;
+    max-inline-size: min(28rem, calc(100vw - 3rem));
     inset-inline-start: -1.5rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+  }
+
+  &__dropdown--solutions &__dropdown-link {
+    white-space: nowrap;
   }
 
   &__dropdown--company {
@@ -300,6 +329,51 @@
     opacity: 0.72;
   }
 
+  &__dropdown-link--pending {
+    opacity: 0.55;
+    cursor: default;
+  }
+
+  &__dropdown-link--pending:hover {
+    opacity: 0.55;
+  }
+
+  &__dropdown--product,
+  &__dropdown--solutions,
+  &__dropdown--company,
+  &__dropdown--how-it-works {
+    overflow: hidden;
+  }
+
+  &__ribbon {
+    position: absolute;
+    z-index: 2;
+    inset-block-start: 1.672rem;
+    inset-inline-end: -3.075rem;
+    inline-size: 10.94rem;
+    padding-block: 0.325rem;
+    color: var(--color-text-primary);
+    background: var(--color-action-primary-text);
+    box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 25%);
+    font-size: 0.794rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    pointer-events: none;
+    text-align: center;
+    transform: rotate(45deg);
+    white-space: nowrap;
+  }
+
+  &__dropdown--product &__ribbon,
+  &__dropdown--solutions &__ribbon {
+    inset-block-start: 2.0625rem;
+    inset-inline-end: -3rem;
+    inline-size: 12rem;
+    padding-block: 0.456rem;
+    font-size: 0.9625rem;
+  }
+
   &__dropdown-link:focus-visible {
     outline: 0.125rem solid currentcolor;
     outline-offset: 0.25rem;
@@ -335,6 +409,11 @@
     display: flex;
     gap: 0.5rem;
     align-items: stretch;
+  }
+
+  &__cta {
+    padding-block: 0.625rem;
+    padding-inline: 1.375rem;
   }
 
   &__language {
@@ -412,8 +491,17 @@
     }
 
     &__brand {
+      --hh-scale: 0.24;
+      --hh-wordmark-scale: 1.2;
+
       grid-column: 1;
       justify-self: start;
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+
+    &__wordmark {
+      font-size: 0.875rem;
     }
 
     &__mobile-toggle {
@@ -478,7 +566,7 @@
           rgb(255 255 255 / 5%) 52%,
           rgb(209 255 201 / 10%)
         ),
-        rgb(0 31 23 / 86%);
+        rgb(0 31 23 / 96%);
       border: 0.0625rem solid rgb(255 255 255 / 30%);
       border-radius: 1rem;
       box-shadow:
@@ -581,6 +669,25 @@
 
     &__dropdown--solutions {
       grid-template-columns: 1fr;
+    }
+
+    &__dropdown--solutions &__dropdown-link {
+      white-space: normal;
+    }
+
+    &__ribbon,
+    &__dropdown--product &__ribbon,
+    &__dropdown--solutions &__ribbon {
+      position: static;
+      inline-size: max-content;
+      margin-block-end: 1rem;
+      padding: 0.25rem 0.5rem;
+      color: var(--color-action-primary-text);
+      background: transparent;
+      box-shadow: none;
+      font-size: 0.6875rem;
+      text-align: start;
+      transform: none;
     }
 
     &__item--dropdown[data-state='open'] &__dropdown,

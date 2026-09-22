@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Ruler, redrawn 2026-09-17 on CEO instruction "make the lines of the ruler 40%
+  thinner". Geometry measured off the original Noun Project 8275767 "Ruler",
+  which was a single filled outline and so had no line weight to change: body
+  339.4 x 1116.0 on the centre line, rotated 45 degrees, ticks alternating 107.25 and
+  40.875 every 50.906. Stroke 36.0 -> 21.6, matched to the neighbouring icons by rasterising both,
+  then -> 27.0 on the CEO's "make the ruler's lines 25% thicker".
+-->
+<svg width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" fill="none" stroke="#000" stroke-width="27.0" stroke-linecap="butt" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+ <g transform="rotate(-45 600 600)">
+  <rect x="42.00" y="430.30" width="1116.00" height="339.40" rx="32"/>
+  <path d="M92.91 430.30v107.25"/>
+  <path d="M143.81 430.30v40.88"/>
+  <path d="M194.72 430.30v107.25"/>
+  <path d="M245.62 430.30v40.88"/>
+  <path d="M296.53 430.30v107.25"/>
+  <path d="M347.44 430.30v40.88"/>
+  <path d="M398.34 430.30v107.25"/>
+  <path d="M449.25 430.30v40.88"/>
+  <path d="M500.15 430.30v107.25"/>
+  <path d="M551.06 430.30v40.88"/>
+  <path d="M601.97 430.30v107.25"/>
+  <path d="M652.87 430.30v40.88"/>
+  <path d="M703.78 430.30v107.25"/>
+  <path d="M754.68 430.30v40.88"/>
+  <path d="M805.59 430.30v107.25"/>
+  <path d="M856.50 430.30v40.88"/>
+  <path d="M907.40 430.30v107.25"/>
+  <path d="M958.31 430.30v40.88"/>
+  <path d="M1009.21 430.30v107.25"/>
+  <path d="M1060.12 430.30v40.88"/>
+  <path d="M1111.03 430.30v107.25"/>
+ </g>
+</svg>

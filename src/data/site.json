@@ -4,20 +4,23 @@
     "description": "Verity"
   },
   "navbar": {
+    "brand": {
+      "label": "Helge Heupel home",
+      "mark": "/src/assets/images/hh-monogram.svg",
+      "wordmark": "Helge Heupel"
+    },
+    "ribbon": "Coming soon",
     "product": {
       "nodeId": "315:75",
       "items": [
         {
-          "label": "Verity Decisioning",
-          "href": "/product/verity-decisioning/"
+          "label": "Asset Tokenizer"
         },
         {
-          "label": "Verity Value Engine",
-          "href": "/product/verity-value-engine/"
+          "label": "Decision Pricer"
         },
         {
-          "label": "SAP Add-in",
-          "href": "/product/sap-add-in/"
+          "label": "SAP Add-in"
         }
       ]
     },
@@ -25,56 +28,30 @@
       "nodeId": "315:106",
       "groups": [
         {
-          "label": "by platform:",
           "items": [
             {
-              "label": "M&A",
-              "href": "/solutions/ma/"
+              "label": "Automotive"
             },
             {
-              "label": "Litigation",
-              "href": "/solutions/litigation/"
+              "label": "Connected products"
             },
             {
-              "label": "Banking",
-              "href": "/solutions/banking/"
+              "label": "Insurance"
             },
             {
-              "label": "Tax",
-              "href": "/solutions/tax/"
+              "label": "Banking and payments"
             },
             {
-              "label": "Insurance",
-              "href": "/solutions/insurance/"
-            }
-          ]
-        },
-        {
-          "label": "by value pool:",
-          "items": [
-            {
-              "label": "AI investment yield",
-              "href": "/value-pools/ai-investment-yield/"
+              "label": "Critical Infrastructure"
             },
             {
-              "label": "Assurance economics",
-              "href": "/value-pools/assurance-economics/"
+              "label": "Assurance And Professional Services"
             },
             {
-              "label": "Capital and platform productivity",
-              "href": "/value-pools/capital-platform-productivity/"
+              "label": "Cross-functional enterprise operations"
             },
             {
-              "label": "Decision capital",
-              "href": "/value-pools/decision-capital/"
-            },
-            {
-              "label": "Operational capacity",
-              "href": "/value-pools/operational-capacity/"
-            },
-            {
-              "label": "Prevented loss and leackage",
-              "href": "/value-pools/prevented-loss-leackage/"
+              "label": "Cloud and technology platforms"
             }
           ]
         }
@@ -84,24 +61,20 @@
       "nodeId": "315:132",
       "items": [
         {
-          "label": "Careers",
-          "href": "/company/careers/"
+          "label": "Careers"
         },
         {
-          "label": "Blog",
-          "href": "/blog/"
+          "label": "Blog"
         },
         {
-          "label": "Press",
-          "href": "/press/"
+          "label": "Press"
         },
         {
-          "label": "About",
-          "href": "/company/about/"
+          "label": "About"
         },
         {
           "label": "Contact",
-          "href": "/contact/"
+          "href": "mailto:contact@helgeheupel.com"
         }
       ]
     },
@@ -109,43 +82,22 @@
       "nodeId": "315:124",
       "items": [
         {
-          "label": "Evidence",
-          "href": "/how-it-works/evidence/"
+          "label": "Evidence"
         },
         {
-          "label": "Security",
-          "href": "/how-it-works/security/"
+          "label": "Security"
         },
         {
-          "label": "Trust",
-          "href": "/how-it-works/trust/"
+          "label": "Trust"
         },
         {
-          "label": "Patents pending",
-          "href": "/how-it-works/patents/"
+          "label": "Patents pending"
         }
       ]
     },
-    "language": {
-      "nodeId": "315:85",
-      "current": {
-        "label": "Deutschland",
-        "icon": "/src/assets/icons/germany.svg"
-      },
-      "items": [
-        {
-          "label": "England",
-          "href": "/en/",
-          "lang": "en",
-          "icon": "/src/assets/icons/england.svg"
-        },
-        {
-          "label": "Deutschland",
-          "href": "/de/",
-          "lang": "de",
-          "icon": "/src/assets/icons/germany.svg"
-        }
-      ]
+    "action": {
+      "label": "Call with Founder",
+      "href": "mailto:contact@helgeheupel.com?subject=Call%20with%20Founder"
     }
   },
   "hero": {
@@ -222,26 +174,43 @@
     },
     "assurance": {
       "nodeId": "285:870",
+      "headline": "Certifications & Compliance",
       "primary": [
         {
-          "name": "TISAX"
+          "badge": "TISAX",
+          "name": "TISAX 6.0.3",
+          "detail": "On-site assessment passed; certification body evaluating the results"
         },
         {
-          "name": "ISO 27001 : 2022",
-          "detail": "Stage 1"
+          "badge": "ISO 27001",
+          "name": "ISO 27001:2022 Stage 1",
+          "detail": "On-site assessment passed; certification body evaluating the results"
+        },
+        {
+          "badge": "GDPR",
+          "name": "GDPR",
+          "detail": "Compliant; a regulation in force, not a certification scheme"
         }
       ],
+      "roadmapLabel": "Next on the roadmap",
       "secondary": [
         "ISAE 3000",
-        "NIS 2",
+        "ISO 42001",
         "ISO 14001",
-        "NIST",
         "ISO 50001",
-        "SOC 2"
+        "NIS 2",
+        "NIST",
+        "SOC 2",
+        "FedRAMP"
       ]
     },
     "interlude": {
-      "nodeId": "285:1012"
+      "nodeId": "285:1012",
+      "items": [
+        "One identity per asset.",
+        "One value per decision.",
+        "One update per new fact."
+      ]
     },
     "closing": {
       "nodeId": "285:1103",
@@ -255,15 +224,15 @@
     "columns": [
       {
         "title": "Value pool",
-        "description": "What value you capture"
+        "description": ""
       },
       {
-        "title": "What Verity unlocks",
-        "description": "How it helps"
+        "title": "What Helge Heupel unlocks",
+        "description": ""
       },
       {
         "title": "How you measure it",
-        "description": "How value is proven"
+        "description": ""
       }
     ],
     "rows": [
@@ -274,15 +243,19 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "AI investment yield and value realisation"
+            "text": "AI investment yield and value realisation",
+            "icon": "/src/assets/icons/yield.svg",
+            "iconBadge": "/src/assets/icons/ai-stars.svg"
           },
           {
-            "label": "What Verity Unlock",
-            "text": "Proven models, agents and automation move from pilot into governed production"
+            "label": "What Helge Heupel Unlocks",
+            "text": "Proven models, agents and automation move from pilot into governed production",
+            "icon": "/src/assets/icons/oee.svg"
           },
           {
             "label": "How you measure it",
-            "text": "Production conversion, realised ROI, time to value"
+            "text": "Production conversion, realised ROI, time to value",
+            "icon": "/src/assets/icons/ruler.svg"
           }
         ]
       },
@@ -292,15 +265,18 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Decision capital and decision productivity"
+            "text": "Decision capital and decision productivity",
+            "icon": "/src/assets/icons/knowledge-capital.svg"
           },
           {
-            "label": "What Verity Unlocks",
-            "text": "Authority reusable and machine-executable"
+            "label": "What Helge Heupel Unlocks",
+            "text": "Makes organisational knowledge, semantics, policies and authority reusable and machine-executable",
+            "icon": "/src/assets/icons/development-policies.svg"
           },
           {
             "label": "How you measure it",
-            "text": "Decision time, rework, escalations, key-person dependency"
+            "text": "Decision time, rework, escalations, key-person dependency",
+            "icon": "/src/assets/icons/ruler.svg"
           }
         ]
       },
@@ -310,15 +286,18 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Increase operational capacity and productivity."
+            "text": "Increase operational capacity and productivity",
+            "icon": "/src/assets/icons/speedometer-max.svg"
           },
           {
-            "label": "What Verity Unlocks",
-            "text": "Automates permitted decisions while people retain intent, exceptions and judgement."
+            "label": "What Helge Heupel Unlocks",
+            "text": "Automates permitted decisions while people retain intent, exceptions, and judgement",
+            "icon": "/src/assets/icons/human-robot-interaction.svg"
           },
           {
             "label": "How you measure it",
-            "text": "Backlog, cycle time, cost per decision, capacity released."
+            "text": "Backlog, cycle time, cost per decision, capacity released",
+            "icon": "/src/assets/icons/ruler.svg"
           }
         ]
       },
@@ -328,15 +307,18 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Reduce financial, operational and reputational losses."
+            "text": "Reduce financial, operational and reputational losses",
+            "icon": "/src/assets/icons/money-shield.svg"
           },
           {
-            "label": "What Verity Unlocks",
-            "text": "Stop Errors, Blocks unauthorised actions"
+            "label": "What Helge Heupel Unlocks",
+            "text": "Stops errors, fraud, warranty leakage, and unauthorised actions before execution",
+            "icon": "/src/assets/icons/stop-sign-hand.svg"
           },
           {
             "label": "How you measure it",
-            "text": "Loss ratio, Fraud loss, Incident cost"
+            "text": "Loss ratio, fraud loss, warranty cost, incident cost",
+            "icon": "/src/assets/icons/ruler.svg"
           }
         ]
       },
@@ -346,15 +328,18 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Asset productivity and service value"
+            "text": "Asset productivity and service value",
+            "icon": "/src/assets/icons/investment.svg"
           },
           {
-            "label": "What Verity Unlocks",
-            "text": "Converts connected-asset signals into authorised maintenance, software, and service actions"
+            "label": "What Helge Heupel Unlocks",
+            "text": "Converts connected-asset signals into authorised maintenance, software, and service actions",
+            "icon": "/src/assets/icons/predictive-maintenance.svg"
           },
           {
             "label": "How you measure it",
-            "text": "Uptime, downtime, service revenue, retention"
+            "text": "Uptime, downtime, service revenue, retention",
+            "icon": "/src/assets/icons/ruler.svg"
           }
         ]
       },
@@ -364,15 +349,18 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Assurance economics and efficiency"
+            "text": "Assurance economics and efficiency",
+            "icon": "/src/assets/icons/assurance.svg"
           },
           {
-            "label": "What Verity Unlocks",
-            "text": "Replaces retrospective evidence collection with continuous, independently verifiable evidence"
+            "label": "What Helge Heupel Unlocks",
+            "text": "Replaces retrospective evidence collection with continuous, independently verifiable evidence",
+            "icon": "/src/assets/icons/retrospective.svg"
           },
           {
             "label": "How you measure it",
-            "text": "Audit effort, control coverage, remediation time, assurance margin"
+            "text": "Audit effort, control coverage, remediation time, assurance margin",
+            "icon": "/src/assets/icons/ruler.svg"
           }
         ]
       },
@@ -382,15 +370,18 @@
         "details": [
           {
             "label": "Value Captured",
-            "text": "Capital and platform productivity"
+            "text": "Capital and platform productivity",
+            "icon": "/src/assets/icons/online-productivity.svg"
           },
           {
-            "label": "What Verity Unlocks",
-            "text": "Accelerates claims, collections, and approvals while reusing existing cloud, data, and control investments"
+            "label": "What Helge Heupel Unlocks",
+            "text": "Accelerates claims, collections, and approvals while reusing existing cloud, data, and control investments",
+            "icon": "/src/assets/icons/accelerate.svg"
           },
           {
             "label": "How you measure it",
-            "text": "Audit effort, control coverage, remediation time, assurance margin"
+            "text": "Claims/collections/approval time, platform reuse rate, cost per transaction",
+            "icon": "/src/assets/icons/ruler.svg"
           }
         ]
       }
@@ -403,6 +394,10 @@
       "href": "/solutions/"
     },
     "items": [
+      {
+        "label": "Automotive",
+        "tone": "default"
+      },
       {
         "label": "Connected products",
         "tone": "faint"
@@ -439,8 +434,8 @@
     "title": "From fourteen-thousand line-items to a decision you can still prove in 2031.",
     "description": "Illustrative. A €40m annual supplier re-award across 14,000 line items, with contract, quality, tooling and logistics data held in five systems.",
     "video": {
-      "webm": "/src/assets/video/Verity-120fps.webm",
-      "mov": "/src/assets/video/Verity-120fps.mov",
+      "webm": "/src/assets/video/Veriy-120fps-2.webm",
+      "mov": "/src/assets/video/Verity-120fps-2.mov",
       "poster": "/src/assets/images/identify-new.png",
       "alt": "Animated decision flow moving through identification, understanding, decision, action, and proof."
     },
@@ -795,52 +790,157 @@
   },
   "siteFooter": {
     "nodeId": "334:2127",
-    "title": "Tokenize every asset. Optimize the entire enterprise.",
-    "action": {
-      "label": "Lets Discuss",
-      "href": "/book-a-demo/"
+    "signature": {
+      "href": "/",
+      "label": "Helge Heupel home",
+      "mark": "/src/assets/images/hh-monogram.svg",
+      "wordmark": "Helge Heupel"
     },
-    "navigation": [
-      [
-        {
-          "label": "Assessment",
-          "href": "/assessment/"
-        },
-        {
-          "label": "Product",
-          "href": "/product/"
-        },
-        {
-          "label": "Solutions",
-          "href": "/solutions/"
-        },
-        {
-          "label": "Assurance",
-          "href": "/assurance/"
-        }
-      ],
-      [
-        {
-          "label": "Company",
-          "href": "/company/"
-        },
-        {
-          "label": "How it works",
-          "href": "/how-it-works/"
-        }
-      ]
-    ],
-    "wordmark": "/src/assets/icons/footer-wordmark.svg",
-    "copyright": "© 2026 Helge Heupel Group",
-    "policies": [
+    "leadLinks": [
       {
-        "label": "Policy Privacy",
-        "href": "/privacy-policy/"
+        "label": "Assessment",
+        "href": "/assessment/"
       },
       {
-        "label": "Term and Condition",
-        "href": "/terms-and-conditions/"
+        "label": "Assurance",
+        "href": "/assurance/"
       }
-    ]
+    ],
+    "action": {
+      "label": "Call with Founder",
+      "href": "mailto:contact@helgeheupel.com?subject=Call%20with%20Founder"
+    },
+    "menus": [
+      {
+        "name": "Product",
+        "entries": [
+          {
+            "label": "Asset Tokenizer"
+          },
+          {
+            "label": "Decision Pricer"
+          },
+          {
+            "label": "SAP Add-in"
+          }
+        ]
+      },
+      {
+        "name": "Solutions",
+        "entries": [
+          {
+            "label": "Automotive"
+          },
+          {
+            "label": "Connected products"
+          },
+          {
+            "label": "Insurance"
+          },
+          {
+            "label": "Banking and payments"
+          },
+          {
+            "label": "Critical Infrastructure"
+          },
+          {
+            "label": "Assurance And Professional Services"
+          },
+          {
+            "label": "Cross-functional enterprise operations"
+          },
+          {
+            "label": "Cloud and technology platforms"
+          }
+        ]
+      },
+      {
+        "name": "Company",
+        "entries": [
+          {
+            "label": "Careers"
+          },
+          {
+            "label": "Blog"
+          },
+          {
+            "label": "Press"
+          },
+          {
+            "label": "About"
+          },
+          {
+            "label": "Contact",
+            "href": "mailto:contact@helgeheupel.com"
+          }
+        ]
+      },
+      {
+        "name": "How it works",
+        "entries": [
+          {
+            "label": "Evidence"
+          },
+          {
+            "label": "Security"
+          },
+          {
+            "label": "Trust"
+          },
+          {
+            "label": "Patents pending"
+          }
+        ]
+      }
+    ],
+    "company": {
+      "name": "Helge Heupel Inc.",
+      "address": [
+        "1 Sansome Street, Suite 1400",
+        "San Francisco, CA 94104",
+        "United States"
+      ],
+      "email": {
+        "label": "email@helgeheupel.com",
+        "href": "mailto:email@helgeheupel.com"
+      },
+      "phone": {
+        "label": "+1 512 417 6804",
+        "href": "tel:+15124176804"
+      },
+      "legal": [
+        {
+          "label": "Legal notice",
+          "href": "/impressum/"
+        },
+        {
+          "label": "Privacy policy",
+          "href": "/privacy/"
+        },
+        {
+          "label": "Cookies",
+          "href": "/cookies/"
+        }
+      ],
+      "offices": [
+        {
+          "name": "San Francisco",
+          "x": 159.9,
+          "y": 128.4
+        },
+        {
+          "name": "Amsterdam",
+          "x": 513.6,
+          "y": 87.9
+        },
+        {
+          "name": "Berlin",
+          "x": 537.2,
+          "y": 87.5
+        }
+      ],
+      "map": "/src/assets/images/world-minimal.svg",
+      "mapAlt": "Offices in San Francisco, Amsterdam and Berlin"
+    }
   }
 }

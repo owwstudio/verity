@@ -15,7 +15,7 @@ section.value-pools(
       .container.value-pools__content(data-value-pools-content)
         .value-pools__table-scroll(
           role='region',
-          aria-label='Verity value pools',
+          aria-label='Helge Heupel value pools',
           tabindex='0',
           data-value-pools-table-scroll
         )
@@ -28,7 +28,8 @@ section.value-pools(
               each column in valuePools.columns
                 span.value-pools__column-heading
                   strong.value-pools__column-title= column.title
-                  span.value-pools__column-description= column.description
+                  if column.description
+                    span.value-pools__column-description= column.description
 
             .value-pools__table-body
               each row in valuePools.rows
@@ -70,13 +71,26 @@ section.value-pools(
                       each detail in row.details
                         .value-pools__detail
                           .value-pools__detail-heading
-                            img.value-pools__detail-icon(
-                              src='/src/assets/icons/cube.svg',
-                              alt='',
-                              width='20',
-                              height='20',
-                              aria-hidden='true'
-                            )
+                            if detail.iconBadge
+                              span.value-pools__detail-icon.value-pools__detail-icon--composite(
+                                aria-hidden='true'
+                              )
+                                img.value-pools__detail-icon-main(
+                                  src=detail.icon,
+                                  alt=''
+                                )
+                                img.value-pools__detail-icon-badge(
+                                  src=detail.iconBadge,
+                                  alt=''
+                                )
+                            else
+                              img.value-pools__detail-icon(
+                                src=detail.icon,
+                                alt='',
+                                width='20',
+                                height='20',
+                                aria-hidden='true'
+                              )
                             strong= detail.label
                           p.value-pools__detail-text= detail.text
 
