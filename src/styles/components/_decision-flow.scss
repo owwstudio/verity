@@ -237,6 +237,7 @@
     min-inline-size: 0;
     aspect-ratio: 844 / 681;
     margin: 0;
+    overflow: hidden;
     place-items: center;
   }
 
@@ -246,12 +247,43 @@
     inline-size: 100%;
     block-size: 100%;
     object-fit: contain;
+    transform: scale(1.5);
     transform-origin: 50% 50%;
   }
 
   &__mobile-progress,
   &__evidence-preview {
     display: none;
+  }
+}
+
+@media (width >= 56rem) {
+  .decision-flow {
+    &__header,
+    &__content {
+      inline-size: min(100%, 96rem);
+      margin-inline: auto;
+    }
+
+    &__divider {
+      inline-size: min(calc(100% - 9rem), 87rem);
+      margin-inline: auto;
+    }
+
+    &__content {
+      grid-template-columns:
+        minmax(24rem, 34.1875rem)
+        minmax(0, 52.75rem);
+      justify-content: center;
+    }
+
+    &__media {
+      justify-self: center;
+    }
+
+    &__video {
+      transform: scale(2);
+    }
   }
 }
 

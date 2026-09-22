@@ -439,8 +439,8 @@
     "title": "From fourteen-thousand line-items to a decision you can still prove in 2031.",
     "description": "Illustrative. A €40m annual supplier re-award across 14,000 line items, with contract, quality, tooling and logistics data held in five systems.",
     "video": {
-      "webm": "/src/assets/video/Verity-Motion-Web.webm",
-      "mov": "/src/assets/video/Verity-motion-web.mov",
+      "webm": "/src/assets/video/Verity-120fps.webm",
+      "mov": "/src/assets/video/Verity-120fps.mov",
       "poster": "/src/assets/images/identify-new.png",
       "alt": "Animated decision flow moving through identification, understanding, decision, action, and proof."
     },
