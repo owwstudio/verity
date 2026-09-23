@@ -317,7 +317,7 @@
     margin-block-start: 1rem;
   }
 }
-@media (width < 48rem) {
+@media (width < 70rem) {
   .status-stack {
     padding: 0.5rem;
   }
@@ -438,6 +438,14 @@
     padding-inline: 1.25rem;
     gap: 1rem;
     font-size: 1rem;
+  }
+}
+@media (48rem <= width < 70rem) {
+  .status-stack__header,
+  .status-stack__cards,
+  .status-stack__action {
+    inline-size: min(100%, 42rem);
+    margin-inline: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {

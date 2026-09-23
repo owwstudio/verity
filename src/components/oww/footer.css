@@ -252,7 +252,7 @@
     grid-column: span 6;
   }
 }
-@media (width <= 40rem) {
+@media (width < 70rem) {
   .site-footer {
     padding-block: 2.5rem 2rem;
     align-content: start;
@@ -321,6 +321,11 @@
   .site-footer__menu:nth-child(2) .site-footer__list,
   .site-footer__contact {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (48rem <= width < 70rem) {
+  .site-footer__inner {
+    max-inline-size: 42rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {

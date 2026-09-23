@@ -77,13 +77,19 @@
     gap: 3rem;
   }
 }
-@media (width < 56rem) {
+@media (width < 70rem) {
   .hero__content {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
   .hero__aside {
     max-inline-size: 40rem;
+  }
+}
+@media (48rem <= width < 70rem) {
+  .hero__content {
+    max-inline-size: 42rem;
+    margin-inline: auto;
   }
 }
 @media (width < 30rem) {

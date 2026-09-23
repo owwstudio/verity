@@ -289,6 +289,19 @@
     will-change: transform, opacity;
   }
 }
+@media (width > 90rem) and (prefers-reduced-motion: no-preference) {
+  .ten-to-one__panel {
+    max-inline-size: 100vw;
+    max-block-size: 100svh;
+  }
+  .ten-to-one__proof,
+  .ten-to-one__today {
+    inset: 50% auto auto 50%;
+    inline-size: 88rem;
+    block-size: min(100%, 52.0625rem);
+    translate: -50% -50%;
+  }
+}
 @media (width >= 70rem) and (hover: hover) {
   .ten-to-one__principle:is(:hover, :focus-visible) {
     outline: none;
@@ -362,7 +375,7 @@
     gap: 3rem;
   }
 }
-@media (width < 48rem) {
+@media (width < 70rem) {
   .ten-to-one__panel {
     padding-inline: 1.5rem;
     gap: 4rem;
@@ -454,6 +467,14 @@
   .ten-to-one__action .button__icon {
     flex: 0 0 2.375rem;
     aspect-ratio: 1;
+  }
+}
+@media (48rem <= width < 70rem) {
+  .ten-to-one__proof,
+  .ten-to-one__today {
+    inline-size: 100%;
+    max-inline-size: 42rem;
+    margin-inline: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {

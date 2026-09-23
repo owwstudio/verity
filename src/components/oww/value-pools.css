@@ -297,7 +297,7 @@
   block-size: 1rem;
 }
 
-@media (width >= 56rem) {
+@media (width >= 70rem) {
   .value-pools__detail {
     padding: 1.5rem 2.25rem;
   }
@@ -311,7 +311,7 @@
   }
 }
 
-@media (width >= 56rem) and (prefers-reduced-motion: no-preference) {
+@media (width >= 70rem) and (prefers-reduced-motion: no-preference) {
   .value-pools__intro {
     position: sticky;
     inset-block-start: 0;
@@ -328,7 +328,7 @@
     display: block;
   }
 }
-@media (width >= 56rem) and (height >= 48rem) and (prefers-reduced-motion: no-preference) {
+@media (width >= 70rem) and (height >= 48rem) and (prefers-reduced-motion: no-preference) {
   .value-pools__table-screen,
   .value-pools__content {
     block-size: 100svh;
@@ -338,7 +338,7 @@
     overflow: clip;
   }
 }
-@media (width >= 56rem) and (48rem <= height < 56.25rem) {
+@media (width >= 70rem) and (48rem <= height < 56.25rem) {
   .value-pools__content {
     padding-block: 2rem;
   }
@@ -354,7 +354,7 @@
     font-size: 0.75rem;
   }
 }
-@media (width < 56rem) {
+@media (width < 70rem) {
   .value-pools__content {
     padding-block: 4rem;
   }
@@ -440,6 +440,12 @@
   }
   .value-pools__caret-control {
     display: none;
+  }
+}
+@media (48rem <= width < 70rem) {
+  .value-pools__table-scroll {
+    max-inline-size: 42rem;
+    margin-inline: auto;
   }
 }
 @media (width < 48rem) {

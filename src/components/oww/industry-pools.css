@@ -103,7 +103,7 @@
     font-size: clamp(1.75rem, 3.9vw, 2.5rem);
   }
 }
-@media (width < 48rem) {
+@media (width < 70rem) {
   .industry-pools__inner {
     padding-block: 4.5rem max(2rem, env(safe-area-inset-bottom));
     grid-template-columns: 1fr;
@@ -158,6 +158,12 @@
   .industry-pools__option[data-state="active"] .industry-pools__label {
     max-inline-size: calc(100% - 2.75rem);
     transform: translateX(2.75rem);
+  }
+}
+@media (48rem <= width < 70rem) {
+  .industry-pools__inner {
+    max-inline-size: 42rem;
+    margin-inline: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -163,7 +163,7 @@
     align-self: end;
   }
 }
-@media (width < 48rem) {
+@media (width < 70rem) {
   .owned-stack__stage {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -188,6 +188,12 @@
   }
   .owned-stack__followup {
     margin-block-start: 1rem;
+  }
+}
+@media (48rem <= width < 70rem) {
+  .owned-stack__stage {
+    max-inline-size: 42rem;
+    margin-inline: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {

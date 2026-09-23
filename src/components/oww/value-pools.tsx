@@ -437,7 +437,7 @@ export const ValuePools = component$(() => {
       });
 
       media.add(
-        "(min-width: 56rem) and (prefers-reduced-motion: no-preference)",
+        "(min-width: 70rem) and (prefers-reduced-motion: no-preference)",
         () => {
           const desktopMedia = window.matchMedia("(min-width: 70rem)");
           const desktopMinimumRunway = 1.25;

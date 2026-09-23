@@ -224,7 +224,7 @@ export const DecisionFlow = component$(() => {
         ),
       );
       media.add(
-        "(min-width: 56rem) and (prefers-reduced-motion: no-preference)",
+        "(min-width: 70rem) and (prefers-reduced-motion: no-preference)",
         () => {
           const desktop = window.matchMedia("(min-width: 70rem)");
           const updateLength = () =>
@@ -309,7 +309,7 @@ export const DecisionFlow = component$(() => {
         },
       );
       media.add(
-        "(max-width: 55.99rem) and (prefers-reduced-motion: no-preference)",
+        "(max-width: 69.999rem) and (prefers-reduced-motion: no-preference)",
         () => {
           const count = steps.length + 2;
           let scene = 0;
@@ -567,12 +567,12 @@ export const DecisionFlow = component$(() => {
                 data-decision-flow-video
               >
                 <source
-                  src="/assets/video/Veriy-120fps-2.webm"
+                  src="/assets/video/Full%20Screen.webm"
                   type="video/webm"
                   data-decision-flow-video-webm
                 />
                 <source
-                  src="/assets/video/Verity-120fps-2.mov"
+                  src="/assets/video/Verity-Full%20Screen.mov"
                   type="video/quicktime; codecs=hvc1"
                   data-decision-flow-video-mov
                 />

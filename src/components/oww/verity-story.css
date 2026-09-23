@@ -270,7 +270,7 @@
     aspect-ratio: 664/396;
   }
 }
-@media (width < 48rem) {
+@media (width < 70rem) {
   .verity-story__overview,
   .verity-story__lesson {
     grid-template-columns: 1fr;
@@ -304,6 +304,12 @@
   }
   .verity-story__portrait {
     inline-size: 55%;
+  }
+}
+@media (48rem <= width < 70rem) {
+  .verity-story__stage {
+    max-inline-size: 42rem;
+    margin-inline: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {

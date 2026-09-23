@@ -380,7 +380,7 @@ export const TheProblem = component$(() => {
       });
 
       media.add(
-        "(min-width: 56rem) and (prefers-reduced-motion: no-preference)",
+        "(min-width: 70rem) and (prefers-reduced-motion: no-preference)",
         () => {
           if (timelineItems.length < 4) return undefined;
 
@@ -572,7 +572,7 @@ export const TheProblem = component$(() => {
       );
 
       media.add(
-        "(max-width: 55.99rem) and (prefers-reduced-motion: no-preference)",
+        "(max-width: 69.999rem) and (prefers-reduced-motion: no-preference)",
         () => {
           if (
             !background ||

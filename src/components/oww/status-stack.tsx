@@ -245,7 +245,7 @@ export const StatusStack = component$(() => {
           return () => tweens.forEach((tween) => tween.kill());
         },
       );
-      media.add("(max-width: 47.999rem)", () => {
+      media.add("(max-width: 69.999rem)", () => {
         let timer = 0;
         const entries = cards.map((card) => ({
           card,

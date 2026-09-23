@@ -193,7 +193,7 @@ export const TenToOne = component$(() => {
         },
       );
       media.add(
-        "(max-width: 47.999rem) and (prefers-reduced-motion: no-preference)",
+        "(max-width: 69.999rem) and (prefers-reduced-motion: no-preference)",
         () => {
           const tweens = images.map((image, index) =>
             gsap.fromTo(

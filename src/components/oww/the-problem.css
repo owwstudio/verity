@@ -337,7 +337,7 @@
   display: none;
 }
 
-@media (width >= 56rem) and (prefers-reduced-motion: no-preference) {
+@media (width >= 70rem) and (prefers-reduced-motion: no-preference) {
   .the-problem {
     min-block-size: 1050svh;
   }
@@ -451,7 +451,7 @@
     block-size: 82.917vw;
   }
 }
-@media (width < 56rem) {
+@media (width < 70rem) {
   .the-problem__layout {
     min-block-size: 100svh;
   }
@@ -477,7 +477,7 @@
     grid-template-columns: 1fr;
   }
 }
-@media (width < 56rem) and (prefers-reduced-motion: no-preference) {
+@media (width < 70rem) and (prefers-reduced-motion: no-preference) {
   .the-problem[data-problem-mobile-scene] {
     block-size: var(--problem-mobile-length, 595svh);
   }

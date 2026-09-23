@@ -276,6 +276,19 @@
     will-change: transform, opacity;
   }
 }
+@media (width > 90rem) and (prefers-reduced-motion: no-preference) {
+  .authority-evidence__stage {
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+  .authority-evidence__scene {
+    inset-block: 0;
+    inset-inline: auto;
+    inset-inline-start: 50%;
+    inline-size: 90rem;
+    translate: -50% 0;
+  }
+}
 @media (width < 70rem), (prefers-reduced-motion: reduce) {
   .authority-evidence {
     padding: 1rem;
@@ -351,7 +364,7 @@
     justify-self: start;
   }
 }
-@media (width < 48rem) {
+@media (width < 70rem) {
   .authority-evidence {
     padding: 0.5rem;
   }
@@ -486,6 +499,12 @@
     inline-size: 100%;
     justify-content: center;
     margin-block-start: 0.5rem;
+  }
+}
+@media (48rem <= width < 70rem) {
+  .authority-evidence__scene {
+    inline-size: min(100%, 42rem);
+    margin-inline: auto;
   }
 }
 @media (prefers-reduced-motion: reduce) {
