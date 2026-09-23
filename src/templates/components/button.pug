@@ -1,6 +1,0 @@
-mixin button(label, href, variant = 'primary', icon = null)
-  a.button(class=`button--${variant}`, href=href, data-button=variant)&attributes(attributes)
-    span.button__label= label
-    if icon
-      span.button__icon(aria-hidden='true')
-        img(src=icon, alt='', width='38', height='38')

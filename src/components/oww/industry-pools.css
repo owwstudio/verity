@@ -1,0 +1,169 @@
+.industry-pools {
+  position: relative;
+  z-index: 3;
+  min-block-size: 100svh;
+  color: #000;
+  background: var(--color-surface-page);
+}
+.industry-pools__inner {
+  display: grid;
+  min-block-size: 100svh;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: center;
+}
+.industry-pools__action {
+  grid-column: 2 / span 4;
+  margin-inline-start: 2rem;
+}
+.industry-pools__list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  grid-column: 6/-1;
+  grid-auto-rows: 4rem;
+  list-style: none;
+}
+.industry-pools__item {
+  min-inline-size: 0;
+}
+.industry-pools__option {
+  position: relative;
+  display: flex;
+  inline-size: max-content;
+  max-inline-size: 100%;
+  block-size: 4rem;
+  padding: 0;
+  align-items: center;
+  color: #000;
+  background: transparent;
+  border: 0;
+  border-radius: 7.5rem;
+  cursor: pointer;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.04em;
+  opacity: 0.1;
+  text-align: start;
+  white-space: nowrap;
+  transition:
+    color 420ms ease,
+    opacity 420ms ease;
+}
+.industry-pools__option[data-proximity="adjacent"] {
+  opacity: 0.35;
+}
+.industry-pools__option[data-state="active"] {
+  opacity: 1;
+}
+.industry-pools__option:focus-visible {
+  outline: 0.125rem solid #156e4a;
+  outline-offset: 0.25rem;
+}
+.industry-pools__indicator {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 4rem;
+  block-size: 4rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-0.75rem) scale(0.88);
+  transition:
+    opacity 420ms ease,
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.industry-pools__indicator img {
+  inline-size: 100%;
+  block-size: 100%;
+}
+.industry-pools__label {
+  display: block;
+  transform: translateX(0);
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.industry-pools__option[data-state="active"] .industry-pools__indicator {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+.industry-pools__option[data-state="active"] .industry-pools__label {
+  transform: translateX(4.5rem);
+}
+
+@media (width < 64rem) {
+  .industry-pools__action {
+    grid-column: 1 / span 4;
+    margin-inline-start: 0;
+  }
+  .industry-pools__list {
+    grid-column: 5/-1;
+  }
+  .industry-pools__option {
+    font-size: clamp(1.75rem, 3.9vw, 2.5rem);
+  }
+}
+@media (width < 48rem) {
+  .industry-pools__inner {
+    padding-block: 4.5rem max(2rem, env(safe-area-inset-bottom));
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-content: stretch;
+  }
+  .industry-pools__action,
+  .industry-pools__list {
+    grid-column: 1;
+  }
+  .industry-pools__action {
+    display: flex;
+    order: 2;
+  }
+  .industry-pools__action .button {
+    inline-size: 100%;
+    min-inline-size: 0;
+    justify-content: space-between;
+  }
+  .industry-pools__action .button__label {
+    min-inline-size: 0;
+  }
+  .industry-pools__action .button__icon {
+    flex: 0 0 2.375rem;
+    aspect-ratio: 1;
+  }
+  .industry-pools__list {
+    order: 1;
+    grid-auto-rows: minmax(3rem, auto);
+    gap: 0.25rem;
+    align-self: center;
+  }
+  .industry-pools__option {
+    inline-size: 100%;
+    min-block-size: 3rem;
+    block-size: auto;
+    padding-block: 0.5rem;
+    font-size: clamp(1.125rem, 5.5vw, 1.5rem);
+    line-height: 1.15;
+    white-space: normal;
+  }
+  .industry-pools__indicator {
+    inset-block-start: 50%;
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+    transform: translate(-0.5rem, -50%) scale(0.88);
+  }
+  .industry-pools__option[data-state="active"] .industry-pools__indicator {
+    transform: translate(0, -50%) scale(1);
+  }
+  .industry-pools__option[data-state="active"] .industry-pools__label {
+    max-inline-size: calc(100% - 2.75rem);
+    transform: translateX(2.75rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .industry-pools__option,
+  .industry-pools__indicator,
+  .industry-pools__label {
+    transition-duration: 0.01ms;
+  }
+}

@@ -1,0 +1,202 @@
+.owned-stack {
+  position: relative;
+  color: #000;
+  background: var(--color-surface-primary);
+}
+.owned-stack__sticky {
+  min-block-size: 100svh;
+}
+.owned-stack__stage {
+  position: relative;
+  inline-size: min(100%, 90rem);
+  min-block-size: 100svh;
+  margin-inline: auto;
+  overflow: hidden;
+}
+.owned-stack__title {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 6.875rem;
+  inset-inline-start: 3rem;
+  inline-size: 23rem;
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.04em;
+}
+.owned-stack__title--intro {
+  display: none;
+}
+.owned-stack__description {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 15.5rem;
+  inset-inline-start: 3rem;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.owned-stack__track {
+  position: absolute;
+  inset-block-start: 6.875rem;
+  inset-inline-start: calc(50% + 0.5rem);
+  inline-size: min(46.111vw, 41.5rem);
+}
+.owned-stack__introduction {
+  display: grid;
+  inline-size: min(100%, 36.5rem);
+  gap: 1rem;
+}
+.owned-stack__copy-title,
+.owned-stack__copy {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+.owned-stack__copy-title {
+  font-weight: 600;
+}
+.owned-stack__copy {
+  font-weight: 400;
+}
+.owned-stack__consequences-label {
+  margin: 1.25rem 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.owned-stack__consequences {
+  display: grid;
+  gap: 3rem;
+  margin-block-start: 1.25rem;
+}
+.owned-stack__consequence {
+  display: grid;
+  gap: 1.5rem;
+}
+.owned-stack__image {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 664/351;
+  object-fit: cover;
+  border-radius: 1.5rem;
+}
+.owned-stack__consequence-copy {
+  inline-size: min(100%, 36.5rem);
+}
+.owned-stack__followup {
+  position: absolute;
+  inset-block-start: 55.4375rem;
+  inset-inline-start: 3rem;
+  display: grid;
+  inline-size: 28.5rem;
+  gap: 1.5rem;
+  justify-items: start;
+}
+.owned-stack__action {
+  min-block-size: 2.875rem;
+}
+
+@media (width >= 70rem) and (prefers-reduced-motion: no-preference) {
+  .owned-stack {
+    z-index: 3;
+    block-size: var(--owned-stack-length, 500svh);
+    margin-block-start: -100svh;
+  }
+  .owned-stack__sticky {
+    position: sticky;
+    inset-block-start: 0;
+    block-size: 100svh;
+    min-block-size: 0;
+    overflow: hidden;
+  }
+  .owned-stack__stage {
+    block-size: 100svh;
+    min-block-size: 0;
+  }
+  .owned-stack__title--intro {
+    display: block;
+    white-space: nowrap;
+  }
+}
+@media (width < 70rem), (prefers-reduced-motion: reduce) {
+  .owned-stack {
+    padding: clamp(5rem, 10vw, 8rem) var(--layout-page-gutter);
+  }
+  .owned-stack__sticky,
+  .owned-stack__stage {
+    min-block-size: 0;
+  }
+  .owned-stack__stage {
+    display: grid;
+    overflow: visible;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 3rem;
+  }
+  .owned-stack__title,
+  .owned-stack__description,
+  .owned-stack__track,
+  .owned-stack__followup {
+    position: static;
+    inline-size: auto;
+  }
+  .owned-stack__title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+  .owned-stack__description {
+    grid-column: 1;
+    white-space: normal;
+  }
+  .owned-stack__track {
+    grid-row: 1 / span 3;
+    grid-column: 2;
+  }
+  .owned-stack__followup {
+    grid-column: 1;
+    align-self: end;
+  }
+}
+@media (width < 48rem) {
+  .owned-stack__stage {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .owned-stack__description,
+  .owned-stack__track,
+  .owned-stack__followup {
+    grid-row: auto;
+    grid-column: 1;
+  }
+  .owned-stack__track {
+    display: contents;
+  }
+  .owned-stack__introduction {
+    margin-block-start: 1rem;
+  }
+  .owned-stack__consequences {
+    gap: 2.5rem;
+  }
+  .owned-stack__image {
+    border-radius: 1rem;
+  }
+  .owned-stack__followup {
+    margin-block-start: 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .owned-stack__title,
+  .owned-stack__description,
+  .owned-stack__track,
+  .owned-stack__followup {
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+  }
+}

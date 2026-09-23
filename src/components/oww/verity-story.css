@@ -1,0 +1,322 @@
+.verity-story {
+  position: relative;
+  color: #000;
+  background: #fff;
+}
+.verity-story__sticky,
+.verity-story__stage {
+  min-block-size: 100svh;
+}
+.verity-story__stage {
+  position: relative;
+  inline-size: min(100%, 90rem);
+  margin-inline: auto;
+  overflow: hidden;
+  background: #fff;
+}
+.verity-story__overview,
+.verity-story__lesson {
+  position: absolute;
+  inset: 0;
+}
+.verity-story__overview {
+  z-index: 1;
+}
+.verity-story__lesson {
+  z-index: 0;
+}
+.verity-story__introduction {
+  position: absolute;
+  inset-block-start: 7.5rem;
+  inset-inline-start: 3rem;
+  display: grid;
+  inline-size: 28.375rem;
+  gap: 2rem;
+}
+.verity-story__title,
+.verity-story__description,
+.verity-story__lesson-title,
+.verity-story__lesson-description,
+.verity-story__quote,
+.verity-story__quote p {
+  margin: 0;
+}
+.verity-story__title {
+  inline-size: 24.875rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.04em;
+}
+.verity-story__description {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.verity-story__metrics-window {
+  position: absolute;
+  inset: 0 3rem 0 calc(50% + 0.5rem);
+  overflow: hidden;
+  pointer-events: none;
+}
+.verity-story__metrics {
+  position: absolute;
+  inset-block-start: 7.5rem;
+  inset-inline: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.verity-story__metric {
+  display: flex;
+  min-block-size: 8.875rem;
+  padding-block: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  border-block-start: 0.0625rem solid rgba(0, 0, 0, 0.1);
+}
+.verity-story__metric-value {
+  font-size: 4rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: normal;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+.verity-story__metric-label {
+  inline-size: 11.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  text-align: end;
+}
+.verity-story__metrics-fade {
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0;
+  pointer-events: none;
+}
+.verity-story__metrics-fade--top {
+  inset-block-start: 0;
+  block-size: 13.5625rem;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.34) 69%,
+    #fff 100%
+  );
+}
+.verity-story__metrics-fade--bottom {
+  inset-block-end: 0;
+  block-size: min(45.5625rem, 48svh);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.34) 15%,
+    #fff 46%
+  );
+}
+.verity-story__lesson-title {
+  position: absolute;
+  inset-block-start: min(5.5rem, 10svh);
+  inset-inline-start: 3rem;
+  inline-size: 16.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+}
+.verity-story__lesson-content {
+  position: absolute;
+  inset-block-start: min(5.5rem, 10svh);
+  inset-inline-start: calc(50% + 0.5rem);
+  display: grid;
+  inline-size: calc(50% - 3.5rem);
+  gap: 1.5rem;
+}
+.verity-story__lesson-description {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+.verity-story__quote {
+  display: grid;
+  gap: 1rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.verity-story__quote cite {
+  color: #005325;
+  font-size: 1rem;
+  font-style: normal;
+}
+.verity-story__portrait,
+.verity-story__lesson-image {
+  position: absolute;
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+.verity-story__portrait-media,
+.verity-story__lesson-image-media {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  filter: none;
+  mask-image: none;
+}
+.verity-story__portrait {
+  inset-block: auto min(7.25rem, 13svh);
+  inset-inline-start: 3rem;
+  inline-size: min(13.5rem, 24svh);
+  block-size: min(12.4375rem, 22.6svh);
+}
+.verity-story__lesson-image {
+  inset-block: auto min(7.25rem, 13svh);
+  inset-inline-start: calc(50% + 0.5rem);
+  inline-size: calc(50% - 3.5rem);
+  block-size: min(22rem, 36svh);
+}
+
+@media (width >= 70rem) and (prefers-reduced-motion: no-preference) {
+  .verity-story {
+    block-size: var(--verity-story-length, 400svh);
+  }
+  .verity-story__sticky {
+    position: sticky;
+    inset-block-start: 0;
+    block-size: 100svh;
+    min-block-size: 0;
+    overflow: hidden;
+  }
+  .verity-story__stage {
+    block-size: 100svh;
+    min-block-size: 0;
+  }
+  .verity-story__introduction,
+  .verity-story__metrics,
+  .verity-story__lesson-title,
+  .verity-story__lesson-content,
+  .verity-story__portrait,
+  .verity-story__lesson-image {
+    will-change: transform, opacity;
+  }
+}
+@media (width < 70rem), (prefers-reduced-motion: reduce) {
+  .verity-story {
+    padding: clamp(4rem, 8vw, 7rem) var(--layout-page-gutter);
+  }
+  .verity-story__sticky,
+  .verity-story__stage {
+    min-block-size: 0;
+  }
+  .verity-story__stage {
+    display: grid;
+    gap: clamp(5rem, 10vw, 8rem);
+    overflow: visible;
+  }
+  .verity-story__overview,
+  .verity-story__lesson {
+    position: relative;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+  .verity-story__introduction,
+  .verity-story__metrics-window,
+  .verity-story__metrics,
+  .verity-story__lesson-title,
+  .verity-story__lesson-content,
+  .verity-story__portrait,
+  .verity-story__lesson-image {
+    position: static;
+    inline-size: auto;
+  }
+  .verity-story__metrics-window {
+    overflow: visible;
+  }
+  .verity-story__metrics-fade {
+    display: none;
+  }
+  .verity-story__metric-value {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+  }
+  .verity-story__lesson-title {
+    grid-column: 1;
+    white-space: normal;
+  }
+  .verity-story__lesson-content {
+    grid-column: 2;
+  }
+  .verity-story__portrait {
+    align-self: end;
+    inline-size: min(100%, 16.5rem);
+    block-size: auto;
+    aspect-ratio: 264/243;
+  }
+  .verity-story__lesson-image {
+    inline-size: 100%;
+    block-size: auto;
+    aspect-ratio: 664/396;
+  }
+}
+@media (width < 48rem) {
+  .verity-story__overview,
+  .verity-story__lesson {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .verity-story__title {
+    inline-size: auto;
+    font-size: clamp(2rem, 9vw, 2.5rem);
+  }
+  .verity-story__lesson-title,
+  .verity-story__lesson-content {
+    grid-column: auto;
+  }
+  .verity-story__lesson-title {
+    order: 1;
+  }
+  .verity-story__portrait {
+    order: 2;
+  }
+  .verity-story__lesson-content {
+    order: 3;
+  }
+  .verity-story__lesson-image {
+    order: 4;
+  }
+  .verity-story__metric {
+    gap: 1.5rem;
+  }
+  .verity-story__metric-label {
+    inline-size: min(42%, 11.5rem);
+  }
+  .verity-story__portrait {
+    inline-size: 55%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .verity-story__overview,
+  .verity-story__introduction,
+  .verity-story__metrics,
+  .verity-story__lesson,
+  .verity-story__lesson-title,
+  .verity-story__lesson-content,
+  .verity-story__portrait,
+  .verity-story__lesson-image {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}

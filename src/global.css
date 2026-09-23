@@ -1,0 +1,142 @@
+/**
+ * Tailwind CSS imports
+ * View the full documentation at https://tailwindcss.com
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand wordmark font — GT Maru Regular (self-hosted, licensed).
+   Required whenever "Helge Heupel" appears alongside the HH logo. */
+/* @font-face {
+  font-family: "GT Maru";
+  src:
+    url("/fonts/GT-Maru-Regular.woff2") format("woff2"),
+    url("/fonts/GT-Maru-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+} */
+
+/* Hero section fade-in animation */
+@keyframes hero-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-fade-in-up {
+  opacity: 0;
+  animation: hero-fade-in-up 0.8s ease-out forwards;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-fade-in-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * CSS-only scroll reveal (fade + rise as the element scrolls into view).
+ * Reuses the hero-fade-in-up keyframes via scroll-driven animation-timeline.
+ * Fallback (no animation-timeline support, or reduced motion): always visible.
+ */
+.reveal-up {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal-up {
+      opacity: 0;
+      animation: hero-fade-in-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
+
+/* Navigation keyboard focus styles */
+nav a:focus-visible,
+nav button:focus-visible {
+  outline: 2px solid #00a7f2;
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
+
+[data-menu-item]:focus-visible {
+  outline: 2px solid #00a7f2;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Service Cards - Scroll-triggered staggered reveal animations */
+@layer components {
+  .services-grid .service-card {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: serviceCardReveal 0.8s ease-out forwards;
+    animation-delay: calc(var(--card-index, 0) * 150ms);
+  }
+
+  @keyframes serviceCardReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll-triggered animation for modern browsers */
+  @supports (animation-timeline: view()) {
+    .services-grid .service-card {
+      animation: serviceCardScrollReveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+
+    @keyframes serviceCardScrollReveal {
+      from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Subtle bounce animation for scroll CTA */
+    @keyframes bounce-subtle {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(6px);
+      }
+    }
+
+    .animate-bounce-subtle {
+      animation: bounce-subtle 2s ease-in-out infinite;
+    }
+  }
+}
