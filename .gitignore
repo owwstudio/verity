@@ -16,3 +16,6 @@ src/**/+.js
 
 .idea/
 .vscode/
+
+# Vercel
+.vercel
