@@ -12,14 +12,8 @@ import theProblemCss from "./the-problem.css?inline";
  * Markup ported from code/handoff/sections/the-problem/the-problem.html,
  * behaviour from the-problem.js. data-* and ARIA attributes preserved verbatim.
  *
- * Scoping note: every query is scoped to sectionRef EXCEPT the [data-navbar]
- * lookup. That one is deliberately global — this section drives the navbar's
- * glass/released theme while it is pinned, and the navbar is a sibling
- * component rendered by src/routes/layout.tsx. The vendor does the same.
- *
- * Cleanup: the vendor's top-level ScrollTrigger.create() is never torn down in
- * the original. Here its handle is captured and killed, alongside
- * gsap.matchMedia().revert(), so nothing survives unmount.
+ * Section animations are registered through gsap.matchMedia() and reverted
+ * on unmount. The mobile story trigger is killed by its media cleanup.
  *
  * Certifications block: the wording below is the CEO statement of 2026-09-16,
  * not the vendor's. See the commit message for what changed and why.
@@ -150,7 +144,6 @@ export const TheProblem = component$(() => {
         mobileProgress: "[data-problem-mobile-progress]",
         mobileCurrent: "[data-problem-mobile-current]",
         mobileProgressFill: "[data-problem-mobile-progress-fill]",
-        navbar: "[data-navbar]",
       };
 
       const BACKGROUND_STATES = [
@@ -171,63 +164,6 @@ export const TheProblem = component$(() => {
         { xPercent: 5, yPercent: 0, scale: 1.18 },
         { xPercent: 5, yPercent: 0, scale: 1.18 },
       ];
-
-      const setNavbarTheme = (navbar: HTMLElement | null, theme: string) => {
-        if (!navbar) return;
-        if (theme === "glass") {
-          navbar.dataset.navbarTheme = theme;
-          return;
-        }
-        delete navbar.dataset.navbarTheme;
-      };
-      const setNavbarPosition = (
-        navbar: HTMLElement | null,
-        position: string,
-      ) => {
-        if (!navbar) return;
-        navbar.dataset.navbarPosition = position;
-      };
-      const showNavbar = (
-        navbar: HTMLElement | null,
-        theme: string,
-        animate = false,
-      ) => {
-        if (!navbar) return;
-        gsap.killTweensOf(navbar);
-        setNavbarPosition(navbar, "fixed");
-        setNavbarTheme(navbar, theme);
-        if (!animate) {
-          gsap.set(navbar, { clearProps: "transform,opacity" });
-          return;
-        }
-        gsap.fromTo(
-          navbar,
-          { yPercent: -100, opacity: 0 },
-          {
-            yPercent: 0,
-            opacity: 1,
-            duration: 0.5,
-            ease: "power2.out",
-            overwrite: true,
-          },
-        );
-      };
-      const releaseNavbar = (navbar: HTMLElement | null, reduced: boolean) => {
-        if (!navbar || navbar.dataset.navbarPosition !== "fixed") return;
-        gsap.killTweensOf(navbar);
-        gsap.to(navbar, {
-          yPercent: -100,
-          opacity: 0,
-          duration: reduced ? 0 : 0.4,
-          ease: "power2.inOut",
-          overwrite: true,
-          onComplete: () => {
-            setNavbarPosition(navbar, "released");
-            setNavbarTheme(navbar, "default");
-            gsap.set(navbar, { clearProps: "transform,opacity" });
-          },
-        });
-      };
 
       const addBackgroundState = (
         timeline: gsap.core.Timeline,
@@ -359,25 +295,7 @@ export const TheProblem = component$(() => {
       const mobileProgressFill = section.querySelector<HTMLElement>(
         SELECTORS.mobileProgressFill,
       );
-      // Deliberately global: the navbar is a sibling component in layout.tsx.
-      const navbar = document.querySelector<HTMLElement>(SELECTORS.navbar);
-
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
       const media = gsap.matchMedia();
-
-      showNavbar(navbar, "default");
-
-      const navbarTrigger = ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "bottom bottom",
-        onEnter: () => showNavbar(navbar, "glass"),
-        onEnterBack: () => showNavbar(navbar, "glass", !reducedMotion),
-        onLeave: () => releaseNavbar(navbar, reducedMotion),
-        onLeaveBack: () => showNavbar(navbar, "default"),
-      });
 
       media.add(
         "(min-width: 70rem) and (prefers-reduced-motion: no-preference)",
@@ -727,9 +645,7 @@ export const TheProblem = component$(() => {
       );
 
       cleanup(() => {
-        navbarTrigger.kill();
         media.revert();
-        gsap.killTweensOf(navbar);
       });
     },
     { strategy: "document-ready" },
