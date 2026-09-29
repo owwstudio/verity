@@ -62,9 +62,6 @@
 .navbar__panel {
   display: contents;
 }
-.navbar[data-navbar-position="released"] {
-  position: absolute;
-}
 .navbar[data-navbar-theme="glass"] {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.12);

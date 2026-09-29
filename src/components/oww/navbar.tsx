@@ -115,7 +115,9 @@ export const Navbar = component$(() => {
       );
       const panel = navbar.querySelector<HTMLElement>(SELECTORS.panel);
       const mobileMedia = window.matchMedia("(width < 64rem)");
-      let lastScroll = window.scrollY;
+      let lastScroll = Math.max(0, window.scrollY);
+      let directionStart = lastScroll;
+      let scrollDirection = 0;
       let navbarVisible = true;
 
       const setNavbarContrast = () => {
@@ -141,6 +143,9 @@ export const Navbar = component$(() => {
       const setNavbarVisibility = (visible: boolean) => {
         if (visible === navbarVisible) return;
         navbarVisible = visible;
+        if (!visible && navbar.contains(document.activeElement)) {
+          (document.activeElement as HTMLElement).blur();
+        }
         navbar.dataset.scrollState = visible ? "visible" : "hidden";
         navbar.inert = !visible;
       };
@@ -286,9 +291,27 @@ export const Navbar = component$(() => {
         const current = Math.max(0, window.scrollY);
         const delta = current - lastScroll;
         setNavbarTheme(current);
-        if (current <= 8) setNavbarVisibility(true);
-        else if (Math.abs(delta) >= 3 && navbar.dataset.state !== "open")
-          setNavbarVisibility(delta < 0);
+        if (current <= 8) {
+          setNavbarVisibility(true);
+          scrollDirection = 0;
+          directionStart = current;
+        } else if (navbar.dataset.state === "open") {
+          directionStart = current;
+        } else if (Math.abs(delta) > 0.1) {
+          const direction = Math.sign(delta);
+          if (direction !== scrollDirection) {
+            scrollDirection = direction;
+            directionStart = lastScroll;
+          }
+          // Accumulate movement because Lenis emits small deltas on each frame.
+          if (Math.abs(current - directionStart) >= 12) {
+            if (direction < 0) setNavbarVisibility(true);
+            else if (current > navbar.offsetHeight) {
+              closeDropdowns();
+              setNavbarVisibility(false);
+            }
+          }
+        }
         lastScroll = current;
       }) as EventListener);
       on(window, "resize", setNavbarContrast as EventListener);
